@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrackMyTube - TfL Status Updates and News</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/tfl-status.js" defer></script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="status.html">Real-Time Status</a></li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="planner.html">Journey Planner</a></li>
+                <li><a href="station.html">Station Finder</a></li>
+                <li><a href="alerts.html">Alerts</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- TfL Status Board Updates Section -->
+        <div class="tfl-status-board">
+            <h2>TfL Status Updates</h2>
+            <div class="status-board">
+                <!-- Status items dynamically updated through JS -->
+                <div id="bakerloo" class="status-item bakerloo" onclick="showPopup('Bakerloo Line')">
+                    <h3>Bakerloo Line</h3>
+                    <p class="status">Status: <span class="status-text">/</span></p>
+                </div>
+                <div id="central" class="status-item central" onclick="showPopup('Central Line')">
+                    <h3>Central Line</h3>
+                    <p class="status">Status: <span class="status-text">/</span></p>
+                </div>
+                <div id="circle" class="status-item circle" onclick="showPopup('Circle Line')">
+                    <h3>Circle Line</h3>
+                    <p class="status">Status: <span class="status-text">/</span></p>
+                </div>
+                <div id="district" class="status-item district" onclick="showPopup('District Line')">
+                    <h3>District Line</h3>
+                    <p class="status">Status: <span class="status-text">/</span></p>
+                </div>
+                <div id="dlr" class="status-item dlr" onclick="showPopup('DLR')">
+                    <h3>DLR</h3>
+                    <p class="status">Status: <span class="status-text">/</span></p>
+                </div>
+                <div id="elizabeth-line" class="status-item elizabeth-line" onclick="showPopup('Elizabeth Line')">
+                    <h3>Elizabeth Line</h3>
+                    <p class="status">Status: <span class="status-text">/</span></p>
+                </div>
+                <div id="hammersmith-city" class="status-item hammersmith-city" onclick="showPopup('Hammersmith & City Line')">
+                    <h3>Hammersmith & City Line</h3>
+                    <p class="status">Status: <span class="status-text">/</span></p>
+                </div>
+                <div id="jubilee" class="status-item jubilee" onclick="showPopup('Jubilee Line')">
+                    <h3>Jubilee Line</h3>
+                    <p class="status">Status: <span class="status-text">/</span></p>
+                </div>
+                <div id="overground" class="status-item overground" onclick="showPopup('London Overground')">
+                    <h3>London Overground</h3>
+                    <p class="status">Status: <span class="status-text">/</span></p>
+                </div>
+                <div id="metropolitan" class="status-item metropolitan" onclick="showPopup('Metropolitan Line')">
+                    <h3>Metropolitan Line</h3>
+                    <p class="status">Status: <span class="status-text">/</span></p>
+                </div>
+                <div id="northern" class="status-item northern" onclick="showPopup('Northern Line')">
+                    <h3>Northern Line</h3>
+                    <p class="status">Status: <span class="status-text">/</span></p>
+                </div>
+                <div id="piccadilly" class="status-item piccadilly" onclick="showPopup('Piccadilly Line')">
+                    <h3>Piccadilly Line</h3>
+                    <p class="status">Status: <span class="status-text">/</span></p>
+                </div>
+                <div id="tram" class="status-item tram" onclick="showPopup('Tram')">
+                    <h3>Tram</h3>
+                    <p class="status">Status: <span class="status-text">/</span></p>
+                </div>
+                <div id="victoria" class="status-item victoria" onclick="showPopup('Victoria Line')">
+                    <h3>Victoria Line</h3>
+                    <p class="status">Status: <span class="status-text">/</span></p>
+                </div>
+                <div id="waterloo-city" class="status-item waterloo-city" onclick="showPopup('Waterloo & City Line')">
+                    <h3>Waterloo & City Line</h3>
+                    <p class="status">Status: <span class="status-text">/</span></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Popup Structure -->
+    <div id="popup-overlay" class="overlay"></div>
+    <div id="popup-content" class="popup">
+        <span class="close-btn" onclick="closePopup()">&times;</span>
+        <h2 id="popup-title">Service Name</h2>
+        <p id="popup-details">Details will be displayed here...</p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <ul>
+                <li><a href="about.html">About</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul>
+            <p>&copy; 2024 TrackMyTube. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

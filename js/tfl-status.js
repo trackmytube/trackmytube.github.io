@@ -37,10 +37,10 @@ async function updateStatusGrid() {
             'piccadilly': 'piccadilly',
             'victoria': 'victoria',
             'waterloo-city': 'waterloo-city',
-            'tram': 'tram',  // Add class for tram
-            'overground': 'overground', // Add class for overground
-            'dlr': 'dlr', // Add class for DLR
-            'elizabeth-line': 'elizabeth-line' // Add class for Elizabeth Line
+            'tram': 'tram',
+            'overground': 'overground',
+            'dlr': 'dlr',
+            'elizabeth-line': 'elizabeth-line'
         };
 
         // Function to update status for a given data and mode
@@ -50,12 +50,32 @@ async function updateStatusGrid() {
                 const lineClass = lineClassNames[lineId] || mode;
                 if (lineClass) {
                     // Select the status element for the current line
-                    const statusElement = document.querySelector(`.status-item.${lineClass} .status`);
+                    const statusElement = document.querySelector(`.status-item.${lineClass} .status-text`);
                     if (statusElement) {
                         // Get the status description
                         const status = item.lineStatuses[0];
                         const statusDescription = status ? status.statusSeverityDescription : 'No Status Available';
-                        statusElement.textContent = `Status: ${statusDescription}`;
+                        statusElement.textContent = statusDescription;
+
+                        // Attach more detailed information to the element
+                        statusElement.dataset.details = status.reason || 'No further details available';
+
+                        // Add or remove the alert icon based on the status
+                        const statusItem = statusElement.closest('.status-item');
+                        let alertIcon = statusItem.querySelector('.alert-icon');
+                        if (!alertIcon) {
+                            alertIcon = document.createElement('img');
+                            alertIcon.src = 'img/tfl_alert_icon.png'; // Path to the image
+                            alertIcon.classList.add('alert-icon');
+                            statusItem.appendChild(alertIcon);
+                        }
+
+                        // Show or hide the alert icon based on status
+                        if (statusDescription !== 'Good Service') {
+                            alertIcon.style.display = 'block';
+                        } else {
+                            alertIcon.style.display = 'none';
+                        }
                     } else {
                         console.warn(`No element found for line class: ${lineClass}`);
                     }
@@ -65,15 +85,11 @@ async function updateStatusGrid() {
             });
         }
 
-        // Update status for Tube
+        // Update status for each mode
         updateStatus(tubeData, 'tube');
-        // Update status for Tram
         updateStatus(tramData, 'tram');
-        // Update status for Overground
         updateStatus(overgroundData, 'overground');
-        // Update status for DLR
         updateStatus(dlrData, 'dlr');
-        // Update status for Elizabeth Line
         updateStatus(elizabethLineData, 'elizabeth-line');
 
     } catch (error) {
@@ -83,3 +99,44 @@ async function updateStatusGrid() {
 
 // Run the updateStatusGrid function when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', updateStatusGrid);
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Select all status items
+    const statusItems = document.querySelectorAll('.status-item');
+    
+    // Popup elements
+    const popupOverlay = document.getElementById('popup-overlay');
+    const popupContent = document.getElementById('popup-content');
+    const popupTitle = document.getElementById('popup-title');
+    const popupDetails = document.getElementById('popup-details'); // Element for detailed status
+    const closeButton = document.querySelector('.close-btn');
+
+    // Function to open the popup
+    function openPopup(serviceName, details, borderColor) {
+        popupTitle.textContent = serviceName;
+        popupDetails.textContent = details;  // Display the details in the popup
+        popupContent.style.borderColor = borderColor;
+        popupOverlay.style.display = 'block';
+        popupContent.style.display = 'block';
+    }
+
+    // Function to close the popup
+    function closePopup() {
+        popupOverlay.style.display = 'none';
+        popupContent.style.display = 'none';
+    }
+
+    // Attach click event listeners to each status item
+    statusItems.forEach(item => {
+        item.addEventListener('click', function () {
+            const serviceName = this.querySelector('h3').textContent;
+            const details = this.querySelector('.status-text').dataset.details; // Get the attached details
+            const borderColor = window.getComputedStyle(this).borderColor;
+            openPopup(serviceName, details, borderColor);
+        });
+    });
+
+    // Close the popup when clicking the close button or overlay
+    closeButton.addEventListener('click', closePopup);
+    popupOverlay.addEventListener('click', closePopup);
+});
