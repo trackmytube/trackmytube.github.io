@@ -6,11 +6,6 @@
 }
 
 /* Basic styling */
-html, body {
-    height: 100%;
-    overflow-x: hidden; /* Hide horizontal overflow */
-}
-
 body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
@@ -40,6 +35,7 @@ nav ul {
     display: flex;
     justify-content: center;
     padding: 10px;
+    flex-wrap: wrap;
 }
 
 nav ul li {
@@ -95,6 +91,55 @@ main {
     padding-bottom: 80px; /* Adjust for fixed footer if needed */
 }
 
+/* TfL Status Updates Section */
+.tfl-status {
+    margin-bottom: 30px;
+}
+
+.tfl-status h2 {
+    font-size: 2em;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.status-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 15px;
+}
+
+.status-item {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    font-size: 0.9em;
+}
+
+.status-item h3 {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+/* Line Colors */
+.bakerloo { border: 3px solid #B36305; }
+.central { border: 3px solid #E32017; }
+.circle { border: 3px solid #FFD300; }
+.district { border: 3px solid #00782A; }
+.dlr { border: 3px solid #00A4A7; }
+.elizabeth { border: 3px solid #9364CC; }
+.hammersmith-city { border: 3px solid #F3A9BB; }
+.jubilee { border: 3px solid #A0A5A9; }
+.overground { border: 3px solid #EE7C0E; }
+.metropolitan { border: 3px solid #9B0056; }
+.northern { border: 3px solid #000000; }
+.piccadilly { border: 3px solid #003688; }
+.tram { border: 3px solid #84B817; }
+.victoria { border: 3px solid #0098D4; }
+.waterloo-city { border: 3px solid #95CDBA; }
+
+/* Latest Travel Updates Section */
 .updates, .features {
     margin-bottom: 30px;
 }
@@ -125,6 +170,7 @@ main {
     text-decoration: underline;
 }
 
+/* Features Section */
 .feature-grid {
     display: flex;
     flex-wrap: wrap;
@@ -178,4 +224,54 @@ footer ul li a {
 
 footer ul li a:hover {
     text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    /* Adjust the hero section for smaller screens */
+    .hero h1 {
+        font-size: 2em;
+    }
+
+    .hero p {
+        font-size: 1em;
+    }
+
+    .hero .btn {
+        padding: 8px 16px;
+    }
+
+    /* Adjust the feature grid and status grid for smaller screens */
+    .feature-grid, .status-grid {
+        flex-direction: column;
+    }
+
+    .feature-item, .status-item {
+        flex: 1 1 100%;
+    }
+
+    /* Adjust nav links for smaller screens */
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Further adjustments for very small screens */
+    .hero h1 {
+        font-size: 1.5em;
+    }
+
+    .hero p {
+        font-size: 0.9em;
+    }
+
+    .hero .btn {
+        padding: 6px 12px;
+    }
 }
