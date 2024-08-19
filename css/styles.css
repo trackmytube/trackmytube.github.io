@@ -56,22 +56,35 @@ nav ul li a:hover {
 .hero {
     background: #0073e6;
     color: #fff;
-    text-align: center;
     padding: 100px 20px 50px;
     margin-top: 60px; /* Adjust for fixed header */
 }
 
-.hero h1 {
+.hero-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 120px; /* Space between columns */
+    max-width: 1200px; /* Optional: Limit the width of the content */
+    margin: 0 auto; /* Center content */
+}
+
+.hero-text {
+    flex: 1;
+    text-align: left; /* Align text to the left */
+}
+
+.hero-text h1 {
     font-size: 2.5em;
     margin-bottom: 20px;
 }
 
-.hero p {
+.hero-text p {
     font-size: 1.2em;
     margin-bottom: 30px;
 }
 
-.hero .btn {
+.hero-text .btn {
     background: #fff;
     color: #0073e6;
     padding: 10px 20px;
@@ -80,8 +93,44 @@ nav ul li a:hover {
     font-weight: bold;
 }
 
-.hero .btn:hover {
+.hero-text .btn:hover {
     background: #e6e6e6;
+}
+
+.hero-search {
+    flex: 1;
+    background: #fff;
+    color: #333;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.hero-search h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.hero-search input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.hero-search .search-btn {
+    background: #0073e6;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.hero-search .search-btn:hover {
+    background: #005bb5;
 }
 
 /* Main content styling */
@@ -91,8 +140,15 @@ main {
     padding-bottom: 80px; /* Adjust for fixed footer if needed */
 }
 
+/* Content Columns */
+.content-columns {
+    display: flex;
+    gap: 20px;
+}
+
 /* TfL Status Updates Section */
 .tfl-status {
+    flex: 2;
     margin-bottom: 30px;
 }
 
@@ -110,7 +166,7 @@ main {
 
 .status-item {
     background: #fff;
-    padding: 20px;
+    padding: 5px;
     border-radius: 5px;
     text-align: center;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -140,13 +196,15 @@ main {
 .waterloo-city { border: 3px solid #95CDBA; }
 
 /* Latest Travel Updates Section */
-.updates, .features {
+.updates {
+    flex: 2;
     margin-bottom: 30px;
 }
 
-.updates h2, .features h2 {
+.updates h2 {
     font-size: 2em;
     margin-bottom: 15px;
+    text-align: center;
 }
 
 .updates ul {
@@ -200,21 +258,35 @@ main {
 footer {
     background: #333;
     color: #fff;
-    text-align: center;
     padding: 10px 20px;
-    position: fixed;
     width: 100%;
     bottom: 0;
 }
 
+footer .footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+footer p {
+    margin-right: 40px; /* Increased space between the p tag and the list */
+}
+
 footer ul {
     list-style: none;
-    padding: 10px 0;
+    display: flex;
+    padding: 0;
+    margin: 0;
 }
 
 footer ul li {
-    display: inline;
     margin: 0 10px;
+}
+
+footer ul li:first-child {
+    margin-left: 20px; /* Increase space between p and the first link */
 }
 
 footer ul li a {
@@ -229,6 +301,20 @@ footer ul li a:hover {
 /* Responsive Design */
 @media (max-width: 768px) {
     /* Adjust the hero section for smaller screens */
+    .hero-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .hero-search {
+        margin-top: 20px;
+    }
+
+    .hero-search input, .hero-search .search-btn {
+        width: auto;
+    }
+
     .hero h1 {
         font-size: 2em;
     }
@@ -241,7 +327,11 @@ footer ul li a:hover {
         padding: 8px 16px;
     }
 
-    /* Adjust the feature grid and status grid for smaller screens */
+    /* Stack the content columns on smaller screens */
+    .content-columns {
+        flex-direction: column;
+    }
+
     .feature-grid, .status-grid {
         flex-direction: column;
     }
