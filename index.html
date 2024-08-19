@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TFL Travel Status</title>
+    <title>TrackMyTube - TfL Status Updates and News</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -23,89 +23,102 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <h1>Welcome to TFL Travel Status</h1>
-        <p>Your go-to source for the latest updates and real-time train information.</p>
-        <a href="status.html" class="btn">Check Live Status</a>
+        <div class="hero-content">
+            <div class="hero-search">
+                <h2>TfL Station Finder</h2>
+                <input type="text" placeholder="Enter a station name..." aria-label="Station name">
+                <button class="search-btn">Show Arrivals and Departures</button>
+            </div>
+            <div class="hero-text">
+                <h1>Welcome to TrackMyTube</h1>
+                <p>Your go-to source for the latest updates and real-time train information for TfL.</p>
+                <a href="status.html" class="btn">Check Live Status</a>
+            </div>
+        </div>
     </section>
 
     <!-- Main Content -->
     <main>
-        <!-- TfL Status Updates Section -->
-        <section class="tfl-status">
-            <h2>TfL Status Updates</h2>
-            <div class="status-grid">
-                <div class="status-item bakerloo">
-                    <h3>Bakerloo Line</h3>
-                    <p>Status: Good Service</p>
+        <div class="content-columns">
+            <!-- TfL Status Updates Section -->
+            <section class="tfl-status">
+                <h2>TfL Status Updates</h2>
+                <div class="status-grid">
+                    <div class="status-item bakerloo">
+                        <h3>Bakerloo Line</h3>
+                        <p>Status: Good Service</p>
+                    </div>
+                    <div class="status-item central">
+                        <h3>Central Line</h3>
+                        <p>Status: Minor Delays</p>
+                    </div>
+                    <div class="status-item circle">
+                        <h3>Circle Line</h3>
+                        <p>Status: Good Service</p>
+                    </div>
+                    <div class="status-item district">
+                        <h3>District Line</h3>
+                        <p>Status: Severe Delays</p>
+                    </div>
+                    <div class="status-item dlr">
+                        <h3>DLR</h3>
+                        <p>Status: Good Service</p>
+                    </div>
+                    <div class="status-item elizabeth">
+                        <h3>Elizabeth Line</h3>
+                        <p>Status: Good Service</p>
+                    </div>
+                    <div class="status-item hammersmith-city">
+                        <h3>Hammersmith & City Line</h3>
+                        <p>Status: Good Service</p>
+                    </div>
+                    <div class="status-item jubilee">
+                        <h3>Jubilee Line</h3>
+                        <p>Status: Good Service</p>
+                    </div>
+                    <div class="status-item overground">
+                        <h3>London Overground</h3>
+                        <p>Status: Good Service</p>
+                    </div>
+                    <div class="status-item metropolitan">
+                        <h3>Metropolitan Line</h3>
+                        <p>Status: Good Service</p>
+                    </div>
+                    <div class="status-item northern">
+                        <h3>Northern Line</h3>
+                        <p>Status: Minor Delays</p>
+                    </div>
+                    <div class="status-item piccadilly">
+                        <h3>Piccadilly Line</h3>
+                        <p>Status: Severe Delays</p>
+                    </div>
+                    <div class="status-item tram">
+                        <h3>Tram</h3>
+                        <p>Status: Good Service</p>
+                    </div>
+                    <div class="status-item victoria">
+                        <h3>Victoria Line</h3>
+                        <p>Status: Good Service</p>
+                    </div>
+                    <div class="status-item waterloo-city">
+                        <h3>Waterloo & City Line</h3>
+                        <p>Status: Service Suspended</p>
+                    </div>
                 </div>
-                <div class="status-item central">
-                    <h3>Central Line</h3>
-                    <p>Status: Minor Delays</p>
-                </div>
-                <div class="status-item circle">
-                    <h3>Circle Line</h3>
-                    <p>Status: Good Service</p>
-                </div>
-                <div class="status-item district">
-                    <h3>District Line</h3>
-                    <p>Status: Severe Delays</p>
-                </div>
-                <div class="status-item dlr">
-                    <h3>DLR</h3>
-                    <p>Status: Good Service</p>
-                </div>
-                <div class="status-item elizabeth">
-                    <h3>Elizabeth Line</h3>
-                    <p>Status: Good Service</p>
-                </div>
-                <div class="status-item hammersmith-city">
-                    <h3>Hammersmith & City Line</h3>
-                    <p>Status: Good Service</p>
-                </div>
-                <div class="status-item jubilee">
-                    <h3>Jubilee Line</h3>
-                    <p>Status: Good Service</p>
-                </div>
-                <div class="status-item overground">
-                    <h3>London Overground</h3>
-                    <p>Status: Good Service</p>
-                </div>
-                <div class="status-item metropolitan">
-                    <h3>Metropolitan Line</h3>
-                    <p>Status: Good Service</p>
-                </div>
-                <div class="status-item northern">
-                    <h3>Northern Line</h3>
-                    <p>Status: Minor Delays</p>
-                </div>
-                <div class="status-item piccadilly">
-                    <h3>Piccadilly Line</h3>
-                    <p>Status: Severe Delays</p>
-                </div>
-                <div class="status-item tram">
-                    <h3>Tram</h3>
-                    <p>Status: Good Service</p>
-                </div>
-                <div class="status-item victoria">
-                    <h3>Victoria Line</h3>
-                    <p>Status: Good Service</p>
-                </div>
-                <div class="status-item waterloo-city">
-                    <h3>Waterloo & City Line</h3>
-                    <p>Status: Service Suspended</p>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Latest Travel Updates Section -->
-        <section class="updates">
-            <h2>Latest Travel Updates</h2>
-            <ul>
-                <li><a href="news.html">Service Disruption on Central Line</a></li>
-                <li><a href="news.html">Planned Maintenance This Weekend</a></li>
-                <li><a href="news.html">New Night Tube Services Announced</a></li>
-            </ul>
-        </section>
+            <!-- Latest Travel Updates Section -->
+            <section class="updates">
+                <h2>Latest Travel Updates</h2>
+                <ul>
+                    <li><a href="news.html">Service Disruption on Central Line</a></li>
+                    <li><a href="news.html">Planned Maintenance This Weekend</a></li>
+                    <li><a href="news.html">New Night Tube Services Announced</a></li>
+                    <li><a href="news.html">Planned Closure for Waterloo & City Line</a></li>
+                    <li><a href="news.html">Cheapest ways to get around London</a></li>
+                </ul>
+            </section>
+        </div>
 
         <!-- Features Section -->
         <section class="features">
@@ -129,13 +142,16 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 TFL Travel Status. All rights reserved.</p>
-        <ul>
-            <li><a href="about.html">About</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Privacy Policy</a></li>
-        </ul>
+        <div class="footer-content">
+            <ul>
+                <li><a href="about.html">About</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul>
+            <p>&copy; 2024 TFL Travel Status. All rights reserved.</p>
+        </div>
     </footer>
+
 
     <script src="js/scripts.js"></script>
 </body>
