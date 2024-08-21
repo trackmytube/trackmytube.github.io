@@ -92,19 +92,45 @@ async function updateStatusGrid() {
         updateStatus(dlrData, 'dlr');
         updateStatus(elizabethLineData, 'elizabeth-line');
 
+        // Update the timestamp of the last update
+        const updateTimeElement = document.getElementById('update-time');
+        const now = new Date();
+        updateTimeElement.textContent = `Last updated: ${now.toLocaleTimeString()}`;
+
     } catch (error) {
         console.error('Error fetching status data:', error);
     }
 }
 
 // Run the updateStatusGrid function when the DOM is fully loaded
-document.addEventListener('DOMContentLoaded', updateStatusGrid);
-
 document.addEventListener('DOMContentLoaded', function () {
-    // Select all status items
-    const statusItems = document.querySelectorAll('.status-item');
-    
+    updateStatusGrid(); // Initial call to populate the grid
+
+    // Set interval for periodic updates (e.g., every 60 seconds)
+    const updateInterval = 60000; // 60 seconds
+    setInterval(updateStatusGrid, updateInterval);
+
+    // Initialize countdown timer
+    const countdownElement = document.getElementById('update-countdown');
+    let countdown = updateInterval / 1000; // Countdown in seconds
+
+    function startCountdown() {
+        countdown = updateInterval / 1000;
+        const intervalId = setInterval(() => {
+            countdown -= 1;
+            countdownElement.textContent = `Update in: ${countdown}s`;
+
+            if (countdown <= 0) {
+                clearInterval(intervalId);
+                startCountdown(); // Restart countdown after each update
+            }
+        }, 1000);
+    }
+
+    startCountdown(); // Start the initial countdown
+
     // Popup elements
+    const statusItems = document.querySelectorAll('.status-item');
     const popupOverlay = document.getElementById('popup-overlay');
     const popupContent = document.getElementById('popup-content');
     const popupTitle = document.getElementById('popup-title');

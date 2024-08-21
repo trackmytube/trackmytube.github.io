@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrackMyTube - TfL Status Updates and News</title>
+    <title>TrackMyTube - TfL Station Finder</title>
     <link rel="stylesheet" href="css/styles.css">
-    <script src="js/tfl-status.js" defer></script>
+    <script src="js/station.js" defer></script>
 </head>
 <body>
     <!-- Header -->
@@ -22,11 +22,17 @@
         </nav>
     </header>
 
-    
-
     <!-- Main Content -->
     <main>
-        
+        <div class="station-finder">
+            <h1>TfL Station Finder</h1>
+            <div class="search-container">
+                <input type="text" id="station-search" placeholder="Search for a station...">
+            </div>
+            <div id="search-results" class="search-results">
+                <!-- Search results will be displayed here -->
+            </div>
+        </div>
     </main>
 
     <!-- Footer -->
@@ -40,8 +46,5 @@
             <p>&copy; 2024 TrackMyTube. All rights reserved.</p>
         </div>
     </footer>
-
-
-    <script src="js/scripts.js"></script>
 </body>
 </html>
