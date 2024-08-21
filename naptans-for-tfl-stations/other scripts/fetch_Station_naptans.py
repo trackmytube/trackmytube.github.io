@@ -1,5 +1,6 @@
 import requests
 
+
 def extractNaptans(urls):
     array = []
     naptan_ids = set()  # A set to track the naptan_ids that have been added
@@ -17,7 +18,7 @@ def extractNaptans(urls):
                 naptan_id = station["stationNaptan"].strip()
             else:
                 naptan_id = "N/A"
-            
+
             if "hubNaptanCode" in station:
                 hub_naptan = station["hubNaptanCode"]
             else:
@@ -30,13 +31,14 @@ def extractNaptans(urls):
 
     return array
 
+
 # TfL Stop Points API endpoints
 stopPointsDict = {
-    "tube_stopPoints" : "https://api.tfl.gov.uk/StopPoint/Mode/Tube",
-    "overground_stopPoints" : "https://api.tfl.gov.uk/StopPoint/Mode/Overground",
-    "elizabethLine_stopPoints" : "https://api.tfl.gov.uk/StopPoint/Mode/Elizabeth-Line",
-    "tram_stopPoints" : "https://api.tfl.gov.uk/StopPoint/Mode/Tram",
-    "DLR_stopPoints" : "https://api.tfl.gov.uk/StopPoint/Mode/DLR",
+    "tube_stopPoints": "https://api.tfl.gov.uk/StopPoint/Mode/Tube",
+    "overground_stopPoints": "https://api.tfl.gov.uk/StopPoint/Mode/Overground",
+    "elizabethLine_stopPoints": "https://api.tfl.gov.uk/StopPoint/Mode/Elizabeth-Line",
+    "tram_stopPoints": "https://api.tfl.gov.uk/StopPoint/Mode/Tram",
+    "DLR_stopPoints": "https://api.tfl.gov.uk/StopPoint/Mode/DLR",
 }
 
 # Print the unique station details
