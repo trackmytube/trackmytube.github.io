@@ -1,0 +1,180 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#naptan-code {
+    width: 300px;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+.line-box {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+    border: 5px solid transparent; /* Default transparent border */
+}
+
+.line-box:hover {
+    background-color: #fff;
+}
+
+.line-name {
+    cursor: pointer;
+    font-size: 25px;
+    text-align: center;
+    font-weight: bold;
+    padding: 10px;
+    background-color: #fff;
+    color: #333;
+    margin: 0;
+    transition: background-color 0.3s;
+}
+
+.line-name:hover {
+    background-color: #f9f9f9;
+}
+
+/* Line color border mapping */
+.bakerloo { border-color: #B36305; }
+.central { border-color: #E32017; }
+.circle { border-color: #FFD300; }
+.district { border-color: #00782A; }
+.dlr { border-color: #00A4A7; }
+.elizabeth-line { border-color: #9364CC; }
+.hammersmith-city { border-color: #F3A9BB; }
+.jubilee { border-color: #A0A5A9; }
+.overground { border-color: #EE7C0E; }
+.metropolitan { border-color: #9B0056; }
+.northern { border-color: #000000; }
+.piccadilly { border-color: #003688; }
+.tram { border-color: #84B817; }
+.victoria { border-color: #0098D4; }
+.waterloo-city { border-color: #95CDBA; }
+
+.minimized-info {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    background-color: #e9e9e9;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.platform-summary {
+    text-align: center;
+    width: 48%;
+}
+
+.platform-summary p {
+    margin: 5px 0;
+}
+
+.collapsed-content {
+    display: none;
+    margin-top: 15px;
+}
+
+.collapsed-content.active {
+    display: block;
+}
+
+.platforms-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.platform-column {
+    width: 48%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f7f7f7;
+}
+
+.platform-column h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #000000;
+}
+
+.arrival-item {
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+}
+
+.arrival-item .left-info {
+    display: flex;
+    flex-direction: column;
+    width: 60%; /* Adjust width as needed */
+}
+
+.arrival-item .right-info {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    width: 40%; /* Adjust width as needed */
+}
+
+.arrival-item .destination {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.arrival-item .location {
+    font-size: 14px;
+    color: #777;
+}
+
+.arrival-item .minutes-left {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.arrival-item .expected-time {
+    font-size: 14px;
+    color: #777;
+}
