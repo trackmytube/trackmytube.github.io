@@ -32,12 +32,12 @@
     border: 1px solid #ddd;
     border-radius: 5px;
     background-color: #f9f9f9;
-    transition: background-color 0.3s, transform 0.3s; /* Smooth transition for background color and slight zoom effect */
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 .station-result:hover {
-    background-color: #e0e0e0; /* Darker background color on hover */
-    transform: scale(1.02); /* Slight zoom effect */
+    background-color: #e0e0e0;
+    transform: scale(1.02);
 }
 
 .line-colors {
@@ -57,4 +57,24 @@
     font-size: 1.5em;
     font-weight: bold;
     text-align: center;
+}
+
+/* Styles for arrivals container */
+.arrivals-container {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.line-arrivals {
+    margin-bottom: 20px;
+}
+
+.arrival {
+    margin-bottom: 10px;
+}
+
+h4 {
+    margin: 0;
+    font-size: 1.2em;
+    font-weight: bold;
 }

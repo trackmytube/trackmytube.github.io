@@ -1,10 +1,12 @@
 document.addEventListener('DOMContentLoaded', function () {
     const searchInput = document.getElementById('station-search');
     const searchResults = document.getElementById('search-results');
-    const selectedStation = document.getElementById('selectedStation'); // Use the div for selected station name
-    const selectedLines = document.getElementById('selectedLines'); // Use the div for line colors
+    const selectedStation = document.getElementById('selectedStation');
+    const selectedLines = document.getElementById('selectedLines');
+    const arrivalsContainer = document.getElementById('arrivalsContainer');
     let allStations = [];
-    let selectedNaPTANId = null; // Variable to store the selected NaPTAN ID
+    let selectedNaPTANId = null;
+    let refreshInterval = null;
 
     // Define line colors (add more lines and colors as needed)
     const lineColors = {
@@ -51,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function displayResults(stations) {
         if (stations.length > 0) {
             searchResults.innerHTML = stations.map(station => {
-                const colors = station.Lines.map(line => lineColors[line] || '#000000'); // Default color if line not found
+                const colors = station.Lines.map(line => lineColors[line] || '#000000');
                 const colorRectangles = colors.map(color => `<span class="line-color" style="background-color: ${color};"></span>`).join(' ');
                 return `
                     <div class="station-result" data-station-name="${station['Station Name']}" data-naptan-id="${station['NaPTAN ID']}" data-station-lines='${JSON.stringify(station.Lines)}'>
@@ -63,6 +65,62 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             searchResults.innerHTML = 'No results found.';
         }
+    }
+
+    // Fetch and display live arrivals
+    async function fetchLiveArrivals(naptanId, lines) {
+        const arrivalsPromises = lines.map(line => 
+            fetch(`https://api.tfl.gov.uk/StopPoint/${naptanId}/Arrivals`)
+                .then(response => response.json())
+                .then(data => {
+                    // Filter arrivals by line
+                    const arrivalsForLine = data.filter(arrival => arrival.lineName === line);
+                    // Group by platform and get the earliest arrival for each platform
+                    const groupedByPlatform = arrivalsForLine.reduce((acc, curr) => {
+                        const platform = curr.platformName || 'Unknown';
+                        if (!acc[platform]) acc[platform] = [];
+                        acc[platform].push(curr);
+                        return acc;
+                    }, {});
+                    const earliestArrivals = Object.entries(groupedByPlatform).map(([platform, arrivals]) => {
+                        const earliestArrival = arrivals.reduce((prev, curr) => new Date(prev.expectedArrival) < new Date(curr.expectedArrival) ? prev : curr);
+                        return {
+                            platformName: platform,
+                            lineName: earliestArrival.lineName,
+                            destinationName: earliestArrival.destinationName,
+                            timeToArrival: Math.floor(earliestArrival.timeToStation / 60)
+                        };
+                    });
+                    return {
+                        line,
+                        arrivals: earliestArrivals
+                    };
+                })
+        );
+        
+        // Wait for all promises to resolve
+        const results = await Promise.all(arrivalsPromises);
+        displayArrivals(results);
+    }
+
+    // Display arrivals
+    function displayArrivals(arrivalData) {
+        arrivalsContainer.innerHTML = '';
+        arrivalData.forEach(data => {
+            if (data.arrivals.length > 0) {
+                const lineArrivals = data.arrivals.map(arrival => `
+                    <div class="arrival">
+                        <strong>${data.line}</strong> - ${arrival.platformName}: ${arrival.timeToArrival < 1 ? 'Due' : `${arrival.timeToArrival} min`} to ${arrival.destinationName}
+                    </div>
+                `).join('');
+                arrivalsContainer.innerHTML += `
+                    <div class="line-arrivals">
+                        <h4>${data.line}</h4>
+                        ${lineArrivals}
+                    </div>
+                `;
+            }
+        });
     }
 
     // Handle station click event
@@ -81,7 +139,12 @@ document.addEventListener('DOMContentLoaded', function () {
             selectedLines.innerHTML = colorRectangles;
             selectedLines.style.display = 'block'; // Show the line colors
 
-            console.log(`Selected NaPTAN ID: ${selectedNaPTANId}`); // Log the selected NaPTAN ID (optional)
+            // Fetch and display live arrivals for only the lines served by the station
+            fetchLiveArrivals(selectedNaPTANId, lines);
+
+            // Set up auto-refresh every 20 seconds
+            if (refreshInterval) clearInterval(refreshInterval);
+            refreshInterval = setInterval(() => fetchLiveArrivals(selectedNaPTANId, lines), 20000);
         }
     }
 
@@ -93,11 +156,15 @@ document.addEventListener('DOMContentLoaded', function () {
             searchResults.style.display = 'block'; // Show search results
             selectedStation.style.display = 'none'; // Hide the selected station title
             selectedLines.style.display = 'none'; // Hide the line colors
+            arrivalsContainer.innerHTML = ''; // Clear arrivals container
+            if (refreshInterval) clearInterval(refreshInterval);
         } else {
             searchResults.innerHTML = ''; // Clear results if query is empty
             searchResults.style.display = 'none'; // Hide search results if no query
             selectedStation.style.display = 'none'; // Hide the selected station title
             selectedLines.style.display = 'none'; // Hide the line colors
+            arrivalsContainer.innerHTML = ''; // Clear arrivals container
+            if (refreshInterval) clearInterval(refreshInterval);
         }
     });
 
