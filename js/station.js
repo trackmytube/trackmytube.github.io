@@ -1,10 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     const searchInput = document.getElementById('station-search');
     const searchResults = document.getElementById('search-results');
-    const popup = document.getElementById('popup');
-    const popupTitle = document.getElementById('popup-title');
-    const popupBody = document.getElementById('popup-body');
-    const popupClose = document.getElementById('popup-close');
     let allStations = [];
 
     // Define line colors (add more lines and colors as needed)
@@ -43,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function filterStations(query) {
         const results = allStations.filter(station => 
             station['Station Name'].toLowerCase().replace(/['’]/g, '').includes(query.toLowerCase().replace(/['’]/g, ''))
-        ).slice(0, 5); // Limit to 5 results
+        ).slice(0, 3); // Limit to 3 results
 
         displayResults(results);
     }
@@ -57,7 +53,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 return `
                     <div class="station-result" data-station-name="${station['Station Name']}">
                         <h3>${station['Station Name']}</h3>
-                        <p>Lines: ${station.Lines.join(', ')}</p>
                         <div class="line-colors">${colorRectangles}</div>
                     </div>
                 `;
@@ -67,42 +62,16 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Show popup with station details
-    function showPopup(stationName) {
-        popupTitle.textContent = `${stationName} - Live Departures`;
-        popup.style.display = 'flex'; // Show the popup
-    }
-
-    // Hide the popup
-    function hidePopup() {
-        popup.style.display = 'none'; // Hide the popup
-    }
-
     // Event listeners
-    searchResults.addEventListener('click', function (event) {
-        const result = event.target.closest('.station-result');
-        if (result) {
-            const stationName = result.dataset.stationName;
-            showPopup(stationName);
+    searchInput.addEventListener('input', function () {
+        const query = searchInput.value.trim();
+        if (query) {
+            filterStations(query);
+        } else {
+            searchResults.innerHTML = ''; // Clear results if query is empty
         }
     });
 
-    popupClose.addEventListener('click', hidePopup);
-    window.addEventListener('click', function (event) {
-        if (event.target === popup) {
-            hidePopup();
-        }
-    });
-
-    // Initialize the station list and set up event listener
-    fetchStations().then(() => {
-        searchInput.addEventListener('input', function () {
-            const query = searchInput.value.trim();
-            if (query) {
-                filterStations(query);
-            } else {
-                searchResults.innerHTML = ''; // Clear results if query is empty
-            }
-        });
-    });
+    // Initialize the station list
+    fetchStations();
 });
