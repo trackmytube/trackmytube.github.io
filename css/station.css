@@ -1,7 +1,7 @@
 /* Styles for Station Finder - station.html */
 .station-finder {
     max-width: 800px;
-    margin: 20px auto;
+    margin: 0px auto;
     padding: 20px;
     text-align: center;
 }
@@ -64,23 +64,44 @@
 }
 
 .line-arrivals {
-    border: 2px solid;
+    border: 5px solid;
     border-radius: 5px;
     padding: 15px;
     margin-bottom: 20px;
     background-color: #fff;
+    display: flex; /* Enable flexbox layout */
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    gap: 10px; /* Add space between columns */
+    overflow-x: auto; /* Allow horizontal scrolling if content overflows */
 }
 
 .line-arrivals h4 {
     margin: 0;
-    padding-bottom: 10px;
+    padding-bottom: 0px;
     font-weight: bold;
+    text-align: center; /* Center-align the heading */
+    width: 100%; /* Ensure heading spans the full width */
+    font-size: 20px;
 }
 
 .arrival {
-    margin-bottom: 10px;
+    flex: 1 1 200px; /* Allow items to grow and shrink with a base width of 200px */
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+    padding: 10px;
+    text-align: center; /* Center-align text */
+    border: 2px solid #454545; /* Add border around each platform box */
+    border-radius: 5px; /* Round the corners */
+    background-color: #f9f9f9; /* Background color for each platform box */
 }
 
 .arrival strong {
     display: block;
+    font-weight: bold; /* Ensure platform name is bold */
+    margin-bottom: 5px; /* Add some spacing below the platform name */
+    font-size: 17px;
+}
+
+.arrival:hover {
+    background-color: #ececec; /* Darker background color on hover */
+    transform: scale(1.02); /* Slight zoom effect */
 }
