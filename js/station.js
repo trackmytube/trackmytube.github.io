@@ -4,11 +4,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const selectedStation = document.getElementById('selectedStation');
     const selectedLines = document.getElementById('selectedLines');
     const arrivalsContainer = document.getElementById('arrivalsContainer');
+    const popup = document.getElementById('popup');
+    const popupTitle = document.getElementById('popupTitle');
+    const popupClose = document.getElementById('popupClose');
+    const overlay = document.getElementById('overlay');
+    const popupArrivals = document.getElementById('popupArrivals');
+    
     let allStations = [];
     let selectedNaPTANId = null;
     let refreshInterval = null;
 
-    // Define line colors (add more lines and colors as needed)
+    // Define line colors
     const lineColors = {
         "Bakerloo": "#B36305",
         "Central": "#E32017",
@@ -31,9 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
     async function fetchStations() {
         try {
             const response = await fetch('https://raw.githubusercontent.com/jahir10ali/naptans-for-tfl-stations/main/data/Station_NaPTANs.json');
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
+            if (!response.ok) throw new Error('Network response was not ok');
             allStations = await response.json();
         } catch (error) {
             console.error('Error fetching stations:', error);
@@ -42,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Filter and display results based on user input
     function filterStations(query) {
-        const results = allStations.filter(station => 
+        const results = allStations.filter(station =>
             station['Station Name'].toLowerCase().replace(/['’]/g, '').includes(query.toLowerCase().replace(/['’]/g, ''))
         ).slice(0, 3); // Limit to 3 results
 
@@ -69,13 +73,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Fetch and display live arrivals
     async function fetchLiveArrivals(naptanId, lines) {
-        const arrivalsPromises = lines.map(line => 
+        const arrivalsPromises = lines.map(line =>
             fetch(`https://api.tfl.gov.uk/StopPoint/${naptanId}/Arrivals`)
                 .then(response => response.json())
                 .then(data => {
-                    // Filter arrivals by line
                     const arrivalsForLine = data.filter(arrival => arrival.lineName === line);
-                    // Group by platform and get the earliest arrival for each platform
                     const groupedByPlatform = arrivalsForLine.reduce((acc, curr) => {
                         const platform = curr.platformName || 'Unknown';
                         if (!acc[platform]) acc[platform] = [];
@@ -87,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         return {
                             platformName: platform,
                             lineName: earliestArrival.lineName,
-                            destinationName: earliestArrival.towards,  // Use 'towards' instead of 'destinationName'
+                            destinationName: earliestArrival.destinationName,
                             timeToArrival: Math.floor(earliestArrival.timeToStation / 60)
                         };
                     });
@@ -97,8 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     };
                 })
         );
-        
-        // Wait for all promises to resolve
+
         const results = await Promise.all(arrivalsPromises);
         displayArrivals(results);
     }
@@ -108,10 +109,10 @@ document.addEventListener('DOMContentLoaded', function () {
         arrivalsContainer.innerHTML = '';
         arrivalData.forEach(data => {
             if (data.arrivals.length > 0) {
-                const lineColor = lineColors[data.line] || '#000000'; // Default color if line not found
+                const lineColor = lineColors[data.line] || '#000000';
                 const lineArrivals = data.arrivals.map(arrival => `
                     <div class="arrival">
-                        <div class="arrival-details">
+                        <div class="arrival-details" data-platform="${arrival.platformName}" data-line="${arrival.lineName}">
                             <strong>${arrival.platformName}</strong>
                             <span>To: ${arrival.destinationName}</span><br>
                             <span>${arrival.timeToArrival < 1 ? 'Due' : `${arrival.timeToArrival} min`}</span>
@@ -128,53 +129,108 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Fetch and display arrivals for the popup
+    async function fetchPopupArrivals(naptanId, line, platform) {
+        try {
+            const response = await fetch(`https://api.tfl.gov.uk/StopPoint/${naptanId}/Arrivals`);
+            const data = await response.json();
+            const arrivalsForPlatform = data.filter(arrival => arrival.platformName === platform && arrival.lineName === line);
+            const sortedArrivals = arrivalsForPlatform.sort((a, b) => new Date(a.expectedArrival) - new Date(b.expectedArrival));
+            
+            popupArrivals.innerHTML = sortedArrivals.map(arrival => {
+                const minutesToArrival = Math.floor(arrival.timeToStation / 60);
+                const timeDisplay = minutesToArrival < 1 ? 'Due' : `${minutesToArrival} min`;
+                return `
+                    <div class="arrival-item">
+                        <div class="destination-line">
+                            <span class="destination">${arrival.destinationName}</span>
+                            <span class="time-to-arrival">${timeDisplay}</span>
+                        </div>
+                        <div class="details-line">
+                            <span class="location">${arrival.currentLocation}</span>
+                            <span class="expected-time">${new Date(arrival.expectedArrival).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        } catch (error) {
+            console.error('Error fetching arrivals:', error);
+        }
+    }
+
     // Handle station click event
     function handleStationClick(event) {
         const result = event.target.closest('.station-result');
         if (result) {
             const stationName = result.dataset.stationName;
-            selectedNaPTANId = result.dataset.naptanId; // Store the NaPTAN ID
-            const lines = JSON.parse(result.dataset.stationLines); // Get lines associated with the station
-            searchResults.style.display = 'none'; // Hide the search results
-            selectedStation.innerHTML = `<h4>${stationName} - Live Departures</h4>`; // Display the station name
-            selectedStation.style.display = 'block'; // Show the selected station title
+            selectedNaPTANId = result.dataset.naptanId;
+            const lines = JSON.parse(result.dataset.stationLines);
+            searchResults.style.display = 'none';
+            selectedStation.innerHTML = `<h4>${stationName} - Live Departures</h4>`;
+            selectedStation.style.display = 'block';
 
-            // Display the line colors
             const colorRectangles = lines.map(line => `<span class="line-color" style="background-color: ${lineColors[line] || '#000000'};"></span>`).join(' ');
             selectedLines.innerHTML = colorRectangles;
-            selectedLines.style.display = 'block'; // Show the line colors
+            selectedLines.style.display = 'block';
 
-            // Fetch and display live arrivals for only the lines served by the station
             fetchLiveArrivals(selectedNaPTANId, lines);
 
-            // Set up auto-refresh every 20 seconds
             if (refreshInterval) clearInterval(refreshInterval);
             refreshInterval = setInterval(() => fetchLiveArrivals(selectedNaPTANId, lines), 20000);
         }
     }
 
-    // Event listeners
+    // Handle platform box click event
+    function handlePlatformClick(event) {
+        const platformDetails = event.target.closest('.arrival-details');
+        if (platformDetails) {
+            const platformName = platformDetails.dataset.platform;
+            const lineName = platformDetails.dataset.line;
+            const lineColor = lineColors[lineName] || '#000000';
+            popupTitle.textContent = `${platformName} - ${lineName}`;
+            popup.style.borderColor = lineColor;
+            fetchPopupArrivals(selectedNaPTANId, lineName, platformName);
+            popup.style.display = 'block';
+            overlay.style.display = 'block';
+
+            // Set up refresh interval for popup arrivals
+            if (refreshInterval) clearInterval(refreshInterval);
+            refreshInterval = setInterval(() => fetchPopupArrivals(selectedNaPTANId, lineName, platformName), 20000);
+        }
+    }
+
+    // Close the popup
+    function closePopup() {
+        popup.style.display = 'none';
+        overlay.style.display = 'none';
+        // Clear the refresh interval when closing the popup
+        if (refreshInterval) clearInterval(refreshInterval);
+    }
+
+    popupClose.addEventListener('click', closePopup);
+    overlay.addEventListener('click', closePopup);
+
     searchInput.addEventListener('input', function () {
         const query = searchInput.value.trim();
         if (query) {
             filterStations(query);
-            searchResults.style.display = 'block'; // Show search results
-            selectedStation.style.display = 'none'; // Hide the selected station title
-            selectedLines.style.display = 'none'; // Hide the line colors
-            arrivalsContainer.innerHTML = ''; // Clear arrivals container
+            searchResults.style.display = 'block';
+            selectedStation.style.display = 'none';
+            selectedLines.style.display = 'none';
+            arrivalsContainer.innerHTML = '';
             if (refreshInterval) clearInterval(refreshInterval);
         } else {
-            searchResults.innerHTML = ''; // Clear results if query is empty
-            searchResults.style.display = 'none'; // Hide search results if no query
-            selectedStation.style.display = 'none'; // Hide the selected station title
-            selectedLines.style.display = 'none'; // Hide the line colors
-            arrivalsContainer.innerHTML = ''; // Clear arrivals container
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            selectedStation.style.display = 'none';
+            selectedLines.style.display = 'none';
+            arrivalsContainer.innerHTML = '';
             if (refreshInterval) clearInterval(refreshInterval);
         }
     });
 
     searchResults.addEventListener('click', handleStationClick);
+    arrivalsContainer.addEventListener('click', handlePlatformClick);
 
-    // Initialize the station list
     fetchStations();
 });
