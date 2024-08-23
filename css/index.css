@@ -1,0 +1,109 @@
+/* Hero section styling */
+.hero {
+    background: #0073e6;
+    color: #fff;
+    padding: 100px 20px 50px;
+    margin-top: 60px; /* Adjust for fixed header */
+}
+
+.hero-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 120px; /* Space between columns */
+    max-width: 1200px; /* Optional: Limit the width of the content */
+    margin: 0 auto; /* Center content */
+}
+
+.hero-text {
+    flex: 1;
+    text-align: left; /* Align text to the left */
+}
+
+.hero-text h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.hero-text p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+.hero-text .btn {
+    background: #fff;
+    color: #0073e6;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.hero-text .btn:hover {
+    background: #e6e6e6;
+}
+
+.hero-search {
+    flex: 1;
+    background: #fff;
+    color: #333;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.hero-search h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.hero-search input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.hero-search .search-btn {
+    background: #0073e6;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.hero-search .search-btn:hover {
+    background: #005bb5;
+}
+
+
+
+/* Features Section - index.html */
+.feature-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.feature-item {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    flex: 12 1 calc(33% - 20px);
+    text-align: center;
+}
+
+.feature-item h3 a {
+    color: #0073e6;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+.feature-item h3 a:hover {
+    text-decoration: underline;
+}
+

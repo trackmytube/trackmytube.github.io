@@ -1,0 +1,133 @@
+/* TfL Status Updates Section - status.html */
+.tfl-status-board {
+    flex: 2;
+    margin-bottom: 30px;
+}
+
+.tfl-status-board h2 {
+    font-size: 2em;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.status-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 15px;
+}
+
+.status-item {
+    background: #fff; /* Default background color */
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    font-size: 0.9em;
+    position: relative; /* Ensure the image can be positioned absolutely */
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+.status-item h3 {
+    margin-bottom: 10px;
+    font-size: 2.0em;
+}
+
+.status-item p {
+    font-weight: bold;
+    font-size: 1.4em;
+}
+
+
+/* Line Colors */
+.bakerloo { border: 5px solid #B36305; }
+.central { border: 5px solid #E32017; }
+.circle { border: 5px solid #FFD300; }
+.district { border: 5px solid #00782A; }
+.dlr { border: 5px solid #00A4A7; }
+.elizabeth-line { border: 5px solid #9364CC; }
+.hammersmith-city { border: 5px solid #F3A9BB; }
+.jubilee { border: 5px solid #A0A5A9; }
+.overground { border: 5px solid #EE7C0E; }
+.metropolitan { border: 5px solid #9B0056; }
+.northern { border: 5px solid #000000; }
+.piccadilly { border: 5px solid #003688; }
+.tram { border: 5px solid #84B817; }
+.victoria { border: 5px solid #0098D4; }
+.waterloo-city { border: 5px solid #95CDBA; }
+
+/* Hover Effects */
+.status-item:hover {
+    background-color: #e3e3e3; /* Light grey background on hover */
+}
+
+/* Exclamation Mark Image */
+.alert-icon {
+    position: absolute; /* Position the image absolutely within the status-item */
+    right: 10px; /* Distance from the right edge */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust for vertical centering */
+    width: 50px; /* Set the width of the image */
+    height: auto; /* Maintain aspect ratio */
+    display: none; /* Hide the image by default */
+}
+
+/* Show the image when status is not 'Good Service' */
+.status-item .status-text:not(.good-service)::after {
+    content: ''; /* Empty content to allow visibility */
+    display: block; /* Make the element block */
+}
+
+/* Overlay */
+.overlay {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 1000;
+}
+
+/* Popup */
+.popup {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+    width: 700px;
+    height: 700px;
+    max-width: 80%;
+    border-radius: 8px;
+    text-align: center;
+    border: 7px solid;
+    overflow-y: auto; /* Add vertical scrolling */
+}
+
+/* Popup Title */
+.popup h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+/* Popup Details */
+#popup-details {
+    font-size: 1.2em;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* Close Button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+}

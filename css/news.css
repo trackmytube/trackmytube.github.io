@@ -1,0 +1,32 @@
+/* Latest Travel Updates Section - news.html */
+.updates {
+    flex: 2;
+    margin-bottom: 30px;
+}
+
+.updates h2 {
+    font-size: 2em;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.updates ul {
+    list-style: none;
+}
+
+.updates ul li {
+    background: #fff;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.updates ul li a {
+    color: #0073e6;
+    text-decoration: none;
+}
+
+.updates ul li a:hover {
+    text-decoration: underline;
+}

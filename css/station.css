@@ -1,0 +1,92 @@
+/* Styles for Station Finder - station.html */
+.station-finder {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.search-container {
+    margin-bottom: 20px;
+}
+
+#station-search {
+    width: 100%;
+    max-width: 600px;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-results {
+    margin-top: 20px;
+    text-align: left;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+}
+
+.station-result {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition for background color and slight zoom effect */
+}
+
+.station-result:hover {
+    background-color: #e0e0e0; /* Darker background color on hover */
+    transform: scale(1.02); /* Slight zoom effect */
+}
+
+.line-colors {
+    margin-top: 5px;
+}
+
+.line-color {
+    display: inline-block;
+    width: 40px;
+    height: 10px;
+    border-radius: 4px;
+    margin-right: 5px;
+}
+
+/* Popup styles for station.html */
+.popup-overlay {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    width: 60vw; /* 60% of the viewport width */
+    max-width: 90%; /* Ensure it doesn't exceed viewport width on smaller screens */
+    height: auto; /* Adjust height based on content */
+    position: relative;
+    text-align: center; /* Center align content */
+    margin: auto; /* Center horizontally */
+}
+
+.popup-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 28px; /* Larger close icon */
+    cursor: pointer;
+}
+
+.popup-title {
+    font-size: 24px; /* Larger title */
+    margin-bottom: 20px;
+}
