@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         return {
                             platformName: platform,
                             lineName: earliestArrival.lineName,
-                            destinationName: earliestArrival.destinationName,
+                            destinationName: earliestArrival.towards,  // Use 'towards' instead of 'destinationName'
                             timeToArrival: Math.floor(earliestArrival.timeToStation / 60)
                         };
                     });
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
             selectedNaPTANId = result.dataset.naptanId; // Store the NaPTAN ID
             const lines = JSON.parse(result.dataset.stationLines); // Get lines associated with the station
             searchResults.style.display = 'none'; // Hide the search results
-            selectedStation.innerHTML = `<h2>${stationName} - Live Departures</h2>`; // Display the station name
+            selectedStation.innerHTML = `<h4>${stationName} - Live Departures</h4>`; // Display the station name
             selectedStation.style.display = 'block'; // Show the selected station title
 
             // Display the line colors
