@@ -1,7 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
     const searchInput = document.getElementById('station-search');
     const searchResults = document.getElementById('search-results');
+    const selectedStation = document.getElementById('selectedStation'); // Use the div for selected station name
+    const selectedLines = document.getElementById('selectedLines'); // Use the div for line colors
     let allStations = [];
+    let selectedNaPTANId = null; // Variable to store the selected NaPTAN ID
 
     // Define line colors (add more lines and colors as needed)
     const lineColors = {
@@ -51,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const colors = station.Lines.map(line => lineColors[line] || '#000000'); // Default color if line not found
                 const colorRectangles = colors.map(color => `<span class="line-color" style="background-color: ${color};"></span>`).join(' ');
                 return `
-                    <div class="station-result" data-station-name="${station['Station Name']}">
+                    <div class="station-result" data-station-name="${station['Station Name']}" data-naptan-id="${station['NaPTAN ID']}" data-station-lines='${JSON.stringify(station.Lines)}'>
                         <h3>${station['Station Name']}</h3>
                         <div class="line-colors">${colorRectangles}</div>
                     </div>
@@ -62,15 +65,43 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    // Handle station click event
+    function handleStationClick(event) {
+        const result = event.target.closest('.station-result');
+        if (result) {
+            const stationName = result.dataset.stationName;
+            selectedNaPTANId = result.dataset.naptanId; // Store the NaPTAN ID
+            const lines = JSON.parse(result.dataset.stationLines); // Get lines associated with the station
+            searchResults.style.display = 'none'; // Hide the search results
+            selectedStation.innerHTML = `<h2>${stationName} - Live Departures</h2>`; // Display the station name
+            selectedStation.style.display = 'block'; // Show the selected station title
+
+            // Display the line colors
+            const colorRectangles = lines.map(line => `<span class="line-color" style="background-color: ${lineColors[line] || '#000000'};"></span>`).join(' ');
+            selectedLines.innerHTML = colorRectangles;
+            selectedLines.style.display = 'block'; // Show the line colors
+
+            console.log(`Selected NaPTAN ID: ${selectedNaPTANId}`); // Log the selected NaPTAN ID (optional)
+        }
+    }
+
     // Event listeners
     searchInput.addEventListener('input', function () {
         const query = searchInput.value.trim();
         if (query) {
             filterStations(query);
+            searchResults.style.display = 'block'; // Show search results
+            selectedStation.style.display = 'none'; // Hide the selected station title
+            selectedLines.style.display = 'none'; // Hide the line colors
         } else {
             searchResults.innerHTML = ''; // Clear results if query is empty
+            searchResults.style.display = 'none'; // Hide search results if no query
+            selectedStation.style.display = 'none'; // Hide the selected station title
+            selectedLines.style.display = 'none'; // Hide the line colors
         }
     });
+
+    searchResults.addEventListener('click', handleStationClick);
 
     // Initialize the station list
     fetchStations();
