@@ -108,13 +108,18 @@ document.addEventListener('DOMContentLoaded', function () {
         arrivalsContainer.innerHTML = '';
         arrivalData.forEach(data => {
             if (data.arrivals.length > 0) {
+                const lineColor = lineColors[data.line] || '#000000'; // Default color if line not found
                 const lineArrivals = data.arrivals.map(arrival => `
                     <div class="arrival">
-                        <strong>${data.line}</strong> - ${arrival.platformName}: ${arrival.timeToArrival < 1 ? 'Due' : `${arrival.timeToArrival} min`} to ${arrival.destinationName}
+                        <div class="arrival-details">
+                            <strong>${arrival.platformName}</strong>
+                            <span>To: ${arrival.destinationName}</span><br>
+                            <span>${arrival.timeToArrival < 1 ? 'Due' : `${arrival.timeToArrival} min`}</span>
+                        </div>
                     </div>
                 `).join('');
                 arrivalsContainer.innerHTML += `
-                    <div class="line-arrivals">
+                    <div class="line-arrivals" style="border-color: ${lineColor};">
                         <h4>${data.line}</h4>
                         ${lineArrivals}
                     </div>
