@@ -2,22 +2,11 @@
 .hero {
     background: #0073e6;
     color: #fff;
-    padding: 100px 20px 50px;
-    margin-top: 60px; /* Adjust for fixed header */
-}
-
-.hero-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 120px; /* Space between columns */
-    max-width: 1200px; /* Optional: Limit the width of the content */
-    margin: 0 auto; /* Center content */
+    padding: 90px 0px 35px;
 }
 
 .hero-text {
-    flex: 1;
-    text-align: left; /* Align text to the left */
+    text-align: center; /* Align text to the left */
 }
 
 .hero-text h1 {
@@ -27,59 +16,7 @@
 
 .hero-text p {
     font-size: 1.2em;
-    margin-bottom: 30px;
 }
-
-.hero-text .btn {
-    background: #fff;
-    color: #0073e6;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-}
-
-.hero-text .btn:hover {
-    background: #e6e6e6;
-}
-
-.hero-search {
-    flex: 1;
-    background: #fff;
-    color: #333;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.hero-search h2 {
-    font-size: 1.5em;
-    margin-bottom: 20px;
-}
-
-.hero-search input {
-    width: 100%;
-    padding: 15px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-.hero-search .search-btn {
-    background: #0073e6;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.hero-search .search-btn:hover {
-    background: #005bb5;
-}
-
-
 
 /* Features Section - index.html */
 .feature-grid {
@@ -106,4 +43,115 @@
 .feature-item h3 a:hover {
     text-decoration: underline;
 }
+
+/* Ticker Section Styling */
+.ticker {
+    background: #f4f4f4;
+    padding: 10px 0;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #ccc; /* Border around the ticker container */
+    border-radius: 5px; /* Rounded corners for the ticker container */
+}
+
+.ticker-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%; /* Full width of the screen */
+    position: relative; /* Position relative for child positioning */
+}
+
+.ticker-text {
+    flex-shrink: 0; /* Prevent the text from shrinking */
+    font-size: 1.2em; /* Adjust font size as needed */
+    color: #333; /* Adjust text color as needed */
+    position: absolute; /* Position absolute within the ticker-wrapper */
+    left: 10px; /* Create a small gap from the very left edge of the screen */
+    padding: 0 10px; /* Add padding around the text */
+    background: #f4f4f4; /* Same background as the ticker for consistency */
+    border-radius: 5px 0 0 5px; /* Rounded corners on the left side */
+}
+
+.ticker-text a {
+    text-decoration: none; /* Remove underline from the link */
+}
+
+.ticker-text a:hover {
+    text-decoration: underline; /* Underline on hover for clarity */
+}
+
+.ticker-container {
+    margin-left: 150px; /* Adjust margin to push the container right from the text */
+    flex: 1; /* Allows the ticker container to take the remaining space */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.ticker-content-wrapper {
+    display: flex;
+    flex-direction: row;
+    white-space: nowrap;
+}
+
+#ticker-content1,
+#ticker-content2 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    white-space: nowrap;
+    animation: ticker 30s linear infinite; /* Adjust duration for scrolling speed */
+}
+
+.status-item {
+    display: inline-block;
+    margin-right: 50px; /* Adjust spacing between items */
+    padding: 10px; /* Padding inside each item */
+    border-radius: 5px; /* Rounded corners for each item */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional shadow for better visibility */
+}
+
+.status-text {
+    font-size: 1em;
+    color: #333;
+}
+
+/* Line Colors */
+.bakerloo { border: 5px solid #B36305; }
+.central { border: 5px solid #E32017; }
+.circle { border: 5px solid #FFD300; }
+.district { border: 5px solid #00782A; }
+.dlr { border: 5px solid #00A4A7; }
+.elizabeth-line { border: 5px solid #9364CC; }
+.hammersmith-city { border: 5px solid #F3A9BB; }
+.jubilee { border: 5px solid #A0A5A9; }
+.overground { border: 5px solid #EE7C0E; }
+.metropolitan { border: 5px solid #9B0056; }
+.northern { border: 5px solid #000000; }
+.piccadilly { border: 5px solid #003688; }
+.tram { border: 5px solid #84B817; }
+.victoria { border: 5px solid #0098D4; }
+.waterloo-city { border: 5px solid #95CDBA; }
+
+/* Keyframes for the ticker animation */
+@keyframes ticker {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Optional styles for alert icons */
+.alert-icon {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
 
