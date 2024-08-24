@@ -72,6 +72,14 @@
     border-radius: 5px 0 0 5px; /* Rounded corners on the left side */
 }
 
+.ticker-text a {
+    text-decoration: none; /* Remove underline from the link */
+}
+
+.ticker-text a:hover {
+    text-decoration: underline; /* Underline on hover for clarity */
+}
+
 .ticker-container {
     margin-left: 150px; /* Adjust margin to push the container right from the text */
     flex: 1; /* Allows the ticker container to take the remaining space */
