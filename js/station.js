@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function filterStations(query) {
         const results = allStations.filter(station =>
             station['Station Name'].toLowerCase().replace(/['’]/g, '').includes(query.toLowerCase().replace(/['’]/g, ''))
-        ).slice(0, 3); // Limit to 3 results
+        ).slice(0, 6); // Limit to 6 results
 
         displayResults(results);
     }
