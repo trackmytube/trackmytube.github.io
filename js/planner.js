@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Update the journey title based on selected stations
     function updateJourneyTitle() {
         if (stationFrom && stationTo) {
-            selectedStation.innerHTML = `<h4>${stationFrom} &rarr; ${stationTo}</h4>`;
+            selectedStation.innerHTML = `<h5>${stationFrom} &rarr; ${stationTo}</h5>`;
             selectedStation.style.display = 'block'; 
         }
     }
