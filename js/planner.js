@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const selectedStation = document.getElementById('selectedStation');
     const selectedLines = document.getElementById('selectedLines');
     const switchButton = document.getElementById('switch-stations');
+    const searchButton = document.getElementById('search-button'); // New search button
     const journeyPreferencesButton = document.getElementById('journey-preferences-button');
     const journeyPreferences = document.getElementById('journey-preferences');
     const datePicker = document.getElementById('date-picker');
@@ -107,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 searchInputVia.value = stationName; // Set the VIA input field
             }
 
-            updateJourneyTitle(); // Update the journey title when a station is selected
+            // Do not update the journey title here
         }
     }
 
@@ -125,10 +126,10 @@ document.addEventListener('DOMContentLoaded', function () {
         [stationFrom, stationTo] = [stationTo, stationFrom];
         [naptanFrom, naptanTo] = [naptanTo, naptanFrom];
         
-        // Update the input fields and title
+        // Update the input fields
         searchInputOne.value = stationFrom;
         searchInputTwo.value = stationTo;
-        updateJourneyTitle();
+        // Do not update the journey title here
     }
 
     // Toggle the visibility of the journey preferences section
@@ -147,6 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
         timeIs = timeIsSelect.value;
         journeyPreference = journeyPreferenceSelect.value;
 
+        // Log preferences for debugging purposes
         console.log("Journey Preferences:");
         console.log("Date:", date);
         console.log("Time:", time);
@@ -174,16 +176,26 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Add event listeners for collecting journey preferences
+    // Handle search button click
+    searchButton.addEventListener('click', function() {
+        updateJourneyTitle(); // Update the title when the search button is clicked
+    });
+
+    // Handle switch button click
+    switchButton.addEventListener('click', switchStations); // Update the input fields only
+
+    // Handle journey preferences button click
+    journeyPreferencesButton.addEventListener('click', toggleJourneyPreferences); // Toggle preferences section visibility
+
+    // Collect journey preferences when they change
     datePicker.addEventListener('change', collectJourneyPreferences);
     timePicker.addEventListener('change', collectJourneyPreferences);
     timeIsSelect.addEventListener('change', collectJourneyPreferences);
     journeyPreferenceSelect.addEventListener('change', collectJourneyPreferences);
 
+    // Handle search result click
     searchResults.addEventListener('click', handleStationClick);
 
-    switchButton.addEventListener('click', switchStations); // Add event listener for the switch button
-    journeyPreferencesButton.addEventListener('click', toggleJourneyPreferences); // Add event listener for the journey preferences button
-
+    // Initial fetch
     fetchStations();
 });
