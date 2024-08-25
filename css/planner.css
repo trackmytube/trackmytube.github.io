@@ -22,7 +22,7 @@
     border-radius: 5px;
 }
 
-#switch-stations {
+#switch-stations, #search-button {
     padding: 10px 20px;
     font-size: 1em;
     border: 1px solid #ccc;
@@ -33,7 +33,7 @@
     transition: background-color 0.3s;
 }
 
-#switch-stations:hover {
+#switch-stations:hover, #search-button:hover {
     background-color: #0056b3;
 }
 
