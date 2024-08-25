@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrackMyTube - TfL Status Updates and News</title>
+    <title>TrackMyTube - TfL Station Finder</title>
     <link rel="stylesheet" href="css/styles.css">
-    <script src="js/tfl-status.js" defer></script>
+    <link rel="stylesheet" href="css/planner.css">
+    <script src="js/planner.js" defer></script>
 </head>
 <body>
     <!-- Header -->
@@ -22,11 +23,55 @@
         </nav>
     </header>
 
-    
-
     <!-- Main Content -->
     <main>
-        
+        <div class="station-finder">
+            <h1>TfL Journey Planner</h1>
+            <div class="search-container">
+                <input type="text" id="station-search-1" placeholder="FROM station...">
+                <input type="text" id="station-search-2" placeholder="TO station...">
+                <button id="switch-stations" aria-label="Switch FROM and TO stations">Switch</button>
+            </div>
+            
+            <button id="journey-preferences-button">Journey Preferences</button>
+            <div id="journey-preferences" class="hidden">
+                <input type="text" id="station-search-via" placeholder="VIA station...">
+                <div class="preferences-row">
+                    <div class="input-group">
+                        <label for="date-picker">Date:</label>
+                        <input type="date" id="date-picker">
+                    </div>
+                    <div class="input-group">
+                        <label for="time-picker">Time:</label>
+                        <input type="time" id="time-picker">
+                    </div>
+                </div>
+                <div class="preferences-row">
+                    <div class="input-group">
+                        <label for="time-is">Time is:</label>
+                        <select id="time-is">
+                            <option value="departing">Departing</option>
+                            <option value="arriving">Arriving</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="journey-preference">Journey Preference:</label>
+                        <select id="journey-preference">
+                            <option value="leastinterchange">Least Interchange</option>
+                            <option value="leasttime">Least Time</option>
+                            <option value="leastwalking">Least Walking</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div id="selectedStation"></div> <!-- For displaying the station name -->
+            <div id="selectedLines" class="line-colors"></div> <!-- For displaying the line colors -->
+
+            <div id="search-results" class="search-results">
+                <!-- Search results will be displayed here -->
+            </div>
+        </div>
     </main>
 
     <!-- Footer -->
@@ -40,8 +85,5 @@
             <p>&copy; 2024 TrackMyTube. All rights reserved.</p>
         </div>
     </footer>
-
-
-    <script src="js/scripts.js"></script>
 </body>
 </html>
