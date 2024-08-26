@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
         "Circle": "#FFD300",
         "District": "#00782A",
         "DLR": "#00A4A7",
-        "Elizabeth": "#5B2C6F",
+        "Elizabeth line": "#60399E",
         "Hammersmith & City": "#F3A9BB",
         "Jubilee": "#A0A5A9",
         "London Overground": "#EE7C0E",
