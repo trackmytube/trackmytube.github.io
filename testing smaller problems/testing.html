@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Testing TFL Arrivals</title>
+    <title>Journey Details</title>
     <link rel="stylesheet" href="testing.css">
 </head>
 <body>
-    <h1>Enter Naptan Code to Get Train Arrivals</h1>
-    <form id="naptan-form">
-        <input type="text" id="naptan-code" placeholder="Enter Naptan Code" required>
-        <button type="submit">Submit</button>
-    </form>
-    <div id="arrival-data"></div>
-
+    <div class="journey-container">
+        <button id="fetch-journey">Fetch Journey</button>
+    </div>
+    
+    <div id="journey-results"></div>
+    
     <script src="testing.js"></script>
 </body>
 </html>

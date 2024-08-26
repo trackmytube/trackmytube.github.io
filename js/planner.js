@@ -6,28 +6,29 @@ document.addEventListener('DOMContentLoaded', function () {
     const selectedStation = document.getElementById('selectedStation');
     const selectedLines = document.getElementById('selectedLines');
     const switchButton = document.getElementById('switch-stations');
-    const searchButton = document.getElementById('search-button'); // New search button
+    const searchButton = document.getElementById('search-button');
     const journeyPreferencesButton = document.getElementById('journey-preferences-button');
     const journeyPreferences = document.getElementById('journey-preferences');
     const datePicker = document.getElementById('date-picker');
     const timePicker = document.getElementById('time-picker');
     const timeIsSelect = document.getElementById('time-is');
     const journeyPreferenceSelect = document.getElementById('journey-preference');
-    
+    const journeyResults = document.getElementById('journey-results'); // Keep this
+
     let allStations = [];
-    let activeInput = null; // To track which input is being edited
-    let stationFrom = ""; // To store the selected "FROM" station name
-    let stationTo = ""; // To store the selected "TO" station name
-    let stationVia = ""; // To store the selected "VIA" station name
+    let activeInput = null;
+    let stationFrom = "";
+    let stationTo = "";
+    let stationVia = "";
     let naptanFrom = ""; // To store the selected "FROM" station NaPTAN ID
     let naptanTo = ""; // To store the selected "TO" station NaPTAN ID
-    let naptanVia = ""; // To store the selected "VIA" station NaPTAN ID
+    let naptanVia = "";
 
     // Preferences data
-    let date = ""; // To store the selected date
-    let time = ""; // To store the selected time
-    let timeIs = "departing"; // Default value for "Time is"
-    let journeyPreference = "leastinterchange"; // Default value for "Journey Preference"
+    let date = "";
+    let time = "";
+    let timeIs = "departing";
+    let journeyPreference = "leastinterchange";
 
     // Define line colors
     const lineColors = {
@@ -96,19 +97,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (activeInput === searchInputOne) {
                 stationFrom = stationName;
-                naptanFrom = naptanId; // Store the NaPTAN ID for the "FROM" station
-                searchInputOne.value = stationName; // Set the FROM input field
+                naptanFrom = naptanId;
+                searchInputOne.value = stationName;
             } else if (activeInput === searchInputTwo) {
                 stationTo = stationName;
-                naptanTo = naptanId; // Store the NaPTAN ID for the "TO" station
-                searchInputTwo.value = stationName; // Set the TO input field
+                naptanTo = naptanId;
+                searchInputTwo.value = stationName;
             } else if (activeInput === searchInputVia) {
                 stationVia = stationName;
-                naptanVia = naptanId; // Store the NaPTAN ID for the "VIA" station
-                searchInputVia.value = stationName; // Set the VIA input field
+                naptanVia = naptanId;
+                searchInputVia.value = stationName;
             }
-
-            // Do not update the journey title here
         }
     }
 
@@ -122,14 +121,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Switch stations
     function switchStations() {
-        // Swap the station names and NaPTAN IDs
         [stationFrom, stationTo] = [stationTo, stationFrom];
         [naptanFrom, naptanTo] = [naptanTo, naptanFrom];
-        
-        // Update the input fields
         searchInputOne.value = stationFrom;
         searchInputTwo.value = stationTo;
-        // Do not update the journey title here
     }
 
     // Toggle the visibility of the journey preferences section
@@ -148,12 +143,87 @@ document.addEventListener('DOMContentLoaded', function () {
         timeIs = timeIsSelect.value;
         journeyPreference = journeyPreferenceSelect.value;
 
-        // Log preferences for debugging purposes
         console.log("Journey Preferences:");
         console.log("Date:", date);
         console.log("Time:", time);
         console.log("Time Is:", timeIs);
         console.log("Journey Preference:", journeyPreference);
+    }
+
+    // Fetch and display journey results
+    async function fetchJourneyResults() {
+        if (!naptanFrom || !naptanTo) {
+            alert('Please enter both FROM and TO NaPTAN IDs.');
+            return;
+        }
+
+        try {
+            const response = await fetch(`https://api.tfl.gov.uk/Journey/JourneyResults/${naptanFrom}/to/${naptanTo}`);
+            if (!response.ok) throw new Error('Network response was not ok');
+            const data = await response.json();
+
+            console.log('API Response Data:', data);
+            displayJourneyResults(data);
+        } catch (error) {
+            console.error('Error fetching journey results:', error);
+            journeyResults.innerHTML = 'Error fetching journey details. Please try again.';
+        }
+    }
+
+    function formatTime(time) {
+        return new Date(time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function displayJourneyResults(data) {
+        if (data && data.journeys && Array.isArray(data.journeys) && data.journeys.length > 0) {
+            journeyResults.innerHTML = data.journeys.map(journey => {
+                const legsHtml = journey.legs && Array.isArray(journey.legs) ? journey.legs.map((leg, index) => {
+                    const trainName = leg.routeOptions && leg.routeOptions[0] ? leg.routeOptions[0].name : 'Unknown Train';
+                    const departureStopName = leg.departurePoint ? leg.departurePoint.commonName : 'Unknown Departure Stop';
+                    const arrivalStopName = leg.arrivalPoint ? leg.arrivalPoint.commonName : 'Unknown Arrival Stop';
+                    const departureTime = leg.departureTime ? formatTime(leg.departureTime) : 'Unknown Time';
+                    const arrivalTime = leg.arrivalTime ? formatTime(leg.arrivalTime) : 'Unknown Time';
+                    const duration = leg.duration || 'Unknown Duration';
+                    const stopPointsHtml = leg.path && leg.path.stopPoints && Array.isArray(leg.path.stopPoints) 
+                        ? leg.path.stopPoints.map(stop => `
+                            <li>${stop.name}</li>
+                        `).join('') 
+                        : '';
+
+                    return `
+                        <p><strong>${trainName}</strong></p>
+                        <div class="journey-leg">
+                            <div class="journey-leg-content">
+                                <p class="journey-leg-station"><strong>${departureTime} - ${departureStopName}</strong></p>
+                                <p><strong>${duration} min</strong> <button class="view-stops-button">View Stops</button></p>
+                                <ul class="stop-points" style="display: none;">
+                                    ${stopPointsHtml}
+                                </ul>
+                                <p class="journey-leg-station"><strong>${arrivalTime} - ${arrivalStopName}</strong></p>
+                                
+                            </div>
+                        </div>
+                    `;
+                }).join('') : 'No legs data available';
+
+                return `
+                    <div class="journey-item">
+                        <h3>Duration: ${journey.duration ? `${journey.duration} min` : 'Unknown Duration'}, ${journey.startDateTime ? formatTime(journey.startDateTime) : 'Unknown Time'} - ${journey.arrivalDateTime ? formatTime(journey.arrivalDateTime) : 'Unknown Time'}</h3>
+                        ${legsHtml}
+                    </div>
+                `;
+            }).join('');
+
+            // Attach event listeners to "View Stops" buttons
+            document.querySelectorAll('.view-stops-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const stopPointsList = button.closest('.journey-leg-content').querySelector('.stop-points');
+                    stopPointsList.style.display = stopPointsList.style.display === 'none' ? 'block' : 'none';
+                });
+            });
+        } else {
+            journeyResults.innerHTML = 'No journey details found.';
+        }
     }
 
     // Add event listeners to all input fields
@@ -165,27 +235,28 @@ document.addEventListener('DOMContentLoaded', function () {
                 searchResults.style.display = 'block';
                 selectedStation.style.display = 'none';
                 selectedLines.style.display = 'none';
-                activeInput = input; // Set the active input field
+                activeInput = input;
             } else {
                 searchResults.innerHTML = '';
                 searchResults.style.display = 'none';
                 selectedStation.style.display = 'none';
                 selectedLines.style.display = 'none';
-                activeInput = null; // Clear the active input if no query
+                activeInput = null;
             }
         });
     });
 
     // Handle search button click
     searchButton.addEventListener('click', function() {
-        updateJourneyTitle(); // Update the title when the search button is clicked
+        updateJourneyTitle();
+        fetchJourneyResults(); // Fetch journey results when the search button is clicked
     });
 
     // Handle switch button click
-    switchButton.addEventListener('click', switchStations); // Update the input fields only
+    switchButton.addEventListener('click', switchStations);
 
     // Handle journey preferences button click
-    journeyPreferencesButton.addEventListener('click', toggleJourneyPreferences); // Toggle preferences section visibility
+    journeyPreferencesButton.addEventListener('click', toggleJourneyPreferences);
 
     // Collect journey preferences when they change
     datePicker.addEventListener('change', collectJourneyPreferences);
