@@ -154,22 +154,15 @@ button:hover {
     background-color: #0056b3;
 }
 
-#journey-results {
-    margin: 20px auto;
+.journey-item {
+    margin: 20px 0; /* Adds space between each journey box */
     padding: 20px;
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 4px;
-    width: 80%;
+    width: 100%;
     max-width: 800px;
-}
-
-.journey-item {
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background-color: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for better separation */
 }
 
 .journey-leg {
