@@ -220,7 +220,6 @@ button:hover {
     border: none;
     background: none; /* Ensures no background color */
     color: #007bff; /* Default text color */
-    text-decoration: underline; /* Underline the text */
     cursor: pointer; /* Pointer cursor on hover */
     font: inherit; /* Inherit font style from parent */
     display: inline; /* Make sure the element behaves like an inline element */

@@ -223,7 +223,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     const departureTime = leg.departureTime ? formatTime(leg.departureTime) : 'Unknown Time';
                     const arrivalTime = leg.arrivalTime ? formatTime(leg.arrivalTime) : 'Unknown Time';
                     const duration = leg.duration || 'Unknown Duration';
-                    const stopPointsHtml = leg.path?.stopPoints?.map(stop => `
+                    const stopPoints = leg.path?.stopPoints || [];
+                    const stopPointsHtml = stopPoints?.map(stop => `
                             <li>${stop.name}</li>
                         `).join('') || '';
 
@@ -236,7 +237,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             <div class="journey-leg" style="border-color: ${lineColor};"> <!-- Set border color dynamically -->
                                 <div class="journey-leg-content">
                                     <p class="journey-leg-station"><strong>${departureTime} - ${departureStopName}</strong></p>
-                                    <p><strong>${duration} min</strong> <button class="view-stops-button">View Stops</button></p>
+                                    <p><strong>${duration} min</strong> <button class="view-stops-button">View Stops (${stopPoints.length})</button></p>
                                     <ul class="stop-points" style="display: none;">
                                         ${stopPointsHtml}
                                     </ul>
