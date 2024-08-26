@@ -13,24 +13,22 @@ document.addEventListener('DOMContentLoaded', function () {
     const timePicker = document.getElementById('time-picker');
     const timeIsSelect = document.getElementById('time-is');
     const journeyPreferenceSelect = document.getElementById('journey-preference');
-    const journeyResults = document.getElementById('journey-results'); // Keep this
+    const journeyResults = document.getElementById('journey-results');
 
     let allStations = [];
     let activeInput = null;
     let stationFrom = "";
     let stationTo = "";
     let stationVia = "";
-    let naptanFrom = ""; // To store the selected "FROM" station NaPTAN ID
-    let naptanTo = ""; // To store the selected "TO" station NaPTAN ID
+    let naptanFrom = ""; 
+    let naptanTo = ""; 
     let naptanVia = "";
 
-    // Preferences data
     let date = "";
     let time = "";
     let timeIs = "departing";
     let journeyPreference = "leastinterchange";
 
-    // Define line colors
     const lineColors = {
         "Bakerloo": "#B36305",
         "Central": "#E32017",
@@ -49,7 +47,6 @@ document.addEventListener('DOMContentLoaded', function () {
         "Waterloo & City": "#95CDBA"
     };
 
-    // Fetch all stations from the GitHub-hosted JSON file
     async function fetchStations() {
         try {
             const response = await fetch('https://raw.githubusercontent.com/jahir10ali/naptans-for-tfl-stations/main/data/Station_NaPTANs.json');
@@ -60,16 +57,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Filter and display results based on user input
     function filterStations(query) {
         const results = allStations.filter(station =>
             station['Station Name'].toLowerCase().replace(/['’]/g, '').includes(query.toLowerCase().replace(/['’]/g, ''))
-        ).slice(0, 6); // Limit to 6 results
+        ).slice(0, 6); 
 
         displayResults(results);
     }
 
-    // Display search results
     function displayResults(stations) {
         if (stations.length > 0) {
             searchResults.innerHTML = stations.map(station => {
@@ -87,7 +82,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Handle station click event
     function handleStationClick(event) {
         const result = event.target.closest('.station-result');
         if (result) {
@@ -108,10 +102,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 naptanVia = naptanId;
                 searchInputVia.value = stationName;
             }
+
+            clearJourneyResults(); // Clear results after selecting a station
         }
     }
 
-    // Update the journey title based on selected stations
     function updateJourneyTitle() {
         if (stationFrom && stationTo) {
             selectedStation.innerHTML = `<h5>${stationFrom} &rarr; ${stationTo}</h5>`;
@@ -119,43 +114,39 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Switch stations
     function switchStations() {
         [stationFrom, stationTo] = [stationTo, stationFrom];
         [naptanFrom, naptanTo] = [naptanTo, naptanFrom];
         searchInputOne.value = stationFrom;
         searchInputTwo.value = stationTo;
+
+        clearJourneyResults(); // Clear results after switching stations
     }
 
-    // Toggle the visibility of the journey preferences section
     function toggleJourneyPreferences() {
-        if (journeyPreferences.classList.contains('hidden')) {
-            journeyPreferences.classList.remove('hidden');
-        } else {
-            journeyPreferences.classList.add('hidden');
-        }
+        journeyPreferences.classList.toggle('hidden');
     }
 
-    // Collect and store journey preferences
     function collectJourneyPreferences() {
         date = datePicker.value;
         time = timePicker.value;
         timeIs = timeIsSelect.value;
         journeyPreference = journeyPreferenceSelect.value;
 
-        console.log("Journey Preferences:");
-        console.log("Date:", date);
-        console.log("Time:", time);
-        console.log("Time Is:", timeIs);
-        console.log("Journey Preference:", journeyPreference);
+        console.log("Journey Preferences:", { date, time, timeIs, journeyPreference });
     }
 
-    // Fetch and display journey results
+    function clearJourneyResults() {
+        journeyResults.innerHTML = '';
+    }
+
     async function fetchJourneyResults() {
         if (!naptanFrom || !naptanTo) {
             alert('Please enter both FROM and TO NaPTAN IDs.');
             return;
         }
+
+        journeyResults.innerHTML = '<p>Fetching journey details...</p>'; // Indicate fetching process
 
         try {
             const response = await fetch(`https://api.tfl.gov.uk/Journey/JourneyResults/${naptanFrom}/to/${naptanTo}`);
@@ -177,18 +168,16 @@ document.addEventListener('DOMContentLoaded', function () {
     function displayJourneyResults(data) {
         if (data && data.journeys && Array.isArray(data.journeys) && data.journeys.length > 0) {
             journeyResults.innerHTML = data.journeys.map(journey => {
-                const legsHtml = journey.legs && Array.isArray(journey.legs) ? journey.legs.map((leg, index) => {
-                    const trainName = leg.routeOptions && leg.routeOptions[0] ? leg.routeOptions[0].name : 'Unknown Train';
-                    const departureStopName = leg.departurePoint ? leg.departurePoint.commonName : 'Unknown Departure Stop';
-                    const arrivalStopName = leg.arrivalPoint ? leg.arrivalPoint.commonName : 'Unknown Arrival Stop';
+                const legsHtml = journey.legs && Array.isArray(journey.legs) ? journey.legs.map(leg => {
+                    const trainName = leg.routeOptions?.[0]?.name || 'Unknown Train';
+                    const departureStopName = leg.departurePoint?.commonName || 'Unknown Departure Stop';
+                    const arrivalStopName = leg.arrivalPoint?.commonName || 'Unknown Arrival Stop';
                     const departureTime = leg.departureTime ? formatTime(leg.departureTime) : 'Unknown Time';
                     const arrivalTime = leg.arrivalTime ? formatTime(leg.arrivalTime) : 'Unknown Time';
                     const duration = leg.duration || 'Unknown Duration';
-                    const stopPointsHtml = leg.path && leg.path.stopPoints && Array.isArray(leg.path.stopPoints) 
-                        ? leg.path.stopPoints.map(stop => `
+                    const stopPointsHtml = leg.path?.stopPoints?.map(stop => `
                             <li>${stop.name}</li>
-                        `).join('') 
-                        : '';
+                        `).join('') || '';
 
                     return `
                         <p><strong>${trainName}</strong></p>
@@ -200,7 +189,6 @@ document.addEventListener('DOMContentLoaded', function () {
                                     ${stopPointsHtml}
                                 </ul>
                                 <p class="journey-leg-station"><strong>${arrivalTime} - ${arrivalStopName}</strong></p>
-                                
                             </div>
                         </div>
                     `;
@@ -208,13 +196,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 return `
                     <div class="journey-item">
-                        <h3>Duration: ${journey.duration ? `${journey.duration} min` : 'Unknown Duration'}, ${journey.startDateTime ? formatTime(journey.startDateTime) : 'Unknown Time'} - ${journey.arrivalDateTime ? formatTime(journey.arrivalDateTime) : 'Unknown Time'}</h3>
+                        <h3>Duration: ${journey.duration ? `${journey.duration} min` : 'Unknown Duration'}, ${formatTime(journey.startDateTime)} - ${formatTime(journey.arrivalDateTime)}</h3>
                         ${legsHtml}
                     </div>
                 `;
             }).join('');
 
-            // Attach event listeners to "View Stops" buttons
             document.querySelectorAll('.view-stops-button').forEach(button => {
                 button.addEventListener('click', () => {
                     const stopPointsList = button.closest('.journey-leg-content').querySelector('.stop-points');
@@ -226,7 +213,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Add event listeners to all input fields
     [searchInputOne, searchInputTwo, searchInputVia].forEach(input => {
         input.addEventListener('input', function () {
             const query = input.value.trim();
@@ -243,30 +229,23 @@ document.addEventListener('DOMContentLoaded', function () {
                 selectedLines.style.display = 'none';
                 activeInput = null;
             }
+
+            clearJourneyResults(); // Clear results when input changes
         });
     });
 
-    // Handle search button click
     searchButton.addEventListener('click', function() {
         updateJourneyTitle();
-        fetchJourneyResults(); // Fetch journey results when the search button is clicked
+        fetchJourneyResults();
     });
 
-    // Handle switch button click
     switchButton.addEventListener('click', switchStations);
-
-    // Handle journey preferences button click
     journeyPreferencesButton.addEventListener('click', toggleJourneyPreferences);
-
-    // Collect journey preferences when they change
     datePicker.addEventListener('change', collectJourneyPreferences);
     timePicker.addEventListener('change', collectJourneyPreferences);
     timeIsSelect.addEventListener('change', collectJourneyPreferences);
     journeyPreferenceSelect.addEventListener('change', collectJourneyPreferences);
-
-    // Handle search result click
     searchResults.addEventListener('click', handleStationClick);
 
-    // Initial fetch
     fetchStations();
 });
