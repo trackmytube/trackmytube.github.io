@@ -125,6 +125,15 @@
     margin-right: 5px;
 }
 
+.line-color-inline {
+    display: inline-block;
+    width: 40px; /* Smaller width for inline display */
+    height: 10px; /* Same height as before */
+    border-radius: 4px;
+    margin-right: 5px; /* Space between color and text */
+}
+
+
 #selectedStation {
     margin-top: 20px;
     font-size: 1.5em;
