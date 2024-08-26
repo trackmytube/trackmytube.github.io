@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
         "Circle": "#FFD300",
         "District": "#00782A",
         "DLR": "#00A4A7",
-        "Elizabeth": "#5B2C6F",
+        "Elizabeth line": "#60399E",
         "Hammersmith & City": "#F3A9BB",
         "Jubilee": "#A0A5A9",
         "London Overground": "#EE7C0E",
@@ -44,7 +44,20 @@ document.addEventListener('DOMContentLoaded', function () {
         "Piccadilly": "#003688",
         "Tram": "#84B817",
         "Victoria": "#0098D4",
-        "Waterloo & City": "#95CDBA"
+        "Waterloo & City": "#95CDBA",
+        "Chiltern Railways" : "#109BD5",
+        "c2c" : "#B71C8C",
+        "East Midlands Railway" : "#4D2F49",
+        "Gatwick Express" : "#DC081F",
+        "Great Northern" : "#50107D",
+        "Great Western Railway" : "#0A493E",
+        "Greater Anglia" : "#6A717B",
+        "Heathrow Express" : "#522D61",
+        "London Northwestern Railway" : "#1CA967",
+        "South Western Railway" : "#020202",
+        "Southeastern" : "#1D2452",
+        "Southern" : "#337537",
+        "Thameslink" : "#E9418C",
     };
 
     async function fetchStations() {
@@ -140,16 +153,50 @@ document.addEventListener('DOMContentLoaded', function () {
         journeyResults.innerHTML = '';
     }
 
+
+    function buildJourneyUrl() {
+        let url = `https://api.tfl.gov.uk/Journey/JourneyResults/${naptanFrom}/to/${naptanTo}?&mode=tube,overground,elizabeth-line,tram,dlr,national-rail&useRealTimeLiveArrivals=true&nationalSearch=true&walkingSpeed=Average`;
+
+        // Append 'via' if specified
+        if (naptanVia) {
+            url += `&via=${naptanVia}`;
+        }
+
+        // Append date and time if specified
+        if (date) {
+            const formattedDate = date.replace(/-/g, ''); // YYYYMMDD format
+            url += `&date=${formattedDate}`;
+        }
+        if (time) {
+            const formattedTime = time.replace(/:/g, ''); // HHmm format
+            url += `&time=${formattedTime}`;
+        }
+
+        // Append 'timeIs' if specified
+        if (timeIs) {
+            url += `&timeIs=${timeIs}`;
+        }
+
+        // Append 'journeyPreference' if specified
+        if (journeyPreference) {
+            url += `&journeyPreference=${journeyPreference}`;
+        }
+
+        return url;
+    }
+
+
     async function fetchJourneyResults() {
         if (!naptanFrom || !naptanTo) {
-            alert('Please enter both FROM and TO NaPTAN IDs.');
+            alert('Please enter both FROM and TO Stations.');
             return;
         }
 
         journeyResults.innerHTML = '<p>Fetching journey details...</p>'; // Indicate fetching process
 
         try {
-            const response = await fetch(`https://api.tfl.gov.uk/Journey/JourneyResults/${naptanFrom}/to/${naptanTo}`);
+            const url = buildJourneyUrl();
+            const response = await fetch(url);
             if (!response.ok) throw new Error('Network response was not ok');
             const data = await response.json();
 
@@ -169,7 +216,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (data && data.journeys && Array.isArray(data.journeys) && data.journeys.length > 0) {
             journeyResults.innerHTML = data.journeys.map(journey => {
                 const legsHtml = journey.legs && Array.isArray(journey.legs) ? journey.legs.map(leg => {
-                    const trainName = leg.routeOptions?.[0]?.name || 'Unknown Train';
+                    const trainName = leg.routeOptions?.[0]?.name || 'Interchange';
                     const departureStopName = leg.departurePoint?.commonName || 'Unknown Departure Stop';
                     const arrivalStopName = leg.arrivalPoint?.commonName || 'Unknown Arrival Stop';
                     const departureTime = leg.departureTime ? formatTime(leg.departureTime) : 'Unknown Time';
@@ -179,9 +226,12 @@ document.addEventListener('DOMContentLoaded', function () {
                             <li>${stop.name}</li>
                         `).join('') || '';
 
+                    // Determine border color
+                    const borderColor = lineColors[trainName] || '#000000'; // Default to black if not found
+
                     return `
-                        <p><strong>${trainName}</strong></p>
-                        <div class="journey-leg">
+                        <h3><strong>${trainName}</strong></h3>
+                        <div class="journey-leg" style="border-color: ${borderColor};"> <!-- Set border color dynamically -->
                             <div class="journey-leg-content">
                                 <p class="journey-leg-station"><strong>${departureTime} - ${departureStopName}</strong></p>
                                 <p><strong>${duration} min</strong> <button class="view-stops-button">View Stops</button></p>
