@@ -155,12 +155,29 @@
     }
 }
 
-/* Optional styles for alert icons */
-.alert-icon {
-    width: 20px;
-    height: 20px;
-    vertical-align: middle;
-    margin-left: 10px;
+/* Map Container Section */
+.map-container {
+    display: flex;
+    justify-content: center; /* Center the container horizontally */
+    margin: 20px 0; /* Margin to space it from other sections */
 }
 
+.map-content {
+    width: 80%; /* Set the width to 80% of the page */
+    text-align: center; /* Center the text inside */
+    background: #f9f9f9; /* Background color for the map container */
+    padding: 20px; /* Padding inside the container */
+    border-radius: 5px; /* Rounded corners for the container */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional shadow for better visibility */
+}
 
+.map-content h2 {
+    font-weight: bold; /* Make the heading bold */
+    margin-bottom: 20px; /* Space below the heading */
+}
+
+#map-placeholder {
+    background: #ddd; /* Placeholder background color */
+    height: 400px; /* Set a height for the map placeholder */
+    border-radius: 5px; /* Rounded corners for the placeholder */
+}
