@@ -1,5 +1,9 @@
 async function updateStatusTicker() {
     try {
+        // Show the fetching message
+        const fetchingMessageElement = document.getElementById('fetching-message');
+        fetchingMessageElement.style.display = 'block'; // Ensure it's visible
+
         // Fetch data from the TfL APIs
         const tubeResponse = await fetch('https://api.tfl.gov.uk/Line/Mode/tube/Status');
         const tramResponse = await fetch('https://api.tfl.gov.uk/Line/Mode/tram/Status');
@@ -61,6 +65,9 @@ async function updateStatusTicker() {
         // Insert content into two ticker containers for seamless scrolling
         document.getElementById('ticker-content1').innerHTML = tickerContent;
         document.getElementById('ticker-content2').innerHTML = tickerContent;
+
+        // Hide the fetching message after loading the data
+        fetchingMessageElement.style.display = 'none';
 
         // Update the timestamp of the last update
         const updateTimeElement = document.getElementById('update-time');

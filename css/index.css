@@ -45,6 +45,15 @@
 }
 
 /* Ticker Section Styling */
+
+.fetching-message {
+    flex: 1; /* Take up the full width of the ticker container */
+    text-align: left; /* Align text to the left */
+    font-size: 1.2em; /* Adjust the font size */
+    color: #333; /* Text color */
+    padding-left: 20px; /* Padding to match the ticker-text */
+}
+
 .ticker {
     background: #f4f4f4;
     padding: 10px 0;
