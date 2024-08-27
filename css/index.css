@@ -163,21 +163,21 @@
 }
 
 .map-content {
-    width: 80%; /* Set the width to 80% of the page */
+    width: 80%;
     text-align: center; /* Center the text inside */
     background: #f9f9f9; /* Background color for the map container */
-    padding: 20px; /* Padding inside the container */
+    padding: 10px; /* Padding inside the container */
     border-radius: 5px; /* Rounded corners for the container */
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional shadow for better visibility */
 }
 
 .map-content h2 {
     font-weight: bold; /* Make the heading bold */
-    margin-bottom: 20px; /* Space below the heading */
+    margin-bottom: 5px; /* Space below the heading */
 }
 
 #map-placeholder {
     background: #ddd; /* Placeholder background color */
-    height: 400px; /* Set a height for the map placeholder */
+    height: 700px; /* Set a height for the map placeholder */
     border-radius: 5px; /* Rounded corners for the placeholder */
 }
