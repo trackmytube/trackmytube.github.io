@@ -1,79 +1,88 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const fetchJourneyButton = document.getElementById('fetch-journey');
-    const journeyResults = document.getElementById('journey-results');
+async function fetchTflNews() {
+    const apiUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Ffeeds.bbci.co.uk%2Fnews%2Ftopics%2Fc26xnwx3m34t%2Frss.xml&api_key=k1ofkweiudezz4nnm4wcbgjyv0xktqjs9inbzpk6&order_by=pubDate&order_dir=desc&count=100';
 
-    async function fetchJourneyResults() {
-        const naptanFrom = "910GRICHMND";
-        const naptanTo = "910GFRNDXR";
+    try {
+        // Fetch the RSS feed data in JSON format
+        const response = await fetch(apiUrl);
+        const data = await response.json();
 
-        try {
-            const response = await fetch(`https://api.tfl.gov.uk/Journey/JourneyResults/${naptanFrom}/to/${naptanTo}`);
-            if (!response.ok) throw new Error('Network response was not ok');
-            const data = await response.json();
+        // Parse the RSS feed items from JSON
+        const items = data.items;
+        const seenTitles = new Set(); // To keep track of unique titles
+        let newsItems = [];
 
-            console.log('API Response Data:', data); // Log data for debugging
-            displayJourneyResults(data);
-        } catch (error) {
-            console.error('Error fetching journey results:', error);
-            journeyResults.innerHTML = 'Error fetching journey details. Please try again.';
+        items.forEach(item => {
+            const title = item.title;
+            const link = item.link;
+            const description = item.description; // Using description
+            const pubDate = item.pubDate ? new Date(item.pubDate) : null;
+            const source = "BBC News"; // Hardcoded as the source
+
+            // Fetch the thumbnail image if it exists
+            let imageUrl = item.thumbnail;
+
+            // Adjust the image URL to a higher resolution
+            if (imageUrl) {
+                // Replace the width value in the URL with '600'
+                imageUrl = imageUrl.replace(/\/(\d+)\//, '/600/');
+            }
+
+            // Check for duplicate titles
+            if (!seenTitles.has(title)) {
+                seenTitles.add(title);
+                // Add the news item to the array
+                newsItems.push({ title, link, description, pubDate, source, imageUrl });
+            }
+        });
+
+        // Sort the news items by publication date (latest first)
+        newsItems.sort((a, b) => b.pubDate - a.pubDate);
+
+        // Generate HTML for news items
+        let newsHtml = '';
+        for (const item of newsItems) {
+            const formattedDate = item.pubDate ? formatDate(item.pubDate) : 'Unknown date';
+            const logoUrl = item.imageUrl; // Use the image URL from JSON
+
+            // Create the HTML for each news item
+            newsHtml += `
+            <div class="news-item">
+            <div class="news-item-header">
+            ${logoUrl ? `<img src="${logoUrl}" alt="News image" class="news-image"/>` : ''}
+            <h3><a href="${item.link}" target="_blank">${item.title}</a></h3>
+            </div>
+            <p>${formattedDate} - <strong>${item.source}</strong></p>
+            <p>${item.description}</p>
+            </div>
+            `;
         }
+
+        // Display the news items in the container
+        document.getElementById('news-container').innerHTML = newsHtml;
+
+    } catch (error) {
+        console.error('Error fetching news:', error);
+        document.getElementById('news-container').innerHTML = '<p>Unable to fetch news at this time. Please try again later.</p>';
     }
+}
 
-    function formatTime(time) {
-        return new Date(time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    }
+// Function to format date into relative time or full date
+function formatDate(date) {
+    const now = new Date();
+    const diff = now - date;
+    const minutes = Math.floor(diff / (1000 * 60));
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
 
-    function displayJourneyResults(data) {
-        if (data && data.journeys && Array.isArray(data.journeys) && data.journeys.length > 0) {
-            journeyResults.innerHTML = data.journeys.map(journey => {
-                const legsHtml = journey.legs && Array.isArray(journey.legs) ? journey.legs.map((leg, index) => {
-                    const trainName = leg.routeOptions && leg.routeOptions[0] ? leg.routeOptions[0].name : 'Unknown Train';
-                    const departureStopName = leg.departurePoint ? leg.departurePoint.commonName : 'Unknown Departure Stop';
-                    const arrivalStopName = leg.arrivalPoint ? leg.arrivalPoint.commonName : 'Unknown Arrival Stop';
-                    const departureTime = leg.departureTime ? formatTime(leg.departureTime) : 'Unknown Time';
-                    const arrivalTime = leg.arrivalTime ? formatTime(leg.arrivalTime) : 'Unknown Time';
-                    const duration = leg.duration || 'Unknown Duration';
-                    const stopPointsHtml = leg.path && leg.path.stopPoints && Array.isArray(leg.path.stopPoints) 
-                        ? leg.path.stopPoints.map(stop => `
-                            <li>${stop.name}</li>
-                        `).join('') 
-                        : '';
+    if (minutes < 1) return 'Just now';
+    if (minutes < 60) return `${minutes} minutes ago`;
+    if (hours < 24) return `${hours} hours ago`;
+    if (days === 1) return 'Yesterday';
 
-                    return `
-                        <p><strong>${trainName}</strong></p>
-                        <div class="journey-leg">
-                            <div class="journey-leg-content">
-                                <p class="journey-leg-station"><strong>${departureTime} - ${departureStopName}</strong></p>
-                                <p><strong>${duration} min</strong> <button class="view-stops-button">View Stops</button></p>
-                                <ul class="stop-points" style="display: none;">
-                                    ${stopPointsHtml}
-                                </ul>
-                                <p class="journey-leg-station"><strong>${arrivalTime} - ${arrivalStopName}</strong></p>
-                                
-                            </div>
-                        </div>
-                    `;
-                }).join('') : 'No legs data available';
+    // Format the date as "18 Aug"
+    const options = { day: 'numeric', month: 'short' };
+    return date.toLocaleDateString('en-GB', options);
+}
 
-                return `
-                    <div class="journey-item">
-                        <h3>${journey.from ? journey.from.name : 'Unknown FROM'} &rarr; ${journey.to ? journey.to.name : 'Unknown TO'}: ${journey.duration ? `${journey.duration} min` : 'Unknown Duration'}, ${journey.startDateTime ? formatTime(journey.startDateTime) : 'Unknown Time'} - ${journey.arrivalDateTime ? formatTime(journey.arrivalDateTime) : 'Unknown Time'}</h3>
-                        ${legsHtml}
-                    </div>
-                `;
-            }).join('');
-
-            // Attach event listeners to "View Stops" buttons
-            document.querySelectorAll('.view-stops-button').forEach(button => {
-                button.addEventListener('click', () => {
-                    const stopPointsList = button.closest('.journey-leg-content').querySelector('.stop-points');
-                    stopPointsList.style.display = stopPointsList.style.display === 'none' ? 'block' : 'none';
-                });
-            });
-        } else {
-            journeyResults.innerHTML = 'No journey details found.';
-        }
-    }
-
-    fetchJourneyButton.addEventListener('click', fetchJourneyResults);
-});
+// Run the function when the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', fetchTflNews);
