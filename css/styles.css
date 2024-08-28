@@ -46,9 +46,11 @@ nav ul li {
 }
 
 nav ul li img.logo {
-    max-width: 25px; /* Adjust the size of the logo as needed */
+    max-width: 180px; /* Adjust the size of the logo as needed */
     height: auto;
-    margin-right: 15px; /* Space between the logo and the text */
+    margin-right: 0px; /* Space between the logo and the text */
+    margin-bottom: 5px;
+    margin-right: -20px;
 }
 
 nav ul li a {
