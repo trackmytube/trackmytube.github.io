@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrackMyTube - TfL Status Updates and News</title>
+    <title>TrackMyTube - TfL Train Times, Live Status, and Travel News</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/index.css">
     <script src="js/index.js" defer></script>
@@ -13,13 +13,11 @@
     <header>
         <nav>
             <ul>
-                <li><strong>TrackMyTube</strong></a></li>
+                <li><img src="img/logo.png" alt="TrackMyTube Logo" class="logo"></li>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="status.html">Real-Time Status</a></li>
-                <li><a href="news.html">News</a></li>
-                <li><a href="planner.html">Journey Planner</a></li>
+                <li><a href="status.html">Line Status</a></li>
                 <li><a href="station.html">Station Finder</a></li>
-                <li><a href="alerts.html">Alerts</a></li>
+                <li><a href="planner.html">Journey Planner</a></li>
             </ul>
         </nav>
     </header>
@@ -36,11 +34,11 @@
     <section class="ticker">
         <div class="ticker-wrapper">
             <div class="ticker-text">
-                <a href="status.html"><strong>Live Status</strong></a>
+                <a href="status.html"><strong>Line Status</strong></a>
             </div>
             <div class="ticker-container">
                 <div class="ticker-content-wrapper">
-                    <div id="fetching-message" class="fetching-message">Fetching Live Status...</div>
+                    <div id="fetching-message" class="fetching-message">Fetching Line Status...</div>
                     <div id="ticker-content1"></div>
                     <div id="ticker-content2"></div>
                 </div>
@@ -48,27 +46,35 @@
         </div>
     </section>
 
+    <!-- Features Section -->
+    <section class="features">
+        <div class="feature-grid">
+            <div class="feature-item">
+                <h3><a href="station.html">Station Finder</a></h3>
+                <p>Find arrivals information for any TFL station.</p>
+            </div>
+            <div class="feature-item">
+                <h3><a href="planner.html">Journey Planner</a></h3>
+                <p>Plan your journey with real-time data and alternatives.</p>
+            </div>
+            <div class="feature-item">
+                <h3><a href="status.html">Real-Time Line Status</a></h3>
+                <p>Get the latest status updates and descriptions of each line.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="tfl-news" class="news-section">
+        <h2>Latest News - Transport for London (TfL)</h2>
+        <div id="news-container">
+            <p>Fetching the latest news...</p> <!-- Loading message -->
+        </div>
+    </section>
 
     <!-- Main Content -->
     <main>
-        <!-- Features Section -->
-        <section class="features">
-            <h2>Explore Our Features</h2>
-            <div class="feature-grid">
-                <div class="feature-item">
-                    <h3><a href="status.html">Real-Time Train Status</a></h3>
-                    <p>Get the latest train status updates for your journey.</p>
-                </div>
-                <div class="feature-item">
-                    <h3><a href="planner.html">Journey Planner</a></h3>
-                    <p>Plan your journey with real-time data and alternatives.</p>
-                </div>
-                <div class="feature-item">
-                    <h3><a href="station.html">Station Finder</a></h3>
-                    <p>Find detailed information about any TFL station.</p>
-                </div>
-            </div>
-        </section>
+        
     </main>
 
     <!-- Footer -->

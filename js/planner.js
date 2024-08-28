@@ -250,7 +250,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 return `
                     <div class="journey-item">
-                        <h3>Duration: ${journey.duration ? `${journey.duration} min` : 'Unknown Duration'}, ${formatTime(journey.startDateTime)} - ${formatTime(journey.arrivalDateTime)}, ${journey.legs.length} change(s)</h3>
+                        <h3>Duration: ${journey.duration ? `${journey.duration} min` : 'Unknown Duration'}, ${formatTime(journey.startDateTime)} - ${formatTime(journey.arrivalDateTime)}, ${journey.legs.length-1} change(s)</h3>
                         ${legsHtml}
                     </div>
                 `;

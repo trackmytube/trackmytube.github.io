@@ -11,6 +11,7 @@
 
 .hero-text h1 {
     font-size: 2.5em;
+    margin-top: 10px;
     margin-bottom: 20px;
 }
 
@@ -23,6 +24,11 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    max-width: 95%; /* Allows for a wider section */
+    margin: 0 auto; /* Center the grid container */
+    padding: 0 10px; /* Optional: Add padding to avoid content touching edges */
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 .feature-item {
@@ -30,8 +36,9 @@
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    flex: 12 1 calc(33% - 20px);
+    flex: 1 1 calc(33% - 20px); /* Adjusted for proper spacing */
     text-align: center;
+    box-sizing: border-box; /* Ensure padding and border are included in the width calculation */
 }
 
 .feature-item h3 a {
@@ -43,6 +50,7 @@
 .feature-item h3 a:hover {
     text-decoration: underline;
 }
+
 
 /* Ticker Section Styling */
 
@@ -155,12 +163,77 @@
     }
 }
 
-/* Optional styles for alert icons */
-.alert-icon {
-    width: 20px;
-    height: 20px;
-    vertical-align: middle;
-    margin-left: 10px;
+/* CSS for the News Section */
+.news-section {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px auto; /* Centers the news section */
+    font-family: Arial, sans-serif; /* Sets a clean, readable font */
+    max-width: 95%; /* Allows for a wider section */
 }
 
+.news-section h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
 
+#news-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns in a row */
+    gap: 20px;
+}
+
+.news-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.news-item img.news-image {
+    display: block;
+    width: 100%; /* Make image responsive */
+    height: auto;
+    max-height: 200px; /* Limit the height for consistent item size */
+    object-fit: cover; /* Ensure image covers the space without distortion */
+    margin-bottom: 10px; /* Add margin below image */
+    border-radius: 4px;
+}
+
+.news-item-content {
+    padding: 10px 0; /* Add space around content */
+}
+
+.news-item h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.news-item p {
+    margin: 8px 0;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.news-item a {
+    text-decoration: none;
+    color: #0073e6;
+    font-weight: bold;
+}
+
+.news-item a:hover {
+    text-decoration: underline;
+}
+
+#news-container p {
+    font-size: 1em;
+    color: #888;
+    font-style: italic;
+}
