@@ -26,23 +26,29 @@ header {
     top: 0;
     left: 0;
     z-index: 1000;
-}
-
-header .logo img {
-    max-width: 150px;
-    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the nav items horizontally */
 }
 
 nav ul {
     list-style: none;
     display: flex;
-    justify-content: center;
-    padding: 10px;
-    flex-wrap: wrap;
+    align-items: center; /* Align items vertically */
+    padding: 0;
+    margin: 0;
 }
 
 nav ul li {
     margin: 0 15px;
+    display: flex;
+    align-items: center; /* Align items vertically within the list item */
+}
+
+nav ul li img.logo {
+    max-width: 25px; /* Adjust the size of the logo as needed */
+    height: auto;
+    margin-right: 15px; /* Space between the logo and the text */
 }
 
 nav ul li a {
@@ -54,6 +60,7 @@ nav ul li a {
 nav ul li a:hover {
     text-decoration: underline;
 }
+
 
 
 
