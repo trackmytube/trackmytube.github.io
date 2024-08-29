@@ -1,13 +1,25 @@
+/* Hero section styling */
+.hero {
+    background: #0073e6;
+    color: #fff;
+    padding: 90px 0px 35px;
+}
+
+.hero-content {
+    text-align: center; /* Align text to the left */
+}
+
+.hero-content h1 {
+    font-size: 2.5em;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
 /* TfL Status Updates Section - status.html */
 .tfl-status-board {
     flex: 2;
-    margin-bottom: 30px;
-}
-
-.tfl-status-board h2 {
-    font-size: 2em;
-    margin-bottom: 15px;
-    text-align: center;
+    margin-top: -70px;
+    margin-bottom: 0px;
 }
 
 .status-board {
