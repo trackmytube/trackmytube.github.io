@@ -1,0 +1,60 @@
+/* Hero section styling */
+.hero {
+    background: #0073e6;
+    color: #fff;
+    padding: 90px 0px 35px;
+}
+
+.hero-content {
+    text-align: center; /* Align text to the left */
+}
+
+.hero-logo {
+    width: 500px;
+    height: auto;
+}
+
+/* CSS for About Section */
+.about-section {
+    background: #f9f9f9;
+    padding: 30px;
+    border: 4px solid black;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 80%; /* Sets the max width to 80% of the viewport */
+    width: 80%;
+    margin-top: 20px; /* Space from the top to prevent overlap with the header */
+    font-family: Arial, sans-serif;
+    line-height: 2.0;
+}
+
+/* Heading styling */
+.about-section h2 {
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+
+/* Paragraph styling within the about section */
+.about-section p {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #333;
+    text-align: left;
+}
+
+/* Social Icons Styling */
+.social-icons {
+    display: flex; /* Align icons in a row */
+    gap: 20px; /* Adjust spacing between icons */
+    justify-content: center; /* Center icons horizontally */
+}
+
+.social-icon {
+    display: block; /* Removes inline spacing */
+    width: 50px; /* Adjust size as needed */
+    height: auto;
+}
+
+
