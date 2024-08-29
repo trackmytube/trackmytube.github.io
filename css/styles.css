@@ -28,6 +28,13 @@ header {
     z-index: 1000;
     display: flex;
     align-items: center;
+    justify-content: space-between; /* Space between logo and nav items */
+    padding: 0 20px; /* Optional: Add padding on left and right for spacing */
+}
+
+nav {
+    flex: 1; /* Allow nav to take up available space */
+    display: flex;
     justify-content: center; /* Center the nav items horizontally */
 }
 
@@ -48,9 +55,8 @@ nav ul li {
 nav ul li img.logo {
     max-width: 180px; /* Adjust the size of the logo as needed */
     height: auto;
-    margin-right: 0px; /* Space between the logo and the text */
-    margin-bottom: 5px;
-    margin-right: -20px;
+    margin-right: 5px; /* Space between the logo and the text */
+    margin-bottom: 3px; /* Remove any bottom margin */
 }
 
 nav ul li a {
@@ -73,52 +79,4 @@ main {
     margin-top: 60px; /* Adjust for fixed header */
     padding-bottom: 80px; /* Adjust for fixed footer if needed */
 }
-
-
-
-/* Footer styling - All Pages */
-footer {
-    background: #333;
-    color: #fff;
-    padding: 10px 20px;
-    width: 100%;
-    bottom: 0;
-    position: relative; /* Changed from fixed to relative */
-}
-
-footer .footer-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-footer p {
-    margin-right: 40px; /* Increased space between the p tag and the list */
-}
-
-footer ul {
-    list-style: none;
-    display: flex;
-    padding: 0;
-    margin: 0;
-}
-
-footer ul li {
-    margin: 0 10px;
-}
-
-footer ul li:first-child {
-    margin-left: 20px; /* Increase space between p and the first link */
-}
-
-footer ul li a {
-    color: #fff;
-    text-decoration: none;
-}
-
-footer ul li a:hover {
-    text-decoration: underline;
-}
-
 
