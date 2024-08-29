@@ -5,18 +5,17 @@
     padding: 90px 0px 35px;
 }
 
-.hero-text {
+.hero-content {
     text-align: center; /* Align text to the left */
 }
 
-.hero-text h1 {
-    font-size: 2.5em;
-    margin-top: 10px;
-    margin-bottom: 20px;
+.hero-logo {
+    width: 500px;
+    height: auto;
 }
 
-.hero-text p {
-    font-size: 1.2em;
+.hero-content p {
+    font-size: 20px;
 }
 
 /* Features Section - index.html */
