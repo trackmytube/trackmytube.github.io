@@ -1,13 +1,10 @@
 import requests
 
-# TfL Tube Stations API endpoint
 api_url = "https://api.tfl.gov.uk/StopPoint/Mode/DLR"
 
-# Make the API request
 response = requests.get(api_url)
 data = response.json()
 
-# Extract the NaPTAN IDs, hub NaPTAN codes, and common names
 for station in data["stopPoints"]:
     common_name = station["commonName"]
 
