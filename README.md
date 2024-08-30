@@ -1,5 +1,26 @@
 # TrackMyTube - TfL Train Times, Live Status, and Travel News Platform
 
+![TrackMyTube Logo](https://github.com/jahir10ali/trackmytube/blob/main/img/logo_large.jpg?raw=True)
+
+## Table of Contents
+
+- [TrackMyTube - TfL Train Times, Live Status, and Travel News Platform](#trackmytube---tfl-train-times-live-status-and-travel-news-platform)
+  - [Why TrackMyTube?](#why-trackmytube)
+  - [The Meaning of the Logo](#the-meaning-of-the-logo)
+  - [Key Features](#key-features)
+    - [London Transport and Travel News](#london-transport-and-travel-news)
+    - [Live Line Status](#live-line-status)
+    - [Station Finder](#station-finder)
+    - [Journey Planner](#journey-planner)
+  - [Contributing](#contributing)
+  - [License](#license)
+  - [Credits/Acknowledgments](#creditsacknowledgments)
+    - [A Special Thanks to](#a-special-thanks-to)
+    - [With Deepest Gratitude to](#with-deepest-gratitude-to)
+
+
+## Introduction
+
 TrackMyTube is your go-to platform for real-time train updates, live status reports, and travel news across the Transport for London (TfL) network. Designed to enhance your daily commute, TrackMyTube provides accurate and timely information to help you navigate the city's vast public transport system with ease and confidence.
 
 ## Why TrackMyTube?
