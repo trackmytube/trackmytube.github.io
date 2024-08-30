@@ -1,6 +1,5 @@
 async function updateStatusGrid() {
     try {
-        // Fetch data from the TfL APIs
         const tubeResponse = await fetch('https://api.tfl.gov.uk/Line/Mode/tube/Status');
         const tramResponse = await fetch('https://api.tfl.gov.uk/Line/Mode/tram/Status');
         const overgroundResponse = await fetch('https://api.tfl.gov.uk/Line/Mode/overground/Status');
@@ -17,14 +16,12 @@ async function updateStatusGrid() {
         const dlrData = await dlrResponse.json();
         const elizabethLineData = await elizabethLineResponse.json();
 
-        // Log API responses for debugging
         console.log('Tube API Response:', tubeData);
         console.log('Tram API Response:', tramData);
         console.log('Overground API Response:', overgroundData);
         console.log('DLR API Response:', dlrData);
         console.log('Elizabeth Line API Response:', elizabethLineData);
 
-        // Create a mapping of line IDs to their class names for easier lookup
         const lineClassNames = {
             'bakerloo': 'bakerloo',
             'central': 'central',
@@ -43,34 +40,28 @@ async function updateStatusGrid() {
             'elizabeth-line': 'elizabeth-line'
         };
 
-        // Function to update status for a given data and mode
         function updateStatus(data, mode) {
             data.forEach(item => {
                 const lineId = item.id.toLowerCase();
                 const lineClass = lineClassNames[lineId] || mode;
                 if (lineClass) {
-                    // Select the status element for the current line
                     const statusElement = document.querySelector(`.status-item.${lineClass} .status-text`);
                     if (statusElement) {
-                        // Get the status description
                         const status = item.lineStatuses[0];
                         const statusDescription = status ? status.statusSeverityDescription : 'No Status Available';
                         statusElement.textContent = statusDescription;
 
-                        // Attach more detailed information to the element
                         statusElement.dataset.details = status.reason || 'No further details available';
 
-                        // Add or remove the alert icon based on the status
                         const statusItem = statusElement.closest('.status-item');
                         let alertIcon = statusItem.querySelector('.alert-icon');
                         if (!alertIcon) {
                             alertIcon = document.createElement('img');
-                            alertIcon.src = 'img/tfl_alert_icon.png'; // Path to the image
+                            alertIcon.src = 'img/tfl_alert_icon.png'; 
                             alertIcon.classList.add('alert-icon');
                             statusItem.appendChild(alertIcon);
                         }
 
-                        // Show or hide the alert icon based on status
                         if (statusDescription !== 'Good Service') {
                             alertIcon.style.display = 'block';
                         } else {
@@ -85,14 +76,12 @@ async function updateStatusGrid() {
             });
         }
 
-        // Update status for each mode
         updateStatus(tubeData, 'tube');
         updateStatus(tramData, 'tram');
         updateStatus(overgroundData, 'overground');
         updateStatus(dlrData, 'dlr');
         updateStatus(elizabethLineData, 'elizabeth-line');
 
-        // Update the timestamp of the last update
         const updateTimeElement = document.getElementById('update-time');
         const now = new Date();
         updateTimeElement.textContent = `Last updated: ${now.toLocaleTimeString()}`;
@@ -102,17 +91,14 @@ async function updateStatusGrid() {
     }
 }
 
-// Run the updateStatusGrid function when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', function () {
-    updateStatusGrid(); // Initial call to populate the grid
-
-    // Set interval for periodic updates (e.g., every 60 seconds)
-    const updateInterval = 60000; // 60 seconds
+    updateStatusGrid(); 
+ 
+    const updateInterval = 60000; 
     setInterval(updateStatusGrid, updateInterval);
 
-    // Initialize countdown timer
     const countdownElement = document.getElementById('update-countdown');
-    let countdown = updateInterval / 1000; // Countdown in seconds
+    let countdown = updateInterval / 1000; 
 
     function startCountdown() {
         countdown = updateInterval / 1000;
@@ -122,47 +108,42 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (countdown <= 0) {
                 clearInterval(intervalId);
-                startCountdown(); // Restart countdown after each update
+                startCountdown(); 
             }
         }, 1000);
     }
 
-    startCountdown(); // Start the initial countdown
+    startCountdown();
 
-    // Popup elements
     const statusItems = document.querySelectorAll('.status-item');
     const popupOverlay = document.getElementById('popup-overlay');
     const popupContent = document.getElementById('popup-content');
     const popupTitle = document.getElementById('popup-title');
-    const popupDetails = document.getElementById('popup-details'); // Element for detailed status
+    const popupDetails = document.getElementById('popup-details'); 
     const closeButton = document.querySelector('.close-btn');
 
-    // Function to open the popup
     function openPopup(serviceName, details, borderColor) {
         popupTitle.textContent = serviceName;
-        popupDetails.textContent = details;  // Display the details in the popup
+        popupDetails.textContent = details;  
         popupContent.style.borderColor = borderColor;
         popupOverlay.style.display = 'block';
         popupContent.style.display = 'block';
     }
 
-    // Function to close the popup
     function closePopup() {
         popupOverlay.style.display = 'none';
         popupContent.style.display = 'none';
     }
 
-    // Attach click event listeners to each status item
     statusItems.forEach(item => {
         item.addEventListener('click', function () {
             const serviceName = this.querySelector('h3').textContent;
-            const details = this.querySelector('.status-text').dataset.details; // Get the attached details
+            const details = this.querySelector('.status-text').dataset.details; 
             const borderColor = window.getComputedStyle(this).borderColor;
             openPopup(serviceName, details, borderColor);
         });
     });
 
-    // Close the popup when clicking the close button or overlay
     closeButton.addEventListener('click', closePopup);
     popupOverlay.addEventListener('click', closePopup);
 });

@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
         "Northern": "#000000",
         "Piccadilly": "#003688",
         "Tram": "#84B817",
-        "Tramway Tram": "#84B817", // For some reason it has two names
+        "Tramway Tram": "#84B817", 
         "Victoria": "#0098D4",
         "Waterloo & City": "#95CDBA",
         "Chiltern Railways" : "#109BD5",
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 searchInputVia.value = stationName;
             }
 
-            clearJourneyResults(); // Clear results after selecting a station
+            clearJourneyResults(); 
         }
     }
 
@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function () {
         searchInputOne.value = stationFrom;
         searchInputTwo.value = stationTo;
 
-        clearJourneyResults(); // Clear results after switching stations
+        clearJourneyResults(); 
     }
 
     function toggleJourneyPreferences() {
@@ -158,31 +158,26 @@ document.addEventListener('DOMContentLoaded', function () {
     function buildJourneyUrl() {
         let url = `https://api.tfl.gov.uk/Journey/JourneyResults/${naptanFrom}/to/${naptanTo}?&mode=tube,overground,elizabeth-line,tram,dlr,national-rail&useRealTimeLiveArrivals=true&nationalSearch=true&walkingSpeed=Average`;
 
-        // Append 'via' if specified
         if (naptanVia) {
             url += `&via=${naptanVia}`;
         }
 
-        // Append date and time if specified
         if (date) {
-            const formattedDate = date.replace(/-/g, ''); // YYYYMMDD format
+            const formattedDate = date.replace(/-/g, ''); 
             url += `&date=${formattedDate}`;
         }
         if (time) {
-            const formattedTime = time.replace(/:/g, ''); // HHmm format
+            const formattedTime = time.replace(/:/g, ''); 
             url += `&time=${formattedTime}`;
         }
 
-        // Append 'timeIs' if specified
         if (timeIs) {
             url += `&timeIs=${timeIs}`;
         }
 
-        // Append 'journeyPreference' if specified
         if (journeyPreference) {
             url += `&journeyPreference=${journeyPreference}`;
         }
-
         return url;
     }
 
@@ -193,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        journeyResults.innerHTML = '<p>Fetching journey details...</p>'; // Indicate fetching process
+        journeyResults.innerHTML = '<p>Fetching journey details...</p>'; 
 
         try {
             const url = buildJourneyUrl();
@@ -228,10 +223,8 @@ document.addEventListener('DOMContentLoaded', function () {
                             <li>${stop.name}</li>
                         `).join('') || '';
                     
-                    //const legsCount = journey.legs.length;
 
-                    // Determine border color
-                    const lineColor = lineColors[trainName] || false; // Default to black if not found
+                    const lineColor = lineColors[trainName] || false; 
                     
                     return `
                         <h3><strong>${trainName}</strong> <span class="line-color-inline" style="background-color: ${lineColor};"></span></h3>
@@ -284,7 +277,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 activeInput = null;
             }
 
-            clearJourneyResults(); // Clear results when input changes
+            clearJourneyResults();
         });
     });
 

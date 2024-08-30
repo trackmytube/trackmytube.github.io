@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function () {
     let selectedNaPTANId = null;
     let refreshInterval = null;
 
-    // Define line colors
     const lineColors = {
         "Bakerloo": "#B36305",
         "Central": "#E32017",
@@ -33,7 +32,6 @@ document.addEventListener('DOMContentLoaded', function () {
         "Waterloo & City": "#95CDBA"
     };
 
-    // Fetch all stations from the GitHub-hosted JSON file
     async function fetchStations() {
         try {
             const response = await fetch('https://raw.githubusercontent.com/jahir10ali/naptans-for-tfl-stations/main/data/Station_NaPTANs.json');
@@ -44,16 +42,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Filter and display results based on user input
     function filterStations(query) {
         const results = allStations.filter(station =>
             station['Station Name'].toLowerCase().replace(/['’]/g, '').includes(query.toLowerCase().replace(/['’]/g, ''))
-        ).slice(0, 6); // Limit to 6 results
+        ).slice(0, 6); 
 
         displayResults(results);
     }
 
-    // Display search results
     function displayResults(stations) {
         if (stations.length > 0) {
             searchResults.innerHTML = stations.map(station => {
@@ -71,7 +67,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Fetch and display live arrivals
     async function fetchLiveArrivals(naptanId, lines) {
         const arrivalsPromises = lines.map(line =>
             fetch(`https://api.tfl.gov.uk/StopPoint/${naptanId}/Arrivals`)
@@ -104,7 +99,6 @@ document.addEventListener('DOMContentLoaded', function () {
         displayArrivals(results);
     }
 
-    // Display arrivals
     function displayArrivals(arrivalData) {
         arrivalsContainer.innerHTML = '';
         arrivalData.forEach(data => {
@@ -129,7 +123,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Fetch and display arrivals for the popup
     async function fetchPopupArrivals(naptanId, line, platform) {
         try {
             const response = await fetch(`https://api.tfl.gov.uk/StopPoint/${naptanId}/Arrivals`);
@@ -158,7 +151,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Handle station click event
     function handleStationClick(event) {
         const result = event.target.closest('.station-result');
         if (result) {
@@ -180,7 +172,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Handle platform box click event
     function handlePlatformClick(event) {
         const platformDetails = event.target.closest('.arrival-details');
         if (platformDetails) {
@@ -193,17 +184,14 @@ document.addEventListener('DOMContentLoaded', function () {
             popup.style.display = 'block';
             overlay.style.display = 'block';
 
-            // Set up refresh interval for popup arrivals
             if (refreshInterval) clearInterval(refreshInterval);
             refreshInterval = setInterval(() => fetchPopupArrivals(selectedNaPTANId, lineName, platformName), 20000);
         }
     }
 
-    // Close the popup
     function closePopup() {
         popup.style.display = 'none';
         overlay.style.display = 'none';
-        // Clear the refresh interval when closing the popup
         if (refreshInterval) clearInterval(refreshInterval);
     }
 

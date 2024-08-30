@@ -1,10 +1,8 @@
 async function updateStatusTicker() {
     try {
-        // Show the fetching message
         const fetchingMessageElement = document.getElementById('fetching-message');
-        fetchingMessageElement.style.display = 'block'; // Ensure it's visible
+        fetchingMessageElement.style.display = 'block';
 
-        // Fetch data from the TfL APIs
         const tubeResponse = await fetch('https://api.tfl.gov.uk/Line/Mode/tube/Status');
         const tramResponse = await fetch('https://api.tfl.gov.uk/Line/Mode/tram/Status');
         const overgroundResponse = await fetch('https://api.tfl.gov.uk/Line/Mode/overground/Status');
@@ -53,7 +51,6 @@ async function updateStatusTicker() {
             }).join('');
         }
 
-        // Generate ticker content for each mode
         const tickerContent = [
             generateTickerContent(tubeData, 'tube'),
             generateTickerContent(tramData, 'tram'),
@@ -62,14 +59,11 @@ async function updateStatusTicker() {
             generateTickerContent(elizabethLineData, 'elizabeth-line')
         ].join('');
 
-        // Insert content into two ticker containers for seamless scrolling
         document.getElementById('ticker-content1').innerHTML = tickerContent;
         document.getElementById('ticker-content2').innerHTML = tickerContent;
 
-        // Hide the fetching message after loading the data
         fetchingMessageElement.style.display = 'none';
 
-        // Update the timestamp of the last update
         const updateTimeElement = document.getElementById('update-time');
         if (updateTimeElement) {
             const now = new Date();
@@ -81,63 +75,48 @@ async function updateStatusTicker() {
     }
 }
 
-// Run the updateStatusTicker function when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', function () {
-    updateStatusTicker(); // Initial call to populate the ticker
-
-    // Set interval for periodic updates (e.g., every 60 seconds)
-    const updateInterval = 60000; // 60 seconds
+    updateStatusTicker();
+    const updateInterval = 60000;
     setInterval(updateStatusTicker, updateInterval);
 });
 
-// Fetching the news related to TfL
 async function fetchTflNews() {
     const apiUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Ffeeds.bbci.co.uk%2Fnews%2Ftopics%2Fc26xnwx3m34t%2Frss.xml&api_key=k1ofkweiudezz4nnm4wcbgjyv0xktqjs9inbzpk6&order_by=pubDate&order_dir=desc&count=100';
 
     try {
-        // Fetch the RSS feed data in JSON format
         const response = await fetch(apiUrl);
         const data = await response.json();
 
-        // Parse the RSS feed items from JSON
         const items = data.items;
-        const seenTitles = new Set(); // To keep track of unique titles
+        const seenTitles = new Set();
         let newsItems = [];
 
         items.forEach(item => {
             const title = item.title;
             const link = item.link;
-            const description = item.description; // Using description
+            const description = item.description;
             const pubDate = item.pubDate ? new Date(item.pubDate) : null;
-            const source = "London"; // Hardcoded as the source location
-
-            // Fetch the thumbnail image if it exists
+            const source = "London";
             let imageUrl = item.thumbnail;
 
-            // Adjust the image URL to a higher resolution
             if (imageUrl) {
-                // Replace the width value in the URL with '600'
                 imageUrl = imageUrl.replace(/\/(\d+)\//, '/600/');
             }
 
-            // Check for duplicate titles
             if (!seenTitles.has(title)) {
                 seenTitles.add(title);
-                // Add the news item to the array
                 newsItems.push({ title, link, description, pubDate, source, imageUrl });
             }
         });
 
-        // Sort the news items by publication date (latest first)
         newsItems.sort((a, b) => b.pubDate - a.pubDate);
 
-        // Generate HTML for news items
         let newsHtml = '';
         for (const item of newsItems) {
             const formattedDate = item.pubDate ? formatDate(item.pubDate) : 'Unknown date';
-            const logoUrl = item.imageUrl; // Use the image URL from JSON
+            const logoUrl = item.imageUrl;
 
-            // Create the HTML for each news item
             newsHtml += `
             <div class="news-item">
             <div class="news-item-header">
@@ -150,7 +129,6 @@ async function fetchTflNews() {
             `;
         }
 
-        // Display the news items in the container
         document.getElementById('news-container').innerHTML = newsHtml;
 
     } catch (error) {
@@ -159,7 +137,6 @@ async function fetchTflNews() {
     }
 }
 
-// Function to format date into relative time or full date
 function formatDate(date) {
     const now = new Date();
     const diff = now - date;
@@ -176,5 +153,4 @@ function formatDate(date) {
     return date.toLocaleDateString('en-GB', options);
 }
 
-// Run the function when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', fetchTflNews);
