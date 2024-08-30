@@ -2,18 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Testing TfL News</title>
+    <title>TrackMyTube - TfL Train Times, Live Status, and Travel News</title>
     <link rel="stylesheet" href="testing.css">
 </head>
 <body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="../img/logo.png" alt="TrackMyTube Logo">
+            </div>
+            <div class="menu-toggle" id="menuToggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="status.html">Line Status</a></li>
+                <li><a href="station.html">Station Finder</a></li>
+                <li><a href="planner.html">Journey Planner</a></li>
+                <li><a href="about.html">About TrackMyTube</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <!-- News Section -->
-    <section id="tfl-news" class="news-section">
-        <h2>Latest News - Transport for London (TfL)</h2>
-        <div id="news-container">
-            <p>Fetching the latest news...</p> <!-- Loading message -->
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <img src="../img/logo.png" alt="TrackMyTube Logo" class="hero-logo">
         </div>
     </section>
 

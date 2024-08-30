@@ -6,14 +6,22 @@
     <title>TrackMyTube - TfL Train Times, Live Status, and Travel News</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/planner.css">
+    <script src="js/script.js" defer></script>
     <script src="js/planner.js" defer></script>
 </head>
 <body>
     <!-- Header -->
-    <header>
+   <header>
         <nav>
-            <ul>
-                <li><img src="img/logo.png" alt="TrackMyTube Logo" class="logo"></li>
+            <div class="logo">
+                <img src="img/logo.png" alt="TrackMyTube Logo">
+            </div>
+            <div class="menu-toggle" id="menuToggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="status.html">Line Status</a></li>
                 <li><a href="station.html">Station Finder</a></li>
