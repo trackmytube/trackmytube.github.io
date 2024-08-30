@@ -114,6 +114,64 @@ nav {
     transform: rotate(45deg) translate(-5px, -6px);
 }
 
+
+/* Hero section styling */
+.hero {
+    background: #0073e6; /* Background color */
+    color: #fff; /* Text color */
+    padding: 25px 20px 5px; /* Padding for hero section */
+    text-align: center; /* Center the content */
+    margin-top: 60px; /* Ensure space below the fixed navbar */
+}
+
+.hero-content {
+    max-width: 1200px; /* Max width for the content */
+    margin: 0 auto; /* Centering content horizontally */
+    padding: 0 20px; /* Additional padding for smaller screens */
+}
+
+.hero-logo {
+    width: 100%; /* Responsive width for scaling */
+    max-width: 500px; /* Maximum width for larger screens */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Hero section text styling */
+.hero-content p {
+    font-size: 1.2vw; /* Responsive font size relative to viewport width */
+    margin: 0 auto; /* Centering text if needed */
+}
+
+.hero-content h1 {
+    font-size: 2.5vw; /* Responsive font size relative to viewport width */
+    margin-top: 0;
+    margin-bottom: 10px; /* Space between elements */
+}
+
+/* Responsive styling for different screen sizes */
+@media (max-width: 768px) {
+    .hero {
+        padding: 30px 10px 10px; /* Reduced padding for smaller screens */
+        margin-top: 50px; /* Adjust margin for smaller screens */
+    }
+
+    .hero-logo {
+        max-width: 300px; /* Smaller max-width for tablets */
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 40px 5px 5px; /* Even smaller padding for mobile screens */
+        margin-top: 40px; /* Adjust margin for mobile screens */
+    }
+
+    .hero-logo {
+        max-width: 200px; /* Smaller max-width for mobile */
+    } 
+}
+
+
 /* Main content styling */
 main {
     flex: 1; /* Make sure main content takes up available space */

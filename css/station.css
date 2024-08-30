@@ -1,20 +1,3 @@
-/* Hero section styling */
-.hero {
-    background: #0073e6;
-    color: #fff;
-    padding: 90px 0px 35px;
-}
-
-.hero-content {
-    text-align: center; /* Align text to the left */
-}
-
-.hero-content h1 {
-    font-size: 2.5em;
-    margin-top: 0px;
-    margin-bottom: 0px;
-}
-
 /* Styles for Station Finder - station.html */
 .station-finder {
     max-width: 800px;
