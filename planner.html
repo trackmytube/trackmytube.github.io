@@ -10,7 +10,6 @@
     <script src="js/planner.js" defer></script>
 </head>
 <body>
-    <!-- Header -->
    <header>
         <nav>
             <div class="logo">
@@ -31,21 +30,19 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
             <h1>TfL Journey Planner</h1>
         </div>
     </section>
 
-    <!-- Main Content -->
     <main>
         <div class="station-finder">
             <div class="search-container">
                 <input type="text" id="station-search-1" placeholder="FROM station...">
                 <input type="text" id="station-search-2" placeholder="TO station...">
                 <button id="switch-stations" aria-label="Switch FROM and TO stations">&uarr;&darr;</button>
-                <button id="search-button">Search</button> <!-- New search button -->
+                <button id="search-button">Search</button>
             </div>
             
             <button id="journey-preferences-button">Journey Preferences</button>
@@ -80,15 +77,14 @@
                 </div>
             </div>
 
-            <div id="selectedStation"></div> <!-- For displaying the station name -->
-            <div id="selectedLines" class="line-colors"></div> <!-- For displaying the line colors -->
+            <div id="selectedStation"></div>
+            <div id="selectedLines" class="line-colors"></div>
 
             <div class="journey-container">
                 <div id="journey-results"></div>
             </div>
 
             <div id="search-results" class="search-results">
-                <!-- Search results will be displayed here -->
             </div>
         </div>
     </main>

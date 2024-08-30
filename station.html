@@ -10,7 +10,6 @@
     <script src="js/station.js" defer></script>
 </head>
 <body>
-    <!-- Header -->
    <header>
         <nav>
             <div class="logo">
@@ -31,42 +30,35 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
             <h1>TfL Station Finder</h1>
         </div>
     </section>
 
-    <!-- Main Content -->
     <main>
         <div class="station-finder">
             <div class="search-container">
                 <input type="text" id="station-search" placeholder="Search for a station...">
             </div>
 
-            <div id="selectedStation"></div> <!-- For displaying the station name -->
-            <div id="selectedLines" class="line-colors"></div> <!-- For displaying the line colors -->
-            
-            <!-- Add the arrivals container -->
+            <div id="selectedStation"></div>
+            <div id="selectedLines" class="line-colors"></div>
+
             <div id="arrivalsContainer" class="arrivals-container">
-                <!-- Live arrivals will be displayed here -->
             </div>
 
             <div id="search-results" class="search-results">
-                <!-- Search results will be displayed here -->
             </div>
         </div>
     </main>
 
-    <!-- Popup -->
-    <div id="overlay" class="overlay"></div> <!-- Overlay -->
+    <div id="overlay" class="overlay"></div>
     <div id="popup" class="popup">
         <div class="popup-content">
             <span id="popupClose" class="popup-close">&times;</span>
             <h2 id="popupTitle"></h2>
             <div id="popupArrivals" class="popup-arrivals">
-                <!-- Arrival details will be displayed here -->
             </div>
         </div>
     </div>

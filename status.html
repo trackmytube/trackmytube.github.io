@@ -10,7 +10,6 @@
     <script src="js/status.js" defer></script>
 </head>
 <body>
-    <!-- Header -->
    <header>
         <nav>
             <div class="logo">
@@ -31,20 +30,16 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
             <h1>TfL Status Updates</h1>
         </div>
     </section>
 
-    <!-- Main Content -->
     <main>
-        <!-- TfL Status Board Updates Section -->
         <div class="tfl-status-board">
             <div id="update-time" style="margin-top: 10px; font-weight: bold;">Last updated: </div>
             <div class="status-board">
-                <!-- Status items dynamically updated through JS -->
                 <div id="bakerloo" class="status-item bakerloo" onclick="showPopup('Bakerloo Line')">
                     <h3>Bakerloo Line</h3>
                     <p class="status">Status: <span class="status-text">/</span></p>
@@ -110,7 +105,6 @@
         </div>
     </main>
 
-    <!-- Popup Structure -->
     <div id="popup-overlay" class="overlay"></div>
     <div id="popup-content" class="popup">
         <span class="close-btn" onclick="closePopup()">&times;</span>
