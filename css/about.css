@@ -1,4 +1,3 @@
-/* CSS for About Section */
 .about-section {
     background: #f9f9f9;
     padding: 30px;
@@ -6,21 +5,19 @@
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin: 20px auto;
-    max-width: 80%; /* Sets the max width to 80% of the viewport */
+    max-width: 80%; 
     width: 80%;
-    margin-top: 20px; /* Space from the top to prevent overlap with the header */
+    margin-top: 20px; 
     font-family: Arial, sans-serif;
     line-height: 2.0;
 }
 
-/* Heading styling */
 .about-section h2 {
     text-align: center;
     font-size: 25px;
     margin-bottom: 20px;
 }
 
-/* Paragraph styling within the about section */
 .about-section p {
     margin: 10px 0;
     font-size: 18px;
@@ -28,16 +25,15 @@
     text-align: left;
 }
 
-/* Social Icons Styling */
 .social-icons {
-    display: flex; /* Align icons in a row */
-    gap: 20px; /* Adjust spacing between icons */
-    justify-content: center; /* Center icons horizontally */
+    display: flex; 
+    gap: 20px; 
+    justify-content: center; 
 }
 
 .social-icon {
-    display: block; /* Removes inline spacing */
-    width: 50px; /* Adjust size as needed */
+    display: block; 
+    width: 50px; 
     height: auto;
 }
 

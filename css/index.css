@@ -1,11 +1,10 @@
-/* Features Section - index.html */
 .feature-grid {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    max-width: 95%; /* Allows for a wider section */
-    margin: 0 auto; /* Center the grid container */
-    padding: 0 10px; /* Optional: Add padding to avoid content touching edges */
+    max-width: 95%; 
+    margin: 0 auto; 
+    padding: 0 10px; 
     margin-top: 20px;
     margin-bottom: 10px;
 }
@@ -15,9 +14,9 @@
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    flex: 1 1 calc(33% - 20px); /* Adjusted for proper spacing */
+    flex: 1 1 calc(33% - 20px); 
     text-align: center;
-    box-sizing: border-box; /* Ensure padding and border are included in the width calculation */
+    box-sizing: border-box; 
 }
 
 .feature-item h3 a {
@@ -30,15 +29,12 @@
     text-decoration: underline;
 }
 
-
-/* Ticker Section Styling */
-
 .fetching-message {
-    flex: 1; /* Take up the full width of the ticker container */
-    text-align: left; /* Align text to the left */
-    font-size: 1.2em; /* Adjust the font size */
-    color: #333; /* Text color */
-    padding-left: 20px; /* Padding to match the ticker-text */
+    flex: 1; 
+    text-align: left;
+    font-size: 1.2em; 
+    color: #333; 
+    padding-left: 20px; 
 }
 
 .ticker {
@@ -46,39 +42,39 @@
     padding: 10px 0;
     overflow: hidden;
     position: relative;
-    border: 1px solid #ccc; /* Border around the ticker container */
-    border-radius: 5px; /* Rounded corners for the ticker container */
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
 }
 
 .ticker-wrapper {
     display: flex;
     align-items: center;
-    width: 100%; /* Full width of the screen */
-    position: relative; /* Position relative for child positioning */
+    width: 100%; 
+    position: relative; 
 }
 
 .ticker-text {
-    flex-shrink: 0; /* Prevent the text from shrinking */
-    font-size: 1.2em; /* Adjust font size as needed */
-    color: #333; /* Adjust text color as needed */
-    position: absolute; /* Position absolute within the ticker-wrapper */
-    left: 10px; /* Create a small gap from the very left edge of the screen */
-    padding: 0 10px; /* Add padding around the text */
-    background: #f4f4f4; /* Same background as the ticker for consistency */
-    border-radius: 5px 0 0 5px; /* Rounded corners on the left side */
+    flex-shrink: 0; 
+    font-size: 1.2em; 
+    color: #333; 
+    position: absolute; 
+    left: 10px; 
+    padding: 0 10px; 
+    background: #f4f4f4; 
+    border-radius: 5px 0 0 5px; 
 }
 
 .ticker-text a {
-    text-decoration: none; /* Remove underline from the link */
+    text-decoration: none; 
 }
 
 .ticker-text a:hover {
-    text-decoration: underline; /* Underline on hover for clarity */
+    text-decoration: underline; 
 }
 
 .ticker-container {
-    margin-left: 150px; /* Adjust margin to push the container right from the text */
-    flex: 1; /* Allows the ticker container to take the remaining space */
+    margin-left: 150px; 
+    flex: 1; 
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -99,15 +95,15 @@
     flex-direction: row;
     align-items: center;
     white-space: nowrap;
-    animation: ticker 30s linear infinite; /* Adjust duration for scrolling speed */
+    animation: ticker 30s linear infinite; 
 }
 
 .status-item {
     display: inline-block;
-    margin-right: 50px; /* Adjust spacing between items */
-    padding: 10px; /* Padding inside each item */
-    border-radius: 5px; /* Rounded corners for each item */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional shadow for better visibility */
+    margin-right: 50px; 
+    padding: 10px; 
+    border-radius: 5px; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
 }
 
 .status-text {
@@ -115,7 +111,6 @@
     color: #333;
 }
 
-/* Line Colors */
 .bakerloo { border: 5px solid #B36305; }
 .central { border: 5px solid #E32017; }
 .circle { border: 5px solid #FFD300; }
@@ -132,7 +127,6 @@
 .victoria { border: 5px solid #0098D4; }
 .waterloo-city { border: 5px solid #95CDBA; }
 
-/* Keyframes for the ticker animation */
 @keyframes ticker {
     0% {
         transform: translateX(0);
@@ -142,15 +136,14 @@
     }
 }
 
-/* CSS for the News Section */
 .news-section {
     background: #f9f9f9;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin: 20px auto; /* Centers the news section */
-    font-family: Arial, sans-serif; /* Sets a clean, readable font */
-    max-width: 95%; /* Allows for a wider section */
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+    max-width: 95%;
 }
 
 .news-section h2 {
@@ -161,7 +154,7 @@
 
 #news-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 columns in a row */
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
 }
 
@@ -178,16 +171,16 @@
 
 .news-item img.news-image {
     display: block;
-    width: 100%; /* Make image responsive */
+    width: 100%;
     height: auto;
-    max-height: 200px; /* Limit the height for consistent item size */
-    object-fit: cover; /* Ensure image covers the space without distortion */
-    margin-bottom: 10px; /* Add margin below image */
+    max-height: 200px;
+    object-fit: cover;
+    margin-bottom: 10px;
     border-radius: 4px;
 }
 
 .news-item-content {
-    padding: 10px 0; /* Add space around content */
+    padding: 10px 0;
 }
 
 .news-item h3 {
