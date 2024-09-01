@@ -1,0 +1,46 @@
+/* New Grid Section styles */
+.new-grid-section {
+    display: grid; /* Using CSS Grid for layout */
+    grid-template-columns: repeat(3, 1fr); /* Default to 5 boxes per row on larger screens */
+    gap: 20px; /* Space between items */
+    padding: 20px;
+}
+
+/* Grid item styles */
+.new-grid-item {
+    background-color: #f0f0f0; /* Light background for grid items */
+    border: 5px solid black; /* Black border for now, will be updated by JavaScript */
+    border-radius: 3px; /* Rounded corners */
+    overflow: hidden; /* Ensure content doesn't overflow */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    text-align: center; /* Center text */
+    padding: 20px; /* Padding inside the box */
+}
+
+.new-grid-item h2 {
+    font-size: 1.3rem; /* Title size */
+    margin-bottom: 10px; /* Space below title */
+}
+
+.new-grid-item p {
+    font-size: 1rem; /* Description size */
+    color: #333; /* Darker text for contrast */
+    line-height: 1.6; /* Increased line-height for better readability */
+    margin: 0; /* Remove default margin */
+}
+
+/* Responsive styles */
+@media (max-width: 950px) {
+    .new-grid-section {
+        grid-template-columns: 1fr; /* Three boxes per row for medium screens */
+    }
+}
+
+@media (max-width: 600px) {
+    .new-grid-section {
+        grid-template-columns: 1fr; /* Single column layout for small screens */
+    }
+}

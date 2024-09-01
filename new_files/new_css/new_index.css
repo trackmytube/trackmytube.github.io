@@ -1,0 +1,100 @@
+/* Fixed Grid Section styles */
+.fixed-grid {
+    display: grid; /* Using CSS Grid for layout */
+    grid-template-columns: repeat(3, 1fr); /* Fixed three-column layout */
+    gap: 20px; /* Space between items */
+    padding: 20px;
+}
+
+/* Grid item styles */
+.grid-item {
+    background-color: #f0f0f0; /* Light background for grid items */
+    border-radius: 8px; /* Rounded corners */
+    overflow: hidden; /* Ensure content doesn't overflow */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    text-align: center; /* Center text */
+    padding: 20px; /* Padding inside the box */
+}
+
+.grid-item h2 {
+    font-size: 1.3rem; /* Title size */
+    margin-bottom: 10px; /* Space below title */
+}
+
+.grid-item p {
+    font-size: 1rem; /* Description size */
+    color: #333; /* Darker text for contrast */
+    line-height: 1.6; /* Increased line-height for better readability */
+    margin: 0; /* Remove default margin */
+}
+
+/* Responsive styles */
+@media (max-width: 900px) {
+    .fixed-grid {
+        grid-template-columns: 1fr; /* Two-column layout for medium screens */
+    }
+}
+
+@media (max-width: 600px) {
+    .fixed-grid {
+        grid-template-columns: 1fr; /* Single-column layout for small screens */
+    }
+}
+
+
+
+/* News section styles */
+.news-section {
+    display: grid; /* Using CSS Grid for layout */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Flexible columns with more room */
+    gap: 20px; /* Space between items */
+    padding: 20px;
+}
+
+.news-item {
+    background-color: #f0f0f0; /* Light background for news items */
+    border-radius: 8px; /* Rounded corners */
+    overflow: hidden; /* Ensure content doesn't overflow */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    display: flex;
+    flex-direction: column;
+    align-items: left; /* Align items to the left */
+    text-align: left;
+    padding: 15px; /* Padding inside the box */
+}
+
+.news-item img {
+    width: 100%; /* Full width of the item */
+    height: auto; /* Maintain aspect ratio */
+    aspect-ratio: 16 / 9; /* Maintain 16:9 aspect ratio */
+    object-fit: cover; /* Cover the area, maintaining aspect ratio */
+    border-bottom: 2px solid #ddd; /* Subtle separation between image and text */
+}
+
+.news-item h2 {
+    font-size: 1.3rem; /* Larger title size for more emphasis */
+    margin: 10px 0; /* Space around title */
+}
+
+.news-item p {
+    font-size: 1.1rem; /* Larger description size for readability */
+    color: #333; /* Darker text for contrast */
+    line-height: 1.6; /* Increased line-height for better readability */
+    margin: 0; /* Remove default margin */
+}
+
+/* Responsive styles for larger screens */
+@media (min-width: 600px) {
+    .news-section {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* More room for items on medium screens */
+    }
+}
+
+@media (min-width: 900px) {
+    .news-section {
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Even more room for items on larger screens */
+    }
+}

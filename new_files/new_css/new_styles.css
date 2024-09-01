@@ -1,0 +1,105 @@
+/* Basic resets */
+body, ul {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; /* Default sans-serif font stack */
+}
+
+header {
+    background: #333;
+    color: #fff;
+}
+
+/* Navbar styles for mobile-first */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    position: relative; /* Necessary for positioning the absolute nav menu */
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    transition: max-height 0.4s ease, opacity 0.4s ease; /* Smooth animation for height and opacity */
+    max-height: none; /* Full height by default */
+    opacity: 1; /* Fully visible by default */
+    flex-direction: row; /* Row direction for larger screens */
+}
+
+.nav-menu li {
+    margin: 0 10px;
+}
+
+.nav-menu a {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+}
+
+.nav-menu a:hover {
+    background: #555;
+    border-radius: 5px;
+}
+
+/* Hero section styles */
+.hero {
+    background-color: #007BFF; /* Blue background */
+    color: white; /* White text */
+    text-align: center; /* Center text */
+    padding: 25px 15px; /* Increased padding for more space */
+}
+
+.hero h1 {
+    font-size: 2.5rem; /* Larger font size for heading */
+    margin-bottom: 20px; /* Increased space below heading */
+}
+
+.hero p {
+    font-size: 1.1rem; /* Larger font size for paragraph */
+    max-width: 700px; /* Slightly wider paragraph for readability */
+    margin: 0 auto; /* Center the paragraph text */
+    line-height: 1.6; /* Increased line-height for better readability */
+}
+
+
+/* Mobile styles */
+@media only screen and (max-width: 600px) {
+    .nav-menu {
+        max-height: 0; /* Hidden by default on mobile */
+        opacity: 0; /* Invisible by default on mobile */
+        flex-direction: column;
+        width: 100%;
+        background: #333;
+        position: absolute;
+        top: 60px; /* Adjust based on header height */
+        left: 0;
+        padding: 10px;
+        z-index: 1;
+    }
+
+    .nav-menu.active {
+        max-height: 300px; /* Adjust max-height based on content size */
+        opacity: 1;
+    }
+
+    .menu-toggle {
+        display: block; /* Display toggle button on mobile */
+    }
+}

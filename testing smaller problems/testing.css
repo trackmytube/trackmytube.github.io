@@ -1,0 +1,288 @@
+/* testing.css */
+
+/* Basic resets */
+body, ul {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; /* Default sans-serif font stack */
+}
+
+header {
+    background: #333;
+    color: #fff;
+}
+
+/* Navbar styles for mobile-first */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    position: relative; /* Necessary for positioning the absolute nav menu */
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    transition: max-height 0.4s ease, opacity 0.4s ease; /* Smooth animation for height and opacity */
+    max-height: none; /* Full height by default */
+    opacity: 1; /* Fully visible by default */
+    flex-direction: row; /* Row direction for larger screens */
+}
+
+.nav-menu li {
+    margin: 0 10px;
+}
+
+.nav-menu a {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+}
+
+.nav-menu a:hover {
+    background: #555;
+    border-radius: 5px;
+}
+
+/* Hero section styles */
+.hero {
+    background-color: #007BFF; /* Blue background */
+    color: white; /* White text */
+    text-align: center; /* Center text */
+    padding: 25px 15px; /* Increased padding for more space */
+}
+
+.hero h1 {
+    font-size: 2.5rem; /* Larger font size for heading */
+    margin-bottom: 20px; /* Increased space below heading */
+}
+
+.hero p {
+    font-size: 1.1rem; /* Larger font size for paragraph */
+    max-width: 700px; /* Slightly wider paragraph for readability */
+    margin: 0 auto; /* Center the paragraph text */
+    line-height: 1.6; /* Increased line-height for better readability */
+}
+
+
+/* Mobile styles */
+@media only screen and (max-width: 600px) {
+    .nav-menu {
+        max-height: 0; /* Hidden by default on mobile */
+        opacity: 0; /* Invisible by default on mobile */
+        flex-direction: column;
+        width: 100%;
+        background: #333;
+        position: absolute;
+        top: 60px; /* Adjust based on header height */
+        left: 0;
+        padding: 10px;
+        z-index: 1;
+    }
+
+    .nav-menu.active {
+        max-height: 300px; /* Adjust max-height based on content size */
+        opacity: 1;
+    }
+
+    .menu-toggle {
+        display: block; /* Display toggle button on mobile */
+    }
+}
+
+/* Fixed Grid Section styles */
+.fixed-grid {
+    display: grid; /* Using CSS Grid for layout */
+    grid-template-columns: repeat(3, 1fr); /* Fixed three-column layout */
+    gap: 20px; /* Space between items */
+    padding: 20px;
+}
+
+/* Grid item styles */
+.grid-item {
+    background-color: #f0f0f0; /* Light background for grid items */
+    border-radius: 8px; /* Rounded corners */
+    overflow: hidden; /* Ensure content doesn't overflow */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    text-align: center; /* Center text */
+    padding: 20px; /* Padding inside the box */
+}
+
+.grid-item h2 {
+    font-size: 1.3rem; /* Title size */
+    margin-bottom: 10px; /* Space below title */
+}
+
+.grid-item p {
+    font-size: 1rem; /* Description size */
+    color: #333; /* Darker text for contrast */
+    line-height: 1.6; /* Increased line-height for better readability */
+    margin: 0; /* Remove default margin */
+}
+
+/* Responsive styles */
+@media (max-width: 900px) {
+    .fixed-grid {
+        grid-template-columns: 1fr; /* Two-column layout for medium screens */
+    }
+}
+
+@media (max-width: 600px) {
+    .fixed-grid {
+        grid-template-columns: 1fr; /* Single-column layout for small screens */
+    }
+}
+
+
+
+/* News section styles */
+.news-section {
+    display: grid; /* Using CSS Grid for layout */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Flexible columns with more room */
+    gap: 20px; /* Space between items */
+    padding: 20px;
+}
+
+.news-item {
+    background-color: #f0f0f0; /* Light background for news items */
+    border-radius: 8px; /* Rounded corners */
+    overflow: hidden; /* Ensure content doesn't overflow */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    display: flex;
+    flex-direction: column;
+    align-items: left; /* Align items to the left */
+    text-align: left;
+    padding: 15px; /* Padding inside the box */
+}
+
+.news-item img {
+    width: 100%; /* Full width of the item */
+    height: auto; /* Maintain aspect ratio */
+    aspect-ratio: 16 / 9; /* Maintain 16:9 aspect ratio */
+    object-fit: cover; /* Cover the area, maintaining aspect ratio */
+    border-bottom: 2px solid #ddd; /* Subtle separation between image and text */
+}
+
+.news-item h2 {
+    font-size: 1.3rem; /* Larger title size for more emphasis */
+    margin: 10px 0; /* Space around title */
+}
+
+.news-item p {
+    font-size: 1.1rem; /* Larger description size for readability */
+    color: #333; /* Darker text for contrast */
+    line-height: 1.6; /* Increased line-height for better readability */
+    margin: 0; /* Remove default margin */
+}
+
+/* Responsive styles for larger screens */
+@media (min-width: 600px) {
+    .news-section {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* More room for items on medium screens */
+    }
+}
+
+@media (min-width: 900px) {
+    .news-section {
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Even more room for items on larger screens */
+    }
+}
+
+
+/* New Grid Section styles */
+.new-grid-section {
+    display: grid; /* Using CSS Grid for layout */
+    grid-template-columns: repeat(3, 1fr); /* Default to 5 boxes per row on larger screens */
+    gap: 20px; /* Space between items */
+    padding: 20px;
+}
+
+/* Grid item styles */
+.new-grid-item {
+    background-color: #f0f0f0; /* Light background for grid items */
+    border: 5px solid black; /* Black border for now, will be updated by JavaScript */
+    border-radius: 3px; /* Rounded corners */
+    overflow: hidden; /* Ensure content doesn't overflow */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    text-align: center; /* Center text */
+    padding: 20px; /* Padding inside the box */
+}
+
+.new-grid-item h2 {
+    font-size: 1.3rem; /* Title size */
+    margin-bottom: 10px; /* Space below title */
+}
+
+.new-grid-item p {
+    font-size: 1rem; /* Description size */
+    color: #333; /* Darker text for contrast */
+    line-height: 1.6; /* Increased line-height for better readability */
+    margin: 0; /* Remove default margin */
+}
+
+/* Responsive styles */
+@media (max-width: 900px) {
+    .new-grid-section {
+        grid-template-columns: repeat(3, 1fr); /* Three boxes per row for medium screens */
+    }
+}
+
+@media (max-width: 600px) {
+    .new-grid-section {
+        grid-template-columns: 1fr; /* Single column layout for small screens */
+    }
+}
+
+/* About Section styles */
+.about-section {
+    padding: 20px; /* Padding around the section */
+    background-color: #f9f9f9; /* Light background for contrast */
+    text-align: center; /* Center text */
+}
+
+.about-section h2 {
+    font-size: 2rem; /* Larger font size for the heading */
+    margin-bottom: 20px; /* Space below the heading */
+}
+
+.about-section p {
+    font-size: 1rem; /* Standard font size for paragraphs */
+    color: #333; /* Darker text for contrast */
+    line-height: 1.6; /* Increased line-height for better readability */
+    margin: 0 auto; /* Center paragraphs */
+    max-width: 800px; /* Limit paragraph width for readability */
+    margin-bottom: 20px; /* Space between paragraphs */
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+    .about-section h2 {
+        font-size: 1.5rem; /* Smaller heading size on small screens */
+    }
+
+    .about-section p {
+        font-size: 0.9rem; /* Smaller paragraph text on small screens */
+    }
+}
