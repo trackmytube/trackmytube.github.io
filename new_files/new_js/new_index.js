@@ -1,3 +1,87 @@
+async function updateStatusTicker() {
+    try {
+        const fetchingMessageElement = document.getElementById('fetching-message');
+        fetchingMessageElement.style.display = 'block';
+
+        const tubeResponse = await fetch('https://api.tfl.gov.uk/Line/Mode/tube/Status');
+        const tramResponse = await fetch('https://api.tfl.gov.uk/Line/Mode/tram/Status');
+        const overgroundResponse = await fetch('https://api.tfl.gov.uk/Line/Mode/overground/Status');
+        const dlrResponse = await fetch('https://api.tfl.gov.uk/Line/Mode/dlr/Status');
+        const elizabethLineResponse = await fetch('https://api.tfl.gov.uk/Line/Mode/elizabeth-line/Status');
+
+        if (!tubeResponse.ok || !tramResponse.ok || !overgroundResponse.ok || !dlrResponse.ok || !elizabethLineResponse.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const tubeData = await tubeResponse.json();
+        const tramData = await tramResponse.json();
+        const overgroundData = await overgroundResponse.json();
+        const dlrData = await dlrResponse.json();
+        const elizabethLineData = await elizabethLineResponse.json();
+
+        const lineClassNames = {
+            'bakerloo': 'bakerloo',
+            'central': 'central',
+            'circle': 'circle',
+            'district': 'district',
+            'hammersmith-city': 'hammersmith-city',
+            'jubilee': 'jubilee',
+            'metropolitan': 'metropolitan',
+            'northern': 'northern',
+            'piccadilly': 'piccadilly',
+            'victoria': 'victoria',
+            'waterloo-city': 'waterloo-city',
+            'tram': 'tram',
+            'overground': 'overground',
+            'dlr': 'dlr',
+            'elizabeth-line': 'elizabeth-line'
+        };
+
+        function generateTickerContent(data, mode) {
+            return data.map(item => {
+                const lineId = item.id.toLowerCase();
+                const lineClass = lineClassNames[lineId] || mode;
+                const status = item.lineStatuses[0];
+                const statusDescription = status ? status.statusSeverityDescription : 'No Status Available';
+                return `
+                    <div class="status-item ${lineClass}">
+                        <span class="status-text"><strong>${item.name}:</strong> ${statusDescription}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        const tickerContent = [
+            generateTickerContent(tubeData, 'tube'),
+            generateTickerContent(tramData, 'tram'),
+            generateTickerContent(overgroundData, 'overground'),
+            generateTickerContent(dlrData, 'dlr'),
+            generateTickerContent(elizabethLineData, 'elizabeth-line')
+        ].join('');
+
+        document.getElementById('ticker-content1').innerHTML = tickerContent;
+        document.getElementById('ticker-content2').innerHTML = tickerContent;
+
+        fetchingMessageElement.style.display = 'none';
+
+        const updateTimeElement = document.getElementById('update-time');
+        if (updateTimeElement) {
+            const now = new Date();
+            updateTimeElement.textContent = `Last updated: ${now.toLocaleTimeString()}`;
+        }
+
+    } catch (error) {
+        console.error('Error fetching status data:', error);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    updateStatusTicker();
+    const updateInterval = 60000;
+    setInterval(updateStatusTicker, updateInterval);
+});
+
+
 // Function to fetch and display TfL news
 async function fetchTflNews() {
     const apiUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Ffeeds.bbci.co.uk%2Fnews%2Ftopics%2Fc26xnwx3m34t%2Frss.xml&api_key=k1ofkweiudezz4nnm4wcbgjyv0xktqjs9inbzpk6&order_by=pubDate&order_dir=desc&count=100';

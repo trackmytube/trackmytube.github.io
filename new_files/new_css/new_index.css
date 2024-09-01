@@ -1,3 +1,97 @@
+.ticker {
+    background: #f4f4f4;
+    padding: 10px 0;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    width: 100%; /* Full width */
+}
+
+.ticker-wrapper {
+    display: flex;
+    width: 100%;
+    overflow: hidden; /* Hide overflow for smoother scrolling */
+}
+
+.ticker-container {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.ticker-content-wrapper {
+    display: flex;
+    flex-direction: row;
+    white-space: nowrap;
+}
+
+.ticker-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    white-space: nowrap;
+    animation: ticker 30s linear infinite; 
+}
+
+.status-item {
+    display: inline-block;
+    margin-right: 20px; /* Adjusted margin for smaller screens */
+    padding: 5px 10px; /* Adjusted padding */
+    border-radius: 5px; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+    font-size: 0.9em; /* Adjusted font size */
+}
+
+.status-text {
+    color: #333;
+}
+
+.bakerloo { border: 3px solid #B36305; }
+.central { border: 3px solid #E32017; }
+.circle { border: 3px solid #FFD300; }
+.district { border: 3px solid #00782A; }
+.dlr { border: 3px solid #00A4A7; }
+.elizabeth-line { border: 3px solid #9364CC; }
+.hammersmith-city { border: 3px solid #F3A9BB; }
+.jubilee { border: 3px solid #A0A5A9; }
+.overground { border: 3px solid #EE7C0E; }
+.metropolitan { border: 3px solid #9B0056; }
+.northern { border: 3px solid #000000; }
+.piccadilly { border: 3px solid #003688; }
+.tram { border: 3px solid #84B817; }
+.victoria { border: 3px solid #0098D4; }
+.waterloo-city { border: 3px solid #95CDBA; }
+
+@keyframes ticker {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@media (max-width: 600px) {
+    .ticker-container {
+        margin-left: 0; /* No margin needed */
+    }
+
+    .ticker-content {
+        font-size: 0.8em; /* Smaller font size for smaller screens */
+    }
+
+    .status-item {
+        margin-right: 10px; /* Reduced margin for smaller screens */
+        padding: 5px; /* Reduced padding for smaller screens */
+    }
+}
+
+
 /* Fixed Grid Section styles */
 .features-grid {
     display: grid; /* Using CSS Grid for layout */
