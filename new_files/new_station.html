@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrackMyTube - Live Line Status Page</title>
+    <link rel="stylesheet" href="../new_files/new_css/new_station.css">
+    <link rel="stylesheet" href="../new_files/new_css/new_styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">TrackMyTube</div>
+            <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+            <ul class="nav-menu">
+                <li><a href="new_index.html"><strong>Home</strong></a></li>
+                <li><a href="new_status.html"><strong>Line Status</strong></a></li>
+                <li><a href="new_station.html"><strong>Station Finder</strong></a></li>
+                <li><a href="new_planner.html"><strong>Journey Planner</strong></a></li>
+                <li><a href="new_about.html"><strong>About</strong></a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>TfL Station Finder</h1>
+    </section>
+
+    <main>
+        <div class="station-finder">
+            <div class="search-container">
+                <input type="text" id="station-search" placeholder="Search for a station...">
+            </div>
+
+            <div id="selectedStation"></div>
+            <div id="selectedLines" class="line-colors"></div>
+
+            <div id="arrivalsContainer" class="arrivals-container"></div>
+
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </main>
+
+    <div id="overlay" class="overlay"></div>
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span id="popupClose" class="popup-close">&times;</span>
+            <h2 id="popupTitle"></h2>
+            <div id="popupArrivals" class="popup-arrivals"></div>
+        </div>
+    </div>
+    <script src="../new_files/new_js/new_script.js"></script>
+    <script src="../new_files/new_js/new_station.js"></script>
+</body>
+</html>
