@@ -28,68 +28,81 @@
     </section>
 
     <!-- New Grid Section -->
-    <section class="new-grid-section">
-        <div class="new-grid-item">
-            <h2>Item 1</h2>
-            <p>This is an item.</p>
+    <div id="update-time" style="margin-top: 10px; font-weight: bold;">Last updated: </div>
+    <section class="status-board">
+        <div id="bakerloo" class="status-item bakerloo" onclick="showPopup('Bakerloo Line')">
+            <h2>Bakerloo Line</h2>
+            <p class="status"><strong>Status: <span class="status-text">/</strong></span></p>
         </div>
-        <div class="new-grid-item">
-            <h2>Item 2</h2>
-            <p>This is an item.</p>
+        <div id="central" class="status-item central" onclick="showPopup('Central Line')">
+            <h2>Central Line</h2>
+            <p class="status"><strong>Status: <span class="status-text">/</strong></span></p>
         </div>
-        <div class="new-grid-item">
-            <h2>Item 3</h2>
-            <p>This is an item.</p>
+        <div id="circle" class="status-item circle" onclick="showPopup('Circle Line')">
+            <h2>Circle Line</h2>
+            <p class="status"><strong>Status: <span class="status-text">/</strong></span></p>
         </div>
-        <div class="new-grid-item">
-            <h2>Item 4</h2>
-            <p>This is an item.</p>
+        <div id="district" class="status-item district" onclick="showPopup('District Line')">
+            <h2>District Line</h2>
+            <p class="status"><strong>Status: <span class="status-text">/</strong></span></p>
         </div>
-        <div class="new-grid-item">
-            <h2>Item 5</h2>
-            <p>This is an item.</p>
+        <div id="dlr" class="status-item dlr" onclick="showPopup('DLR')">
+            <h2>DLR</h2>
+            <p class="status"><strong>Status: <span class="status-text">/</strong></span></p>
         </div>
-        <div class="new-grid-item">
-            <h2>Item 6</h2>
-            <p>This is an item.</p>
+        <div id="elizabeth-line" class="status-item elizabeth-line" onclick="showPopup('Elizabeth Line')">
+            <h2>Elizabeth Line</h2>
+            <p class="status"><strong>Status: <span class="status-text">/</strong></span></p>
         </div>
-        <div class="new-grid-item">
-            <h2>Item 7</h2>
-            <p>This is an item.</p>
+        <div id="hammersmith-city" class="status-item hammersmith-city" onclick="showPopup('Hammersmith & City Line')">
+            <h2>Hammersmith & City Line</h2>
+            <p class="status"><strong>Status: <span class="status-text">/</strong></span></p>
         </div>
-        <div class="new-grid-item">
-            <h2>Item 8</h2>
-            <p>This is an item.</p>
+        <div id="jubilee" class="status-item jubilee" onclick="showPopup('Jubilee Line')">
+            <h2>Jubilee Line</h2>
+            <p class="status"><strong>Status: <span class="status-text">/</strong></span></p>
         </div>
-        <div class="new-grid-item">
-            <h2>Item 9</h2>
-            <p>This is an item.</p>
+        <div id="overground" class="status-item overground" onclick="showPopup('London Overground')">
+            <h2>London Overground</h2>
+            <p class="status"><strong>Status: <span class="status-text">/</strong></span></p>
         </div>
-        <div class="new-grid-item">
-            <h2>Item 10</h2>
-            <p>This is an item.</p>
+        <div id="metropolitan" class="status-item metropolitan" onclick="showPopup('Metropolitan Line')">
+            <h2>Metropolitan Line</h2>
+            <p class="status"><strong>Status: <span class="status-text">/</strong></span></p>
         </div>
-        <div class="new-grid-item">
-            <h2>Item 11</h2>
-            <p>This is an item.</p>
+        <div id="northern" class="status-item northern" onclick="showPopup('Northern Line')">
+            <h2>Northern Line</h2>
+            <p class="status"><strong>Status: <span class="status-text">/</strong></span></p>
         </div>
-        <div class="new-grid-item">
-            <h2>Item 12</h2>
-            <p>This is an item.</p>
+        <div id="piccadilly" class="status-item piccadilly" onclick="showPopup('Piccadilly Line')">
+            <h2>Piccadilly Line</h2>
+            <p class="status"><strong>Status: <span class="status-text">/</strong></span></p>
         </div>
-        <div class="new-grid-item">
-            <h2>Item 13</h2>
-            <p>This is an item.</p>
+        <div id="tram" class="status-item tram" onclick="showPopup('Tram')">
+            <h2>Tram</h2>
+            <p class="status"><strong>Status: <span class="status-text">/</strong></span></p>
         </div>
-        <div class="new-grid-item">
-            <h2>Item 14</h2>
-            <p>This is an item.</p>
+        <div id="victoria" class="status-item victoria" onclick="showPopup('Victoria Line')">
+            <h2>Victoria Line</h2>
+            <p class="status"><strong>Status: <span class="status-text">/</strong></span></p>
         </div>
-        <div class="new-grid-item">
-            <h2>Item 15</h2>
-            <p>This is an item.</p>
+        <div id="waterloo-city" class="status-item waterloo-city" onclick="showPopup('Waterloo & City Line')">
+            <h2>Waterloo & City Line</h2>
+            <p class="status"><strong>Status: <span class="status-text">/</strong></span></p>
         </div>
     </section>
+    <div id="update-countdown" style="margin-top: 5px; font-weight: bold;">Update in: 60s</div> 
+    
+    <!-- Popup Overlay -->
+    <div id="popup-overlay" class="overlay"></div>
+
+    <!-- Popup Content -->
+    <div id="popup-content" class="popup">
+        <span class="close-btn" aria-label="Close popup">&times;</span>
+        <h2 id="popup-title">Service Name</h2>
+        <p id="popup-details">Details will be displayed here...</p>
+    </div>
+
 
 
     <script src="../new_files/new_js/new_script.js"></script>
