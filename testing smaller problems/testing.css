@@ -286,3 +286,65 @@ header {
         font-size: 0.9rem; /* Smaller paragraph text on small screens */
     }
 }
+
+
+/* Search and Buttons Section styles */
+.search-buttons-section {
+    display: flex; /* Flexbox for layout */
+    flex-direction: column; /* Stack items vertically on mobile */
+    gap: 10px; /* Space between items */
+    padding: 20px; /* Padding around the section */
+    align-items: center; /* Center items horizontally */
+}
+
+/* Search box styles */
+.search-box {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc; /* Light border for search boxes */
+    border-radius: 5px; /* Rounded corners */
+    width: 100%; /* Full width on mobile */
+    max-width: 400px; /* Max width to prevent overly wide input on larger screens */
+}
+
+/* Button styles */
+.switch-button, .search-button {
+    padding: 10px 15px; /* Adjusted padding for buttons */
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: auto; /* Width adjusted to fit content */
+    max-width: 150px; /* Max width for buttons to prevent them from being too wide */
+}
+
+.switch-button {
+    background-color: #007BFF; /* Blue background */
+    color: white;
+}
+
+.search-button {
+    background-color: #28a745; /* Green background */
+    color: white;
+}
+
+/* Responsive styles */
+@media (min-width: 600px) {
+    .search-buttons-section {
+        flex-direction: row; /* Arrange items in a row on larger screens */
+        align-items: center; /* Center items vertically */
+        justify-content: center;
+    }
+
+    .search-box {
+        flex: 1; /* Allow search boxes to grow */
+        max-width: 300px; /* Max width for search boxes on larger screens */
+    }
+
+    .switch-button, .search-button {
+        margin: 0 10px; /* Space between buttons and search boxes */
+        max-width: 120px; /* Adjusted max width for buttons on larger screens */
+    }
+}
+
+
