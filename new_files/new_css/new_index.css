@@ -1,5 +1,5 @@
 /* Fixed Grid Section styles */
-.fixed-grid {
+.features-grid {
     display: grid; /* Using CSS Grid for layout */
     grid-template-columns: repeat(3, 1fr); /* Fixed three-column layout */
     gap: 20px; /* Space between items */
@@ -7,7 +7,7 @@
 }
 
 /* Grid item styles */
-.grid-item {
+.feature-item {
     background-color: #f0f0f0; /* Light background for grid items */
     border-radius: 8px; /* Rounded corners */
     overflow: hidden; /* Ensure content doesn't overflow */
@@ -19,12 +19,12 @@
     padding: 20px; /* Padding inside the box */
 }
 
-.grid-item h2 {
+.feature-item h2 {
     font-size: 1.3rem; /* Title size */
     margin-bottom: 10px; /* Space below title */
 }
 
-.grid-item p {
+.feature-item p {
     font-size: 1rem; /* Description size */
     color: #333; /* Darker text for contrast */
     line-height: 1.6; /* Increased line-height for better readability */
@@ -33,13 +33,13 @@
 
 /* Responsive styles */
 @media (max-width: 900px) {
-    .fixed-grid {
+    .features-grid {
         grid-template-columns: 1fr; /* Two-column layout for medium screens */
     }
 }
 
 @media (max-width: 600px) {
-    .fixed-grid {
+    .features-grid {
         grid-template-columns: 1fr; /* Single-column layout for small screens */
     }
 }
@@ -75,12 +75,12 @@
 }
 
 .news-item h2 {
-    font-size: 1.3rem; /* Larger title size for more emphasis */
+    font-size: 1.2rem; /* Larger title size for more emphasis */
     margin: 10px 0; /* Space around title */
 }
 
 .news-item p {
-    font-size: 1.1rem; /* Larger description size for readability */
+    font-size: 1rem; /* Larger description size for readability */
     color: #333; /* Darker text for contrast */
     line-height: 1.6; /* Increased line-height for better readability */
     margin: 0; /* Remove default margin */
