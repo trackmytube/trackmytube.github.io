@@ -74,10 +74,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Transport for London (TfL)**: For providing the API and extensive datasets related to NaPTAN IDs, station information, lines served, live status updates, station arrivals, and journey planning.
 - **BBC News**: For offering valuable news updates and coverage relevant to the Transport for London network.
 - **Thameslink, Southern, Gatwick Express, EMR, South Western Railway, CrossCountry, and LNER (mobile apps)**: For inspiring the design and structure of the platform by demonstrating effective ways to display important information clearly and conveniently.
-- **Trainline**: For insights into creating a visually appealing and user-friendly layout through thoughtful use of structure and color.
+- **Trainline**: For insights into creating a visually appealing and user-friendly layout through thoughtful use of structure and colour.
 
 ### With Deepest Gratitude to
 - The ticket gate staff member at London Waterloo (Platforms 20-24), for showing me different routes to navigate to Farringdon and King's Cross St. Pancras. This guidance inspired me to document this valuable information and later develop a platform to make such insights quickly accessible through a platform that is simple yet appealing.
 - The ticket officer at Tottenham Court Road station, for helping me understand the validity of paper tickets at different stations in London. This conversation deepened my knowledge of effective journey planning and valid routes, especially when an Oyster card is not available.
 - The station boards at Richmond, Clapham Junction, West Hampstead, London Bridge, London Blackfriars, and St Albans City, for not functioning at times or displaying unclear information. These experiences highlighted the inconvenience of unreliable station boards, inspiring me to create a platform that displays station information clearly and quickly.
-- My former A-Level Computer Science teacher, for introducing me to the world of web development. This sparked my passion for creating platforms that reflect my interests, including in TfL travel.
+- My former A-Level Computer Science teacher, for introducing me to the world of web development. This sparked my passion for creating platforms that reflect my interests, including TfL travel.
