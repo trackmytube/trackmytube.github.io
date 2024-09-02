@@ -33,6 +33,13 @@
     margin: 0; /* Remove default margin */
 }
 
+.update-info {
+    margin: 0 auto; /* Center-align the text within its container */
+    font-weight: bold; /* Make the text bold */
+    text-align: center; /* Center the text */
+    padding: 10px; /* Add some padding for spacing */
+}
+
 .bakerloo { border: 5px solid #B36305; }
 .central { border: 5px solid #E32017; }
 .circle { border: 5px solid #FFD300; }
@@ -63,6 +70,10 @@
 @media (max-width: 600px) {
     .status-board {
         grid-template-columns: 1fr; /* Single column layout for small screens */
+    }
+    .update-info {
+        padding: 8px; /* Adjust padding for smaller screens */
+        font-size: 0.9rem; /* Adjust font size for smaller screens */
     }
 }
 
