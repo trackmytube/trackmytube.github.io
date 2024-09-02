@@ -135,6 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
         searchInputTwo.value = stationTo;
 
         clearJourneyResults(); 
+        hideJourneyTitleAndResults();
     }
 
     function toggleJourneyPreferences() {
@@ -154,6 +155,10 @@ document.addEventListener('DOMContentLoaded', function () {
         journeyResults.innerHTML = '';
     }
 
+    function hideJourneyTitleAndResults() {
+        selectedStation.style.display = 'none';
+        journeyResults.innerHTML = '';
+    }
 
     function buildJourneyUrl() {
         let url = `https://api.tfl.gov.uk/Journey/JourneyResults/${naptanFrom}/to/${naptanTo}?&mode=tube,overground,elizabeth-line,tram,dlr,national-rail&useRealTimeLiveArrivals=true&nationalSearch=true&walkingSpeed=Average`;
@@ -180,7 +185,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         return url;
     }
-
 
     async function fetchJourneyResults() {
         if (!naptanFrom || !naptanTo) {
@@ -227,10 +231,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     const stopPointsHtml = stopPoints?.map(stop => `
                             <li>${stop.name}</li>
                         `).join('') || '';
-                    
 
                     const lineColor = lineColors[trainName] || false; 
-                    
+
                     return `
                         <h3><strong>${trainName}</strong> <span class="line-color-inline" style="background-color: ${lineColor};"></span></h3>
                         <div class="journey-leg" style="border-color: ${lineColor};"> <!-- Set border color dynamically -->
@@ -295,12 +298,31 @@ document.addEventListener('DOMContentLoaded', function () {
         journeyPreferences.classList.toggle('visible'); // Toggle visibility on the section
     });
 
-    switchButton.addEventListener('click', switchStations);
-    journeyPreferencesButton.addEventListener('click', toggleJourneyPreferences);
-    datePicker.addEventListener('change', collectJourneyPreferences);
-    timePicker.addEventListener('change', collectJourneyPreferences);
-    timeIsSelect.addEventListener('change', collectJourneyPreferences);
-    journeyPreferenceSelect.addEventListener('change', collectJourneyPreferences);
+    switchButton.addEventListener('click', function() {
+        switchStations();
+        hideJourneyTitleAndResults(); // Ensure title and results are hidden
+    });
+
+    datePicker.addEventListener('change', function() {
+        collectJourneyPreferences();
+        hideJourneyTitleAndResults(); // Ensure title and results are hidden
+    });
+
+    timePicker.addEventListener('change', function() {
+        collectJourneyPreferences();
+        hideJourneyTitleAndResults(); // Ensure title and results are hidden
+    });
+
+    timeIsSelect.addEventListener('change', function() {
+        collectJourneyPreferences();
+        hideJourneyTitleAndResults(); // Ensure title and results are hidden
+    });
+
+    journeyPreferenceSelect.addEventListener('change', function() {
+        collectJourneyPreferences();
+        hideJourneyTitleAndResults(); // Ensure title and results are hidden
+    });
+
     searchResults.addEventListener('click', handleStationClick);
 
     fetchStations();
