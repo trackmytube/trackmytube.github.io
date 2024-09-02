@@ -29,10 +29,29 @@
 
     <!-- Search and Buttons Section -->
     <section class="search-buttons-section">
-        <input type="text" class="search-box" placeholder="FROM">
-        <input type="text" class="search-box" placeholder="TO">
+        <input type="text" class="search-box" placeholder="ORIGIN">
+        <input type="text" class="search-box" placeholder="DESTINATION">
         <button class="switch-button">&uarr;&darr;</button>
         <button class="search-button">Search</button>
+    </section>
+
+    <!-- Journey Preferences Section -->
+    <section class="journey-preferences-section hidden">
+        <button class="preferences-toggle">Journey Preferences</button>
+        <div class="preferences-content">
+            <input type="text" class="search-box" placeholder="VIA (optional)">
+            <input type="date" class="date-input">
+            <input type="time" class="time-input">
+            <select class="time-is-dropdown">
+                <option value="departing">Departing</option>
+                <option value="arriving">Arriving</option>
+            </select>
+            <select class="preferences-dropdown">
+                <option value="least-time">Least Time</option>
+                <option value="least-interchange">Least Interchange</option>
+                <option value="least-walking">Least Walking</option>
+            </select>
+        </div>
     </section>
 
 

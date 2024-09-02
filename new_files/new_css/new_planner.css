@@ -56,3 +56,53 @@
         max-width: 120px; /* Adjusted max width for buttons on larger screens */
     }
 }
+
+/* Journey Preferences Section styles */
+.journey-preferences-section {
+    padding: 20px;
+    text-align: center;
+}
+
+.preferences-toggle {
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #ffc107; /* Yellow background for visibility */
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.preferences-content {
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.journey-preferences-section.visible .preferences-content {
+    display: flex; /* Display flex when visible */
+}
+
+.date-input, .time-input, .time-is-dropdown, .preferences-dropdown {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 400px;
+}
+
+@media (min-width: 600px) {
+    .preferences-content {
+        flex-direction: row; /* Arrange in a row on larger screens */
+        flex-wrap: wrap; /* Allow wrapping */
+        justify-content: center;
+    }
+    
+    .date-input, .time-input, .time-is-dropdown, .preferences-dropdown {
+        flex: 1; /* Allow inputs to grow */
+        max-width: 200px; /* Restrict max width */
+    }
+}
