@@ -29,30 +29,41 @@
 
     <!-- Search and Buttons Section -->
     <section class="search-buttons-section">
-        <input type="text" class="search-box" placeholder="ORIGIN">
-        <input type="text" class="search-box" placeholder="DESTINATION">
-        <button class="switch-button">&uarr;&darr;</button>
-        <button class="search-button">Search</button>
+        <input type="text" class="search-box" id="station-search-1" placeholder="ORIGIN">
+        <input type="text" class="search-box" id="station-search-2" placeholder="DESTINATION">
+        <button id="switch-stations" class="switch-button">&uarr;&darr;</button>
+        <button id="search-button" class="search-button">Search</button>
     </section>
 
     <!-- Journey Preferences Section -->
     <section class="journey-preferences-section hidden">
-        <button class="preferences-toggle">Journey Preferences</button>
-        <div class="preferences-content">
-            <input type="text" class="search-box" placeholder="VIA (optional)">
-            <input type="date" class="date-input">
-            <input type="time" class="time-input">
-            <select class="time-is-dropdown">
+        <button id="journey-preferences-button" class="journey-preferences-button">Journey Preferences</button>
+        <div id="journey-preferences" class="journey-preferences">
+            <input type="text" id="station-search-via" class="search-box" placeholder="VIA (optional)">
+            <input type="date" class="date-input" id="date-picker">
+            <input type="time" class="time-input" id="time-picker">
+            <select class="time-is-dropdown" id="time-is">
                 <option value="departing">Departing</option>
                 <option value="arriving">Arriving</option>
             </select>
-            <select class="preferences-dropdown">
-                <option value="least-time">Least Time</option>
-                <option value="least-interchange">Least Interchange</option>
-                <option value="least-walking">Least Walking</option>
+            <select class="preferences-dropdown" id="journey-preference">
+                <option value="leasttime">Least Time</option>
+                <option value="leastinterchange">Least Interchange</option>
+                <option value="leastwalking">Least Walking</option>
             </select>
         </div>
     </section>
+    
+
+    <div id="selectedStation"></div>
+    <div id="selectedLines" class="line-colors"></div>
+
+    <div class="journey-container">
+        <div id="journey-results"></div>
+    </div>
+
+    <div id="search-results" class="search-results">
+    </div>
 
 
     <script src="../new_files/new_js/new_script.js"></script>

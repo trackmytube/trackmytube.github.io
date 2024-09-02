@@ -36,6 +36,7 @@
 .search-button {
     background-color: #28a745; /* Green background */
     color: white;
+    margin-bottom: -20px;
 }
 
 /* Responsive styles */
@@ -63,25 +64,26 @@
     text-align: center;
 }
 
-.preferences-toggle {
+.journey-preferences-button {
     padding: 10px 15px;
     font-size: 1rem;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    background-color: #ffc107; /* Yellow background for visibility */
+    background-color: #ffc107; 
     color: #333;
     margin-bottom: 10px;
+    margin-top: -10px;
 }
 
-.preferences-content {
+.journey-preferences {
     display: none; /* Hidden by default */
     flex-direction: column;
     align-items: center;
     gap: 10px;
 }
 
-.journey-preferences-section.visible .preferences-content {
+.journey-preferences-section.visible .journey-preferences {
     display: flex; /* Display flex when visible */
 }
 
@@ -95,7 +97,7 @@
 }
 
 @media (min-width: 600px) {
-    .preferences-content {
+    .journey-preferences {
         flex-direction: row; /* Arrange in a row on larger screens */
         flex-wrap: wrap; /* Allow wrapping */
         justify-content: center;
@@ -106,3 +108,229 @@
         max-width: 200px; /* Restrict max width */
     }
 }
+
+/* General Styles */
+.search-results {
+    margin-top: 20px;
+    text-align: left;
+    padding-top: 10px;
+    padding: 0 10px; /* Add some horizontal padding for mobile view */
+}
+
+/* Station Result Styles */
+.station-result {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s, transform 0.3s;
+    /* Ensure full width on mobile */
+    width: 100%;
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+.station-result:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.02);
+}
+
+/* Line Colors Styles */
+.line-colors {
+    margin-top: 5px;
+    padding: 0 10px; /* Add horizontal padding */
+    /* Ensure full width on mobile */
+    width: 100%;
+    box-sizing: border-box; /* Include padding in element's total width and height */
+}
+
+.line-color {
+    display: inline-block;
+    width: 30px;
+    height: 8px;
+    border-radius: 4px;
+    margin-right: 5px;
+}
+
+/* Selected Station Styles */
+#selectedStation {
+    margin-top: 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+    /* Add some padding for mobile view */
+    padding: 0 10px;
+}
+
+/* Responsive Styles */
+@media (min-width: 600px) {
+    .station-result {
+        max-width: 500px; /* Limit width on larger screens */
+        margin-left: auto;
+        margin-right: auto; /* Center results on larger screens */
+    }
+
+    .line-colors {
+        padding: 0; /* Remove horizontal padding on larger screens */
+    }
+
+    #selectedStation {
+        font-size: 1.5em; /* Increase font size on larger screens */
+    }
+}
+
+@media (min-width: 900px) {
+    .station-result {
+        max-width: 600px; /* Adjust width for even larger screens */
+    }
+}
+
+/* Container for journey results */
+.journey-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    padding: 10px; /* Padding around the container */
+}
+
+/* Individual journey item */
+.journey-item {
+    margin: 10px 0;
+    margin-bottom: 40px;
+    padding: 15px;
+    background-color: white;
+    border: 2px solid #000000;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 100%; /* Full width on mobile */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box; /* Include padding and border in element's total width */
+}
+
+/* Journey leg styling */
+.journey-leg {
+    margin-bottom: 20px; /* Margin for vertical spacing */
+    padding: 15px 20px; /* Padding to accommodate the vertical line */
+    border: 2px solid #745f5f;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    position: relative;
+    border-color: #000;
+    box-sizing: border-box;
+}
+
+.line-color-inline {
+    display: inline-block;
+    width: 40px;
+    height: 10px;
+    border-radius: 4px;
+    margin-right: 5px;
+}
+
+/* Vertical line indicator in journey leg */
+.journey-leg::before {
+    content: '';
+    position: absolute;
+    left: 30px; /* Position the line slightly to the left */
+    top: 45px; /* Start from the top */
+    bottom: 45px; /* Extend to the bottom */
+    width: 2px;
+    background-color: #000;
+}
+
+/* Content inside journey leg */
+.journey-leg-content {
+    padding-left: 30px; /* Space for the vertical line */
+}
+
+/* Station details in journey leg */
+.journey-leg-station {
+    position: relative;
+    margin: 10px 0;
+}
+
+/* Bullet point indicator in journey leg */
+.journey-leg-station::before {
+    content: '';
+    position: absolute;
+    left: -23px; /* Adjust to align with the vertical line */
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    background-color: #000;
+    border-radius: 50%;
+    transform: translateY(-50%);
+}
+
+/* Button for viewing stops */
+.view-stops-button {
+    margin-top: 5px;
+    padding: 0;
+    border: none;
+    background: none;
+    color: #007bff;
+    cursor: pointer;
+    font: inherit;
+    display: inline;
+    font-size: 0.9rem; /* Slightly smaller font size on mobile */
+}
+
+.view-stops-button:hover {
+    color: #013f82;
+    background: none;
+    text-decoration: underline;
+}
+
+/* List of stop points */
+.stop-points {
+    margin-top: 10px;
+    padding: 0;
+    list-style-type: disc;
+    list-style-position: inside;
+    margin-left: 20px;
+}
+
+/* Responsive Styles */
+@media (min-width: 600px) {
+    .journey-item {
+        padding: 20px;
+        margin: 15px 0;
+        border-width: 3px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .journey-leg {
+        padding: 20px 30px;
+        border-width: 3px;
+    }
+
+    .journey-leg::before {
+        left: 41px; /* Adjust for larger screens */
+    }
+
+    .journey-leg-station::before {
+        width: 10px; /* Larger marker on larger screens */
+        height: 10px;
+    }
+}
+
+@media (min-width: 900px) {
+    .journey-item {
+        max-width: 800px;
+    }
+
+    .journey-leg {
+        padding: 20px 40px;
+    }
+
+    .journey-leg::before {
+        left: 51px; /* Further adjustment for larger screens */
+    }
+
+    .journey-leg-station::before {
+        width: 10px; /* Larger marker on larger screens */
+        height: 10px;
+    }
+}
+
