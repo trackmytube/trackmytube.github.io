@@ -196,6 +196,11 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!response.ok) throw new Error('Network response was not ok');
             const data = await response.json();
 
+            if (!data || !data.journeys || data.journeys.length === 0) {
+                journeyResults.innerHTML = 'We are experiencing issues with the journey data. Please try again later. (TfL Server Issue)';
+                return;
+            }
+
             console.log('API Response Data:', data);
             displayJourneyResults(data);
         } catch (error) {

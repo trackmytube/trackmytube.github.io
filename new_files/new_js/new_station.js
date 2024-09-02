@@ -72,6 +72,9 @@ document.addEventListener('DOMContentLoaded', function () {
             fetch(`https://api.tfl.gov.uk/StopPoint/${naptanId}/Arrivals`)
                 .then(response => response.json())
                 .then(data => {
+                    if (!Array.isArray(data) || data.length === 0) {
+                        return { line, arrivals: [] };
+                    }
                     const arrivalsForLine = data.filter(arrival => arrival.lineName === line);
                     const groupedByPlatform = arrivalsForLine.reduce((acc, curr) => {
                         const platform = curr.platformName || 'Unknown';
@@ -95,8 +98,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 })
         );
 
-        const results = await Promise.all(arrivalsPromises);
-        displayArrivals(results);
+        try {
+            const results = await Promise.all(arrivalsPromises);
+    
+            // Check if all results are empty
+            if (results.every(result => result.arrivals.length === 0)) {
+                arrivalsContainer.innerHTML = 'We are experiencing issues with live arrivals information. Please try again later. (TfL Server Issue)';
+            } else {
+                displayArrivals(results);
+            }
+        } catch (error) {
+            console.error('Error fetching live arrivals:', error);
+            arrivalsContainer.innerHTML = 'We are experiencing issues with live arrivals information. Please try again later.';
+        }
     }
 
     function displayArrivals(arrivalData) {
