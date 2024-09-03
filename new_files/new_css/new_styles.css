@@ -21,7 +21,7 @@ header {
 }
 
 .logo {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: bold;
 }
 
@@ -58,27 +58,6 @@ header {
     border-radius: 5px;
 }
 
-/* Hero section styles */
-.hero {
-    background-color: #007BFF; /* Blue background */
-    color: white; /* White text */
-    text-align: center; /* Center text */
-    padding: 5px 15px; /* Increased padding for more space */
-}
-
-.hero h1 {
-    font-size: 1.5rem; /* Larger font size for heading */
-    margin-bottom: 20px; /* Increased space below heading */
-}
-
-.hero p {
-    font-size: 1.1rem; /* Larger font size for paragraph */
-    max-width: 700px; /* Slightly wider paragraph for readability */
-    margin: 0 auto; /* Center the paragraph text */
-    line-height: 1.6; /* Increased line-height for better readability */
-}
-
-
 /* Mobile styles */
 @media only screen and (max-width: 600px) {
     .nav-menu {
@@ -103,3 +82,25 @@ header {
         display: block; /* Display toggle button on mobile */
     }
 }
+
+/* Hero section styles */
+.hero {
+    background-color: #007BFF; /* Blue background */
+    color: white; /* White text */
+    text-align: center; /* Center text */
+    padding: 5px 15px; /* Increased padding for more space */
+}
+
+.hero h1 {
+    font-size: 1.5rem; /* Larger font size for heading */
+    margin-bottom: 20px; /* Increased space below heading */
+}
+
+.hero p {
+    font-size: 1.1rem; /* Larger font size for paragraph */
+    max-width: 700px; /* Slightly wider paragraph for readability */
+    margin: 0 auto; /* Center the paragraph text */
+    line-height: 1.6; /* Increased line-height for better readability */
+}
+
+
