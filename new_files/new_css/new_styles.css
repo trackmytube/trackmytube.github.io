@@ -23,6 +23,14 @@ header {
 .logo {
     font-size: 1.2rem;
     font-weight: bold;
+    display: flex; /* Use flexbox to center the logo image */
+    align-items: center; /* Center vertically */
+}
+
+.logo img {
+    max-width: 100%; /* Make sure the image scales with the container */
+    height: auto; /* Maintain aspect ratio */
+    width: 150px; /* Adjust width as needed */
 }
 
 .menu-toggle {
@@ -59,7 +67,7 @@ header {
 }
 
 /* Mobile styles */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 800px) {
     .nav-menu {
         max-height: 0; /* Hidden by default on mobile */
         opacity: 0; /* Invisible by default on mobile */
@@ -81,6 +89,9 @@ header {
     .menu-toggle {
         display: block; /* Display toggle button on mobile */
     }
+    .logo img {
+        width: 150px; /* Adjust for smaller screens */
+    }
 }
 
 /* Hero section styles */
@@ -89,6 +100,13 @@ header {
     color: white; /* White text */
     text-align: center; /* Center text */
     padding: 5px 15px; /* Increased padding for more space */
+}
+
+.hero-logo {
+    max-width: 100%; /* Make sure the image scales with the container */
+    height: auto; /* Maintain aspect ratio */
+    width: 320px; /* Adjust width as needed for larger screens */
+    margin-bottom: 0px; /* Space below the logo */
 }
 
 .hero h1 {
@@ -101,6 +119,21 @@ header {
     max-width: 700px; /* Slightly wider paragraph for readability */
     margin: 0 auto; /* Center the paragraph text */
     line-height: 1.6; /* Increased line-height for better readability */
+}
+
+@media only screen and (max-width: 600px) {
+    .hero-logo {
+        width: 250px; /* Adjust width for smaller screens */
+        margin-bottom: 0px; /* Adjust space below the logo for mobile */
+    }
+
+    .hero h1 {
+        font-size: 1.2rem; /* Adjust font size for smaller screens */
+    }
+
+    .hero p {
+        font-size: 1rem; /* Adjust font size for smaller screens */
+    }
 }
 
 
