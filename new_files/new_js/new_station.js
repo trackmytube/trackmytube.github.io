@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     async function fetchStations() {
         try {
-            const response = await fetch('https://raw.githubusercontent.com/jahir10ali/naptans-for-tfl-stations/main/data/Station_NaPTANs.json');
+            const response = await fetch('https://raw.githubusercontent.com/jahir10ali/naptans-for-tfl-stations/main/data/tfl-station-naptan-data.json');
             if (!response.ok) throw new Error('Network response was not ok');
             allStations = await response.json();
         } catch (error) {
