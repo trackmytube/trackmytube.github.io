@@ -20,8 +20,8 @@ document.addEventListener('DOMContentLoaded', function () {
     let stationFrom = "";
     let stationTo = "";
     let stationVia = "";
-    let naptanFrom = []; 
-    let naptanTo = []; 
+    let naptanFrom = [];
+    let naptanTo = [];
     let naptanVia = [];
 
     let date = "";
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function filterStations(query) {
         const results = allStations.filter(station =>
             station['Station Name'].toLowerCase().replace(/['’]/g, '').includes(query.toLowerCase().replace(/['’]/g, ''))
-        ).slice(0, 6);
+        ).slice(0, 6); 
 
         displayResults(results);
     }
@@ -100,13 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const result = event.target.closest('.station-result');
         if (result) {
             const stationName = result.dataset.stationName;
-            let naptanIds = [];
-            try {
-                naptanIds = JSON.parse(result.dataset.naptanId);
-            } catch (error) {
-                console.error('Error parsing NaPTAN IDs:', error);
-                naptanIds = []; // Set to empty array if parsing fails
-            }
+            const naptanIds = JSON.parse(result.dataset.naptanId);
             searchResults.style.display = 'none';
 
             if (activeInput === searchInputOne) {
@@ -123,14 +117,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 searchInputVia.value = stationName;
             }
 
-            clearJourneyResults();
+            clearJourneyResults(); 
         }
     }
 
     function updateJourneyTitle() {
         if (stationFrom && stationTo) {
             selectedStation.innerHTML = `<h3>${stationFrom} &rarr; ${stationTo}</h3>`;
-            selectedStation.style.display = 'block';
+            selectedStation.style.display = 'block'; 
         }
     }
 
@@ -140,12 +134,12 @@ document.addEventListener('DOMContentLoaded', function () {
         searchInputOne.value = stationFrom;
         searchInputTwo.value = stationTo;
 
-        clearJourneyResults();
+        clearJourneyResults(); 
         hideJourneyTitleAndResults();
     }
 
     function toggleJourneyPreferences() {
-        journeyPreferences.classList.toggle('hidden');
+        journeyPreferences.classList.toggle('visible');
     }
 
     function collectJourneyPreferences() {
@@ -184,11 +178,11 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         if (date) {
-            const formattedDate = date.replace(/-/g, '');
+            const formattedDate = date.replace(/-/g, ''); 
             urls = urls.map(url => `${url}&date=${formattedDate}`);
         }
         if (time) {
-            const formattedTime = time.replace(/:/g, '');
+            const formattedTime = time.replace(/:/g, ''); 
             urls = urls.map(url => `${url}&time=${formattedTime}`);
         }
 
@@ -209,26 +203,35 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
     
-        journeyResults.innerHTML = '<p>Fetching journey details...</p>';
+        journeyResults.innerHTML = '<p>Fetching journey details...</p>'; 
     
         const urls = buildJourneyUrls();
         const fetchPromises = urls.map(url => fetch(url).then(response => response.json()));
     
         try {
             const results = await Promise.all(fetchPromises);
-            const journeys = results.flatMap(result => result.journeys || []);
+            let journeys = results.flatMap(result => result.journeys || []);
+            
+            // Filter out journeys where the first leg has an empty name in routeOptions
+            journeys = journeys.filter(journey => {
+                const firstLeg = journey.legs[0]; // Get the first leg of the journey
+                const routeOptions = firstLeg.routeOptions || []; // Get routeOptions of the first leg
+                return routeOptions.length > 0 && routeOptions[0].name.trim() !== ""; // Check if name is not empty
+            });
     
-            // Filter out duplicate journeys, ignoring interchange legs
-            const uniqueJourneys = Array.from(new Set(
-                journeys.map(journey => {
-                    // Create a unique key based on the journey's legs excluding interchange legs
-                    const legsWithoutInterchanges = journey.legs.filter(leg => leg.routeOptions?.[0]?.name !== 'Interchange');
-                    return JSON.stringify({
-                        ...journey,
-                        legs: legsWithoutInterchanges
-                    });
-                })
-            )).map(journey => JSON.parse(journey));
+            // Remove duplicate journeys based on startDateTime and arrivalDateTime
+            const uniqueJourneys = [];
+            const seenJourneys = new Set();
+    
+            journeys.forEach(journey => {
+                const key = `${journey.startDateTime}|${journey.arrivalDateTime}`;
+                if (!seenJourneys.has(key)) {
+                    uniqueJourneys.push(journey);
+                    seenJourneys.add(key);
+                }
+            });
+    
+            console.log(uniqueJourneys); // Log the filtered and deduplicated journeys
     
             if (uniqueJourneys.length === 0) {
                 journeyResults.innerHTML = 'We are experiencing issues with the journey data. Please try again later.';
@@ -247,13 +250,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function displayJourneyResults(journeys) {
         if (journeys.length > 0) {
-            // Find the minimum number of journey legs
-            const minLegs = Math.min(...journeys.map(journey => journey.legs.length));
-
-            // Filter journeys to include only those with the minimum number of legs
-            const filteredJourneys = journeys.filter(journey => journey.legs.length === minLegs);
-
-            journeyResults.innerHTML = filteredJourneys.map(journey => {
+            journeyResults.innerHTML = journeys.map(journey => {
                 const legsHtml = journey.legs && Array.isArray(journey.legs) ? journey.legs.map(leg => {
                     const trainName = leg.routeOptions?.[0]?.name || 'Interchange';
                     const departureStopName = leg.departurePoint?.commonName || 'Unknown Departure Stop';
@@ -262,15 +259,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     const arrivalTime = leg.arrivalTime ? formatTime(leg.arrivalTime) : 'Unknown Time';
                     const duration = leg.duration || 'Unknown Duration';
                     const stopPoints = leg.path?.stopPoints || [];
-                    const stopPointsHtml = stopPoints?.map(stop => `
-                            <li>${stop.name}</li>
-                        `).join('') || '';
-
-                    const lineColor = lineColors[trainName] || false;
-                    
+                    const stopPointsHtml = stopPoints.map(stop => `<li>${stop.name}</li>`).join('');
+    
+                    const lineColor = lineColors[trainName] || '#000'; 
+    
                     return `
                         <h3><strong>${trainName}</strong> <span class="line-color-inline" style="background-color: ${lineColor};"></span></h3>
-                        <div class="journey-leg" style="border-color: ${lineColor};"> <!-- Set border color dynamically -->
+                        <div class="journey-leg" style="border-color: ${lineColor};">
                             <div class="journey-leg-content">
                                 <p class="journey-leg-station"><strong>${departureTime} - ${departureStopName}</strong></p>
                                 <p><strong>${duration} min</strong> <button class="view-stops-button">View Stops (${stopPoints.length})</button></p>
@@ -282,15 +277,16 @@ document.addEventListener('DOMContentLoaded', function () {
                         </div>
                     `;
                 }).join('') : 'No legs data available';
-
+    
                 return `
                     <div class="journey-item">
-                        <h3>Duration: ${journey.duration ? `${journey.duration} min` : 'Unknown Duration'}, ${formatTime(journey.startDateTime)} - ${formatTime(journey.arrivalDateTime)}, ${journey.legs.length-1} change(s)</h3>
+                        <h3>Duration: ${journey.duration ? `${journey.duration} min` : 'Unknown Duration'}, ${formatTime(journey.startDateTime)} - ${formatTime(journey.arrivalDateTime)}, ${journey.legs.length - 1} change(s)</h3>
                         ${legsHtml}
                     </div>
                 `;
             }).join('');
-
+    
+            // Add click event listeners to view stops buttons
             document.querySelectorAll('.view-stops-button').forEach(button => {
                 button.addEventListener('click', () => {
                     const stopPointsList = button.closest('.journey-leg-content').querySelector('.stop-points');
@@ -329,32 +325,32 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     journeyPreferencesButton.addEventListener('click', function() {
-        journeyPreferences.classList.toggle('visible'); // Toggle visibility on the section
+        toggleJourneyPreferences();
     });
 
     switchButton.addEventListener('click', function() {
         switchStations();
-        hideJourneyTitleAndResults(); // Ensure title and results are hidden
+        hideJourneyTitleAndResults(); 
     });
 
     datePicker.addEventListener('change', function() {
         collectJourneyPreferences();
-        hideJourneyTitleAndResults(); // Ensure title and results are hidden
+        hideJourneyTitleAndResults(); 
     });
 
     timePicker.addEventListener('change', function() {
         collectJourneyPreferences();
-        hideJourneyTitleAndResults(); // Ensure title and results are hidden
+        hideJourneyTitleAndResults(); 
     });
 
     timeIsSelect.addEventListener('change', function() {
         collectJourneyPreferences();
-        hideJourneyTitleAndResults(); // Ensure title and results are hidden
+        hideJourneyTitleAndResults(); 
     });
 
     journeyPreferenceSelect.addEventListener('change', function() {
         collectJourneyPreferences();
-        hideJourneyTitleAndResults(); // Ensure title and results are hidden
+        hideJourneyTitleAndResults(); 
     });
 
     searchResults.addEventListener('click', handleStationClick);
