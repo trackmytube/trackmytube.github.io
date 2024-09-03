@@ -53,6 +53,7 @@ header {
 
 .nav-menu li {
     margin: 0 10px;
+    margin-bottom: 15px;
 }
 
 .nav-menu a {
