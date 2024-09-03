@@ -85,13 +85,14 @@
 }
 
 .arrival {
-    flex: 1 1 100px;
+    flex: 1 1 100%; /* Full width by default for mobile-first */
     box-sizing: border-box;
     padding: 10px;
     text-align: center;
     border: 2px solid #454545;
     border-radius: 5px;
     background-color: #f9f9f9;
+    margin-bottom: 10px; /* Space between stacked arrivals */
 }
 
 .arrival strong {
@@ -208,6 +209,18 @@
     .search-results, .popup-arrivals .arrival-item {
         font-size: 1em;
     }
+
+    .line-arrivals {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        overflow-x: auto;
+    }
+    
+    .arrival {
+        flex: 1 1 100px; /* Set flexible width for larger screens */
+        margin-bottom: 0; /* Remove extra space between items for side-by-side layout */
+    }
 }
 
 @media (min-width: 800px) {
@@ -226,5 +239,11 @@
     #station-search {
         font-size: 0.9em; /* Slightly smaller font size on very small screens */
         padding: 8px; /* Slightly reduced padding */
+    }
+
+    .popup {
+        width: 95%;
+        max-width: 95%;
+        padding: 8px; /* Reduce padding further for very small screens */
     }
 }
