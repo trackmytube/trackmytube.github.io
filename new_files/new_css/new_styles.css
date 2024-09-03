@@ -63,11 +63,11 @@ header {
     background-color: #007BFF; /* Blue background */
     color: white; /* White text */
     text-align: center; /* Center text */
-    padding: 25px 15px; /* Increased padding for more space */
+    padding: 5px 15px; /* Increased padding for more space */
 }
 
 .hero h1 {
-    font-size: 2.5rem; /* Larger font size for heading */
+    font-size: 1.5rem; /* Larger font size for heading */
     margin-bottom: 20px; /* Increased space below heading */
 }
 
