@@ -43,7 +43,7 @@ header {
 }
 
 .nav-menu {
-    display: flex;
+    display: flex; /* Default display for larger screens */
     list-style: none;
     transition: max-height 0.4s ease, opacity 0.4s ease; /* Smooth animation for height and opacity */
     max-height: none; /* Full height by default */
@@ -69,8 +69,7 @@ header {
 /* Mobile styles */
 @media only screen and (max-width: 800px) {
     .nav-menu {
-        max-height: 0; /* Hidden by default on mobile */
-        opacity: 0; /* Invisible by default on mobile */
+        display: none; /* Hidden by default on mobile */
         flex-direction: column;
         width: 100%;
         background: #333;
@@ -82,6 +81,7 @@ header {
     }
 
     .nav-menu.active {
+        display: flex; /* Display as flex when menu is active */
         max-height: 300px; /* Adjust max-height based on content size */
         opacity: 1;
     }
@@ -89,9 +89,11 @@ header {
     .menu-toggle {
         display: block; /* Display toggle button on mobile */
     }
+
     .logo img {
         width: 150px; /* Adjust for smaller screens */
     }
+
     .nav-menu li {
         margin-bottom: 25px;
     }
