@@ -20,9 +20,9 @@ document.addEventListener('DOMContentLoaded', function () {
     let stationFrom = "";
     let stationTo = "";
     let stationVia = "";
-    let naptanFrom = ""; 
-    let naptanTo = ""; 
-    let naptanVia = "";
+    let naptanFrom = []; 
+    let naptanTo = []; 
+    let naptanVia = [];
 
     let date = "";
     let time = "";
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     async function fetchStations() {
         try {
-            const response = await fetch('https://raw.githubusercontent.com/jahir10ali/naptans-for-tfl-stations/main/data/Station_NaPTANs.json');
+            const response = await fetch('https://raw.githubusercontent.com/jahir10ali/naptans-for-tfl-stations/main/data/tfl-station-naptan-data.json');
             if (!response.ok) throw new Error('Network response was not ok');
             allStations = await response.json();
         } catch (error) {
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function filterStations(query) {
         const results = allStations.filter(station =>
             station['Station Name'].toLowerCase().replace(/['’]/g, '').includes(query.toLowerCase().replace(/['’]/g, ''))
-        ).slice(0, 6); 
+        ).slice(0, 6);
 
         displayResults(results);
     }
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const colors = station.Lines.map(line => lineColors[line] || '#000000');
                 const colorRectangles = colors.map(color => `<span class="line-color" style="background-color: ${color};"></span>`).join(' ');
                 return `
-                    <div class="station-result" data-station-name="${station['Station Name']}" data-station-lines='${JSON.stringify(station.Lines)}' data-naptan-id="${station['NaPTAN ID']}">
+                    <div class="station-result" data-station-name="${station['Station Name']}" data-station-lines='${JSON.stringify(station.Lines)}' data-naptan-id='${JSON.stringify(station['NaPTAN ID'])}'>
                         <h3>${station['Station Name']}</h3>
                         <div class="line-colors">${colorRectangles}</div>
                     </div>
@@ -100,31 +100,37 @@ document.addEventListener('DOMContentLoaded', function () {
         const result = event.target.closest('.station-result');
         if (result) {
             const stationName = result.dataset.stationName;
-            const naptanId = result.dataset.naptanId;
+            let naptanIds = [];
+            try {
+                naptanIds = JSON.parse(result.dataset.naptanId);
+            } catch (error) {
+                console.error('Error parsing NaPTAN IDs:', error);
+                naptanIds = []; // Set to empty array if parsing fails
+            }
             searchResults.style.display = 'none';
 
             if (activeInput === searchInputOne) {
                 stationFrom = stationName;
-                naptanFrom = naptanId;
+                naptanFrom = naptanIds;
                 searchInputOne.value = stationName;
             } else if (activeInput === searchInputTwo) {
                 stationTo = stationName;
-                naptanTo = naptanId;
+                naptanTo = naptanIds;
                 searchInputTwo.value = stationName;
             } else if (activeInput === searchInputVia) {
                 stationVia = stationName;
-                naptanVia = naptanId;
+                naptanVia = naptanIds;
                 searchInputVia.value = stationName;
             }
 
-            clearJourneyResults(); 
+            clearJourneyResults();
         }
     }
 
     function updateJourneyTitle() {
         if (stationFrom && stationTo) {
-            selectedStation.innerHTML = `<h5>${stationFrom} &rarr; ${stationTo}</h5>`;
-            selectedStation.style.display = 'block'; 
+            selectedStation.innerHTML = `<h3>${stationFrom} &rarr; ${stationTo}</h3>`;
+            selectedStation.style.display = 'block';
         }
     }
 
@@ -134,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function () {
         searchInputOne.value = stationFrom;
         searchInputTwo.value = stationTo;
 
-        clearJourneyResults(); 
+        clearJourneyResults();
         hideJourneyTitleAndResults();
     }
 
@@ -160,55 +166,77 @@ document.addEventListener('DOMContentLoaded', function () {
         journeyResults.innerHTML = '';
     }
 
-    function buildJourneyUrl() {
-        let url = `https://api.tfl.gov.uk/Journey/JourneyResults/${naptanFrom}/to/${naptanTo}?&mode=tube,overground,elizabeth-line,tram,dlr,national-rail&useRealTimeLiveArrivals=true&nationalSearch=true&walkingSpeed=Average`;
+    function buildJourneyUrls() {
+        let urls = [];
 
-        if (naptanVia) {
-            url += `&via=${naptanVia}`;
-        }
+        naptanFrom.forEach(fromId => {
+            naptanTo.forEach(toId => {
+                let url = `https://api.tfl.gov.uk/Journey/JourneyResults/${fromId}/to/${toId}?&mode=tube,overground,elizabeth-line,tram,dlr,national-rail&useRealTimeLiveArrivals=true&nationalSearch=true&walkingSpeed=Average`;
+
+                if (naptanVia.length > 0) {
+                    naptanVia.forEach(viaId => {
+                        urls.push(`${url}&via=${viaId}`);
+                    });
+                } else {
+                    urls.push(url);
+                }
+            });
+        });
 
         if (date) {
-            const formattedDate = date.replace(/-/g, ''); 
-            url += `&date=${formattedDate}`;
+            const formattedDate = date.replace(/-/g, '');
+            urls = urls.map(url => `${url}&date=${formattedDate}`);
         }
         if (time) {
-            const formattedTime = time.replace(/:/g, ''); 
-            url += `&time=${formattedTime}`;
+            const formattedTime = time.replace(/:/g, '');
+            urls = urls.map(url => `${url}&time=${formattedTime}`);
         }
 
         if (timeIs) {
-            url += `&timeIs=${timeIs}`;
+            urls = urls.map(url => `${url}&timeIs=${timeIs}`);
         }
 
         if (journeyPreference) {
-            url += `&journeyPreference=${journeyPreference}`;
+            urls = urls.map(url => `${url}&journeyPreference=${journeyPreference}`);
         }
-        return url;
+
+        return urls;
     }
 
     async function fetchJourneyResults() {
-        if (!naptanFrom || !naptanTo) {
+        if (!naptanFrom.length || !naptanTo.length) {
             alert('Please enter both FROM and TO Stations.');
             return;
         }
-
-        journeyResults.innerHTML = '<p>Fetching journey details...</p>'; 
-
+    
+        journeyResults.innerHTML = '<p>Fetching journey details...</p>';
+    
+        const urls = buildJourneyUrls();
+        const fetchPromises = urls.map(url => fetch(url).then(response => response.json()));
+    
         try {
-            const url = buildJourneyUrl();
-            const response = await fetch(url);
-            if (!response.ok) throw new Error('Network response was not ok');
-            const data = await response.json();
-
-            if (!data || !data.journeys || data.journeys.length === 0) {
-                journeyResults.innerHTML = 'We are experiencing issues with the journey data. Please try again later. (TfL Server Issue)';
-                return;
+            const results = await Promise.all(fetchPromises);
+            const journeys = results.flatMap(result => result.journeys || []);
+    
+            // Filter out duplicate journeys, ignoring interchange legs
+            const uniqueJourneys = Array.from(new Set(
+                journeys.map(journey => {
+                    // Create a unique key based on the journey's legs excluding interchange legs
+                    const legsWithoutInterchanges = journey.legs.filter(leg => leg.routeOptions?.[0]?.name !== 'Interchange');
+                    return JSON.stringify({
+                        ...journey,
+                        legs: legsWithoutInterchanges
+                    });
+                })
+            )).map(journey => JSON.parse(journey));
+    
+            if (uniqueJourneys.length === 0) {
+                journeyResults.innerHTML = 'We are experiencing issues with the journey data. Please try again later.';
+            } else {
+                displayJourneyResults(uniqueJourneys);
             }
-
-            console.log('API Response Data:', data);
-            displayJourneyResults(data);
         } catch (error) {
-            console.error('Error fetching journey results:', error);
+            console.error('Error fetching journey details:', error);
             journeyResults.innerHTML = 'Error fetching journey details. Please try again.';
         }
     }
@@ -217,9 +245,15 @@ document.addEventListener('DOMContentLoaded', function () {
         return new Date(time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     }
 
-    function displayJourneyResults(data) {
-        if (data && data.journeys && Array.isArray(data.journeys) && data.journeys.length > 0) {
-            journeyResults.innerHTML = data.journeys.map(journey => {
+    function displayJourneyResults(journeys) {
+        if (journeys.length > 0) {
+            // Find the minimum number of journey legs
+            const minLegs = Math.min(...journeys.map(journey => journey.legs.length));
+
+            // Filter journeys to include only those with the minimum number of legs
+            const filteredJourneys = journeys.filter(journey => journey.legs.length === minLegs);
+
+            journeyResults.innerHTML = filteredJourneys.map(journey => {
                 const legsHtml = journey.legs && Array.isArray(journey.legs) ? journey.legs.map(leg => {
                     const trainName = leg.routeOptions?.[0]?.name || 'Interchange';
                     const departureStopName = leg.departurePoint?.commonName || 'Unknown Departure Stop';
@@ -232,8 +266,8 @@ document.addEventListener('DOMContentLoaded', function () {
                             <li>${stop.name}</li>
                         `).join('') || '';
 
-                    const lineColor = lineColors[trainName] || false; 
-
+                    const lineColor = lineColors[trainName] || false;
+                    
                     return `
                         <h3><strong>${trainName}</strong> <span class="line-color-inline" style="background-color: ${lineColor};"></span></h3>
                         <div class="journey-leg" style="border-color: ${lineColor};"> <!-- Set border color dynamically -->
