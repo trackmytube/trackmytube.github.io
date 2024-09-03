@@ -16,7 +16,7 @@ df['Station Name'] = df['Station Name'].str.replace(pattern, '', regex=True).str
 df = df.groupby('Station Name').agg({
     'NaPTAN ID': lambda x: list(x.unique()),
     'Hub NaPTAN': lambda x: list(x.unique()),
-    'Lines': lambda x: list(set([item for sublist in x for item in sublist]))
+    'Lines': lambda x: sorted(set([item for sublist in x for item in sublist]))
 }).reset_index()
 
 df = df.sort_values(by='Station Name')
