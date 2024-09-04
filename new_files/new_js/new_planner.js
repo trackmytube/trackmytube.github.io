@@ -204,15 +204,26 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
     
-        journeyResults.innerHTML = '<p>Fetching journey details...</p>'; 
+        journeyResults.innerHTML = '<p>Fetching journey details...</p>';
     
         const urls = buildJourneyUrls();
-        const fetchPromises = urls.map(url => fetch(url).then(response => response.json()));
+        const fetchPromises = urls.map(url => fetch(url).then(response => {
+            if (!response.ok) {
+                return response.json().then(data => {
+                    if (data.httpStatusCode === 404 && data.exceptionType === "EntityNotFoundException") {
+                        throw new Error(data.message || 'No journey found for your inputs.');
+                    } else {
+                        throw new Error('Error fetching journey details. Please try again.');
+                    }
+                });
+            }
+            return response.json();
+        }));
     
         try {
             const results = await Promise.all(fetchPromises);
             let journeys = results.flatMap(result => result.journeys || []);
-            
+    
             // Filter out journeys where the first leg has an empty name in routeOptions
             journeys = journeys.filter(journey => {
                 const firstLeg = journey.legs[0]; // Get the first leg of the journey
@@ -241,7 +252,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         } catch (error) {
             console.error('Error fetching journey details:', error);
-            journeyResults.innerHTML = 'Error fetching journey details. Please try again.';
+            journeyResults.innerHTML = error.message;
         }
     }
 
