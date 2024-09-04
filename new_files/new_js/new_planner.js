@@ -263,19 +263,31 @@ document.addEventListener('DOMContentLoaded', function () {
     
                     const lineColor = lineColors[trainName] || '#000'; 
     
-                    return `
-                        <h3><strong>${trainName}</strong> <span class="line-color-inline" style="background-color: ${lineColor};"></span></h3>
-                        <div class="journey-leg" style="border-color: ${lineColor};">
-                            <div class="journey-leg-content">
-                                <p class="journey-leg-station"><strong>${departureTime} - ${departureStopName}</strong></p>
-                                <p><strong>${duration} min</strong> <button class="view-stops-button">View Stops (${stopPoints.length})</button></p>
-                                <ul class="stop-points" style="display: none;">
-                                    ${stopPointsHtml}
-                                </ul>
-                                <p class="journey-leg-station"><strong>${arrivalTime} - ${arrivalStopName}</strong></p>
+                    if (trainName != "Interchange") {
+                        return `
+                            <h3><strong>${trainName}</strong> <span class="line-color-inline" style="background-color: ${lineColor};"></span></h3>
+                            <div class="journey-leg" style="border-color: ${lineColor};">
+                                <div class="journey-leg-content">
+                                    <p class="journey-leg-station"><strong>${departureTime} - ${departureStopName}</strong></p>
+                                    <p><strong>${duration} min</strong> <button class="view-stops-button">View Stops (${stopPoints.length})</button></p>
+                                    <ul class="stop-points" style="display: none;">
+                                        ${stopPointsHtml}
+                                    </ul>
+                                    <p class="journey-leg-station"><strong>${arrivalTime} - ${arrivalStopName}</strong></p>
+                                </div>
                             </div>
-                        </div>
-                    `;
+                        `;
+                    } else {
+                        return `
+                            <h3><strong>${trainName}</strong></h3>
+                            <div class="journey-leg" style="border-color: ${lineColor};">
+                                <div class="journey-leg-content">
+                                    <p class="journey-leg-station"><strong>${departureStopName}</strong></p>
+                                    <p class="journey-leg-station"><strong>${arrivalStopName}</strong></p>
+                                </div>
+                            </div>
+                        `;
+                    }
                 }).join('') : 'No legs data available';
     
                 return `
