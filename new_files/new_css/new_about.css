@@ -5,7 +5,7 @@
 }
 
 .about-section h2 {
-    font-size: 2rem; /* Larger font size for the heading */
+    font-size: 1.5rem; /* Larger font size for the heading */
     margin-bottom: 20px; /* Space below the heading */
     text-align: center;
 }
@@ -18,6 +18,14 @@
     max-width: 800px; /* Limit paragraph width for readability */
     margin-bottom: 20px; /* Space between paragraphs */
     text-align: left;
+}
+
+.social-icons {
+    display: flex; /* Use flexbox for alignment */
+    justify-content: center; /* Horizontally centers the items */
+    align-items: center; /* Vertically centers the items (if needed) */
+    gap: 10px; /* Space between the icons */
+    margin-top: 20px; /* Add space above if needed */
 }
 
 /* Responsive styles */
