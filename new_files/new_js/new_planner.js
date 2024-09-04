@@ -248,6 +248,16 @@ document.addEventListener('DOMContentLoaded', function () {
         return new Date(time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     }
 
+    function formatDuration(minutes) {
+        const hours = Math.floor(minutes / 60);
+        const mins = minutes % 60;
+        if (hours > 0) {
+            return `${hours} hr${hours > 1 ? 's' : ''} ${mins} min`;
+        } else {
+            return `${mins} min`;
+        }
+    }
+
     function displayJourneyResults(journeys) {
         if (journeys.length > 0) {
             journeyResults.innerHTML = journeys.map(journey => {
@@ -257,7 +267,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     const arrivalStopName = leg.arrivalPoint?.commonName || 'Unknown Arrival Stop';
                     const departureTime = leg.departureTime ? formatTime(leg.departureTime) : 'Unknown Time';
                     const arrivalTime = leg.arrivalTime ? formatTime(leg.arrivalTime) : 'Unknown Time';
-                    const duration = leg.duration || 'Unknown Duration';
+                    const duration = leg.duration ? formatDuration(leg.duration) : 'Unknown Duration';
                     const stopPoints = leg.path?.stopPoints || [];
                     const stopPointsHtml = stopPoints.map(stop => `<li>${stop.name}</li>`).join('');
     
@@ -269,7 +279,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             <div class="journey-leg" style="border-color: ${lineColor};">
                                 <div class="journey-leg-content">
                                     <p class="journey-leg-station"><strong>${departureTime} - ${departureStopName}</strong></p>
-                                    <p><strong>${duration} min</strong> <button class="view-stops-button">View Stops (${stopPoints.length})</button></p>
+                                    <p><strong>${duration}</strong> <button class="view-stops-button">View Stops (${stopPoints.length})</button></p>
                                     <ul class="stop-points" style="display: none;">
                                         ${stopPointsHtml}
                                     </ul>
@@ -289,10 +299,13 @@ document.addEventListener('DOMContentLoaded', function () {
                         `;
                     }
                 }).join('') : 'No legs data available';
+
+                const journeyDuration = journey.duration ? formatDuration(journey.duration) : 'Unknown Duration';
+                const journeyChanges = journey.legs.length - 1 === 0 ? 'Direct' : `${journey.legs.length - 1} change(s)`;
     
                 return `
                     <div class="journey-item">
-                        <h3>Duration: ${journey.duration ? `${journey.duration} min` : 'Unknown Duration'}, ${formatTime(journey.startDateTime)} - ${formatTime(journey.arrivalDateTime)}, ${journey.legs.length - 1} change(s)</h3>
+                        <h3>Duration: ${journeyDuration}, ${formatTime(journey.startDateTime)} - ${formatTime(journey.arrivalDateTime)}, ${journeyChanges}</h3>
                         ${legsHtml}
                     </div>
                 `;
