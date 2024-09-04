@@ -1,60 +1,65 @@
 /* Search and Buttons Section styles */
 .search-buttons-section {
-    display: flex; /* Flexbox for layout */
-    flex-direction: column; /* Stack items vertically on mobile */
-    gap: 10px; /* Space between items */
-    padding: 20px; /* Padding around the section */
-    align-items: center; /* Center items horizontally */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    align-items: stretch;
+    margin-bottom: -25px;
+}
+
+.input-button-group {
+    display: flex;
+    gap: 10px;
 }
 
 /* Search box styles */
 .search-box {
+    flex: 1;
     padding: 10px;
     font-size: 1rem;
-    border: 1px solid #ccc; /* Light border for search boxes */
-    border-radius: 5px; /* Rounded corners */
-    width: 100%; /* Full width on mobile */
-    max-width: 400px; /* Max width to prevent overly wide input on larger screens */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
 }
 
 /* Button styles */
 .switch-button, .search-button {
-    padding: 10px 15px; /* Adjusted padding for buttons */
+    padding: 10px 15px;
     font-size: 1rem;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    width: auto; /* Width adjusted to fit content */
-    max-width: 150px; /* Max width for buttons to prevent them from being too wide */
+    white-space: nowrap;
 }
 
 .switch-button {
-    background-color: #007BFF; /* Blue background */
+    background-color: #007BFF;
     color: white;
+    width: 80px;
 }
 
 .search-button {
-    background-color: #28a745; /* Green background */
+    background-color: #28a745;
     color: white;
-    margin-bottom: -20px;
+    width: 80px;
 }
 
 /* Responsive styles */
 @media (min-width: 600px) {
     .search-buttons-section {
-        flex-direction: row; /* Arrange items in a row on larger screens */
-        align-items: center; /* Center items vertically */
+        flex-direction: row;
+        align-items: center;
         justify-content: center;
     }
 
-    .search-box {
-        flex: 1; /* Allow search boxes to grow */
-        max-width: 300px; /* Max width for search boxes on larger screens */
+    .input-button-group {
+        flex: 1;
+        max-width: 400px;
     }
 
-    .switch-button, .search-button {
-        margin: 0 10px; /* Space between buttons and search boxes */
-        max-width: 120px; /* Adjusted max width for buttons on larger screens */
+    .search-box {
+        max-width: none;
     }
 }
 
@@ -65,7 +70,7 @@
 }
 
 .journey-preferences-button {
-    padding: 10px 15px;
+    padding: 8px 8px;
     font-size: 1rem;
     border: none;
     border-radius: 5px;
