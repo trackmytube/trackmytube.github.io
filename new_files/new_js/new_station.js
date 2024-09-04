@@ -9,9 +9,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const popupClose = document.getElementById('popupClose');
     const overlay = document.getElementById('overlay');
     const popupArrivals = document.getElementById('popupArrivals');
+    const apiKey = 'e1dba10d59974541a168d3a26c841336';
     
     let allStations = [];
-    let selectedNaPTANId = null;
+    let selectedNaPTANIds = null;
     let refreshInterval = null;
 
     const lineColors = {
@@ -56,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const colors = station.Lines.map(line => lineColors[line] || '#000000');
                 const colorRectangles = colors.map(color => `<span class="line-color" style="background-color: ${color};"></span>`).join(' ');
                 return `
-                    <div class="station-result" data-station-name="${station['Station Name']}" data-naptan-id="${station['NaPTAN ID']}" data-station-lines='${JSON.stringify(station.Lines)}'>
+                    <div class="station-result" data-station-name="${station['Station Name']}" data-naptan-id="${station['NaPTAN ID'].join(',')}" data-station-lines='${JSON.stringify(station.Lines)}'>
                         <h3>${station['Station Name']}</h3>
                         <div class="line-colors">${colorRectangles}</div>
                     </div>
@@ -67,58 +68,69 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    async function fetchLiveArrivals(naptanId, lines) {
-        const arrivalsPromises = lines.map(line =>
-            fetch(`https://api.tfl.gov.uk/StopPoint/${naptanId}/Arrivals`)
-                .then(response => response.json())
-                .then(data => {
-                    if (!Array.isArray(data) || data.length === 0) {
-                        return { line, arrivals: [] };
-                    }
-                    const arrivalsForLine = data.filter(arrival => arrival.lineName === line);
-                    const groupedByPlatform = arrivalsForLine.reduce((acc, curr) => {
-                        const platform = curr.platformName || 'Unknown';
-                        if (!acc[platform]) acc[platform] = [];
-                        acc[platform].push(curr);
-                        return acc;
-                    }, {});
-                    const earliestArrivals = Object.entries(groupedByPlatform).map(([platform, arrivals]) => {
-                        const earliestArrival = arrivals.reduce((prev, curr) => new Date(prev.expectedArrival) < new Date(curr.expectedArrival) ? prev : curr);
+    async function fetchLiveArrivals(naptanIds, lines) {
+        // Create an array of Promises for each line and each NaPTAN ID
+        const arrivalsPromises = naptanIds.flatMap(naptanId =>
+            lines.map(line =>
+                fetch(`https://api.tfl.gov.uk/StopPoint/${naptanId}/Arrivals?api_key=${apiKey}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (!Array.isArray(data) || data.length === 0) {
+                            return { line, arrivals: [] };
+                        }
+                        const arrivalsForLine = data.filter(arrival => arrival.lineName === line);
+                        const groupedByPlatform = arrivalsForLine.reduce((acc, curr) => {
+                            const platform = curr.platformName || 'Unknown';
+                            if (!acc[platform]) acc[platform] = [];
+                            acc[platform].push(curr);
+                            return acc;
+                        }, {});
+                        const earliestArrivals = Object.entries(groupedByPlatform).map(([platform, arrivals]) => {
+                            const earliestArrival = arrivals.reduce((prev, curr) => new Date(prev.expectedArrival) < new Date(curr.expectedArrival) ? prev : curr);
+                            return {
+                                platformName: platform,
+                                lineName: earliestArrival.lineName,
+                                destinationName: earliestArrival.destinationName,
+                                timeToArrival: Math.floor(earliestArrival.timeToStation / 60)
+                            };
+                        });
                         return {
-                            platformName: platform,
-                            lineName: earliestArrival.lineName,
-                            destinationName: earliestArrival.destinationName,
-                            timeToArrival: Math.floor(earliestArrival.timeToStation / 60)
+                            line,
+                            arrivals: earliestArrivals
                         };
-                    });
-                    return {
-                        line,
-                        arrivals: earliestArrivals
-                    };
-                })
+                    })
+            )
         );
-
+    
         try {
             const results = await Promise.all(arrivalsPromises);
     
+            // Group results by line for display
+            const groupedResults = results.reduce((acc, result) => {
+                if (!acc[result.line]) acc[result.line] = [];
+                acc[result.line].push(...result.arrivals);
+                return acc;
+            }, {});
+    
             // Check if all results are empty
-            if (results.every(result => result.arrivals.length === 0)) {
+            if (Object.values(groupedResults).every(arrivals => arrivals.length === 0)) {
                 arrivalsContainer.innerHTML = 'We are experiencing issues with live arrivals information. Please try again later. (TfL Server Issue)';
             } else {
-                displayArrivals(results);
+                displayArrivals(groupedResults);
             }
         } catch (error) {
             console.error('Error fetching live arrivals:', error);
             arrivalsContainer.innerHTML = 'We are experiencing issues with live arrivals information. Please try again later.';
         }
     }
+    
 
-    function displayArrivals(arrivalData) {
+    function displayArrivals(groupedArrivals) {
         arrivalsContainer.innerHTML = '';
-        arrivalData.forEach(data => {
-            if (data.arrivals.length > 0) {
-                const lineColor = lineColors[data.line] || '#000000';
-                const lineArrivals = data.arrivals.map(arrival => `
+        for (const [line, arrivals] of Object.entries(groupedArrivals)) {
+            if (arrivals.length > 0) {
+                const lineColor = lineColors[line] || '#000000';
+                const lineArrivals = arrivals.map(arrival => `
                     <div class="arrival">
                         <div class="arrival-details" data-platform="${arrival.platformName}" data-line="${arrival.lineName}">
                             <strong>${arrival.platformName}</strong>
@@ -129,22 +141,32 @@ document.addEventListener('DOMContentLoaded', function () {
                 `).join('');
                 arrivalsContainer.innerHTML += `
                     <div class="line-arrivals" style="border-color: ${lineColor};">
-                        <h4>${data.line}</h4>
+                        <h4>${line}</h4>
                         ${lineArrivals}
                     </div>
                 `;
             }
-        });
+        }
     }
+    
 
-    async function fetchPopupArrivals(naptanId, line, platform) {
+    async function fetchPopupArrivals(naptanIds, line, platform) {
         try {
-            const response = await fetch(`https://api.tfl.gov.uk/StopPoint/${naptanId}/Arrivals`);
-            const data = await response.json();
-            const arrivalsForPlatform = data.filter(arrival => arrival.platformName === platform && arrival.lineName === line);
-            const sortedArrivals = arrivalsForPlatform.sort((a, b) => new Date(a.expectedArrival) - new Date(b.expectedArrival));
-            
-            popupArrivals.innerHTML = sortedArrivals.map(arrival => {
+            // Create an array of Promises for each NaPTAN ID
+            const arrivalsPromises = naptanIds.map(naptanId =>
+                fetch(`https://api.tfl.gov.uk/StopPoint/${naptanId}/Arrivals?api_key=${apiKey}`)
+                    .then(response => response.json())
+                    .then(data => data.filter(arrival => arrival.platformName === platform && arrival.lineName === line))
+            );
+    
+            // Fetch all data
+            const arrivalsForPlatforms = await Promise.all(arrivalsPromises);
+    
+            // Merge all results and sort
+            const allArrivals = arrivalsForPlatforms.flat().sort((a, b) => new Date(a.expectedArrival) - new Date(b.expectedArrival));
+    
+            // Update popup content
+            popupArrivals.innerHTML = allArrivals.map(arrival => {
                 const minutesToArrival = Math.floor(arrival.timeToStation / 60);
                 const timeDisplay = minutesToArrival < 1 ? 'Due' : `${minutesToArrival} min`;
                 return `
@@ -164,12 +186,13 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error fetching arrivals:', error);
         }
     }
+    
 
     function handleStationClick(event) {
         const result = event.target.closest('.station-result');
         if (result) {
             const stationName = result.dataset.stationName;
-            selectedNaPTANId = result.dataset.naptanId;
+            selectedNaPTANIds = result.dataset.naptanId.split(',').map(id => id.trim());
             const lines = JSON.parse(result.dataset.stationLines);
             searchResults.style.display = 'none';
             selectedStation.innerHTML = `<h4>${stationName} - Live Departures</h4>`;
@@ -179,10 +202,10 @@ document.addEventListener('DOMContentLoaded', function () {
             selectedLines.innerHTML = colorRectangles;
             selectedLines.style.display = 'block';
 
-            fetchLiveArrivals(selectedNaPTANId, lines);
+            fetchLiveArrivals(selectedNaPTANIds, lines);
 
             if (refreshInterval) clearInterval(refreshInterval);
-            refreshInterval = setInterval(() => fetchLiveArrivals(selectedNaPTANId, lines), 20000);
+            refreshInterval = setInterval(() => fetchLiveArrivals(selectedNaPTANIds, lines), 20000);
         }
     }
 
@@ -194,12 +217,12 @@ document.addEventListener('DOMContentLoaded', function () {
             const lineColor = lineColors[lineName] || '#000000';
             popupTitle.textContent = `${platformName} - ${lineName}`;
             popup.style.borderColor = lineColor;
-            fetchPopupArrivals(selectedNaPTANId, lineName, platformName);
+            fetchPopupArrivals(selectedNaPTANIds, lineName, platformName);
             popup.style.display = 'block';
             overlay.style.display = 'block';
 
             if (refreshInterval) clearInterval(refreshInterval);
-            refreshInterval = setInterval(() => fetchPopupArrivals(selectedNaPTANId, lineName, platformName), 20000);
+            refreshInterval = setInterval(() => fetchPopupArrivals(selectedNaPTANIds, lineName, platformName), 20000);
         }
     }
 
