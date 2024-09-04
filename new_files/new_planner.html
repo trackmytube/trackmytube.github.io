@@ -32,11 +32,17 @@
     <!-- Search and Buttons Section -->
     <section class="search-buttons-section">
         <div class="input-button-group">
-            <input type="text" class="search-box" id="station-search-1" placeholder="ORIGIN">
+            <div class="input-wrapper">
+                <input type="text" class="search-box" id="station-search-1" placeholder="ORIGIN">
+                <button class="clear-button" type="button">&times;</button>
+            </div>
             <button id="switch-stations" class="switch-button">&uarr;&darr;</button>
         </div>
         <div class="input-button-group">
-            <input type="text" class="search-box" id="station-search-2" placeholder="DESTINATION">
+            <div class="input-wrapper">
+                <input type="text" class="search-box" id="station-search-2" placeholder="DESTINATION">
+                <button class="clear-button" type="button">&times;</button>
+            </div>
             <button id="search-button" class="search-button">Search</button>
         </div>
     </section>
@@ -45,7 +51,10 @@
     <section class="journey-preferences-section hidden">
         <button id="journey-preferences-button" class="journey-preferences-button">Journey Preferences</button>
         <div id="journey-preferences" class="journey-preferences">
-            <input type="text" id="station-search-via" class="search-box" placeholder="VIA (optional)">
+            <div class="input-wrapper">
+                <input type="text" id="station-search-via" class="search-box" placeholder="VIA (optional)">
+                <button class="clear-button" type="button">&times;</button>
+            </div>
             <input type="date" class="date-input" id="date-picker">
             <input type="time" class="time-input" id="time-picker">
             <select class="time-is-dropdown" id="time-is">
@@ -57,6 +66,7 @@
                 <option value="leastinterchange">Least Interchange</option>
                 <option value="leastwalking">Least Walking</option>
             </select>
+            <button id="clear-journey-preferences" class="clear-preferences-button" type="button">Clear Journey Preferences</button>
         </div>
     </section>
     

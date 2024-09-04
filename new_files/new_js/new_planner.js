@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const timeIsSelect = document.getElementById('time-is');
     const journeyPreferenceSelect = document.getElementById('journey-preference');
     const journeyResults = document.getElementById('journey-results');
+    const clearJourneyPreferencesButton = document.getElementById('clear-journey-preferences');
 
     let allStations = [];
     let activeInput = null;
@@ -342,6 +343,44 @@ document.addEventListener('DOMContentLoaded', function () {
 
             clearJourneyResults();
         });
+
+        // Add clear button functionality
+        const clearButton = input.nextElementSibling; // Assuming the clear button is immediately after the input in HTML structure
+        clearButton.addEventListener('click', function () {
+            input.value = ''; // Clear the input
+            input.dispatchEvent(new Event('input')); // Trigger the input event to clear results
+
+            if (input === searchInputOne) {
+                stationFrom = "";
+                naptanFrom = [];
+            } else if (input === searchInputTwo) {
+                stationTo = "";
+                naptanTo = [];
+            } else if (input === searchInputVia) {
+                stationVia = "";
+                naptanVia = [];
+            }
+    
+            clearJourneyResults();
+        });
+    });
+
+    clearJourneyPreferencesButton.addEventListener('click', function() {
+        searchInputVia.value = '';
+        datePicker.value = '';
+        timePicker.value = '';
+        timeIsSelect.value = 'departing';
+        journeyPreferenceSelect.value = 'leastinterchange';
+
+        stationVia = "";
+        naptanVia = [];
+        date = '';
+        time = '';
+        timeIs = 'departing';
+        journeyPreference = 'leastinterchange';
+
+        clearJourneyResults();
+        hideJourneyTitleAndResults();
     });
 
     searchButton.addEventListener('click', function() {

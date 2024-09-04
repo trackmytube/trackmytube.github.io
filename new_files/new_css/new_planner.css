@@ -13,15 +13,46 @@
     gap: 10px;
 }
 
+/* Input wrapper to contain the search box and clear button */
+.input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
 /* Search box styles */
 .search-box {
-    flex: 1;
+    width: 100%;
     padding: 10px;
+    padding-right: 30px; /* Add padding to the right to make space for the clear button */
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 5px;
-    width: 100%;
+    box-sizing: border-box; /* Ensures padding and border are included in width calculation */
 }
+
+/* Clear button styles */
+.clear-button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    color: #666;
+    cursor: pointer;
+    display: none; /* Hidden by default */
+}
+
+.clear-button:hover {
+    color: #000;
+}
+
+/* Show the clear button only when there is text in the search box */
+.search-box:not(:placeholder-shown) + .clear-button {
+    display: block;
+}
+
 
 /* Button styles */
 .switch-button, .search-button {
@@ -36,7 +67,7 @@
 .switch-button {
     background-color: #007BFF;
     color: white;
-    width: 80px;
+    width: 95px;
 }
 
 .switch-button:hover {
@@ -113,6 +144,23 @@
     max-width: 400px;
 }
 
+.clear-preferences-button {
+    padding: 8px 8px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    background: none;
+    color: #001aff;
+    text-decoration: underline;
+    margin-bottom: 10px;
+    margin-top: -10px;
+}
+
+.clear-preferences-button {
+    color: #0015d4;
+}
+
 @media (min-width: 600px) {
     .journey-preferences {
         flex-direction: row; /* Arrange in a row on larger screens */
@@ -123,6 +171,10 @@
     .date-input, .time-input, .time-is-dropdown, .preferences-dropdown {
         flex: 1; /* Allow inputs to grow */
         max-width: 200px; /* Restrict max width */
+    }
+
+    #station-search-via {
+        width: 300px;
     }
 }
 
