@@ -135,13 +135,29 @@
     display: flex; /* Display flex when visible */
 }
 
+.date-time-label, .journey-options-label {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.date-time-container,
+.journey-options-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
 .date-input, .time-input, .time-is-dropdown, .preferences-dropdown {
+    width: 150px; /* Full width by default */
+    max-width: 180px; /* Restrict max width to ensure both inputs are the same size */
     padding: 10px;
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 5px;
-    width: 100%;
-    max-width: 400px;
+    box-sizing: border-box; /* Include padding and border in width calculation */
+    margin-bottom: 10px;
 }
 
 .clear-preferences-button {
@@ -162,17 +178,6 @@
 }
 
 @media (min-width: 600px) {
-    .journey-preferences {
-        flex-direction: row; /* Arrange in a row on larger screens */
-        flex-wrap: wrap; /* Allow wrapping */
-        justify-content: center;
-    }
-    
-    .date-input, .time-input, .time-is-dropdown, .preferences-dropdown {
-        flex: 1; /* Allow inputs to grow */
-        max-width: 200px; /* Restrict max width */
-    }
-
     #station-search-via {
         width: 300px;
     }
