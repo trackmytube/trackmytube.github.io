@@ -55,17 +55,28 @@
                 <input type="text" id="station-search-via" class="search-box" placeholder="VIA (optional)">
                 <button class="clear-button" type="button">&times;</button>
             </div>
-            <input type="date" class="date-input" id="date-picker">
-            <input type="time" class="time-input" id="time-picker">
-            <select class="time-is-dropdown" id="time-is">
-                <option value="departing">Departing</option>
-                <option value="arriving">Arriving</option>
-            </select>
-            <select class="preferences-dropdown" id="journey-preference">
-                <option value="leasttime">Least Time</option>
-                <option value="leastinterchange">Least Interchange</option>
-                <option value="leastwalking">Least Walking</option>
-            </select>
+            <div class="date-time-container">
+                <div>
+                    <div class="date-time-label">Select Date</div>
+                    <input type="date" class="date-input" id="date-picker">
+                </div>
+                <div>
+                    <div class="date-time-label">Select Time</div>
+                    <input type="time" class="time-input" id="time-picker">
+                </div>
+            </div>
+            <div class="journey-options-label">Journey Options</div>
+            <div class="journey-options-container">
+                <select class="time-is-dropdown" id="time-is">
+                    <option value="departing">Departing</option>
+                    <option value="arriving">Arriving</option>
+                </select>
+                <select class="preferences-dropdown" id="journey-preference">
+                    <option value="leasttime">Least Time</option>
+                    <option value="leastinterchange">Least Interchange</option>
+                    <option value="leastwalking">Least Walking</option>
+                </select>
+            </div>
             <button id="clear-journey-preferences" class="clear-preferences-button" type="button">Clear Journey Preferences</button>
         </div>
     </section>
