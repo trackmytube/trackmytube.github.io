@@ -1,103 +1,192 @@
-.station-finder {
-    max-width: 800px;
-    margin: 0 auto;
+/* Search and Buttons Section styles */
+.search-buttons-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     padding: 20px;
-    text-align: center;
-    margin-top: -70px;
+    align-items: stretch;
+    margin-bottom: -25px;
 }
 
-.search-container {
+.input-button-group {
     display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-#station-search-1, #station-search-2, #station-search-via {
-    flex: 1;
-    min-width: 300px;
-    padding: 10px;
-    font-size: 1em;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-#switch-stations, #search-button {
-    padding: 10px 20px;
-    font-size: 1em;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #007BFF;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-#switch-stations:hover, #search-button:hover {
-    background-color: #0056b3;
-}
-
-#journey-preferences-button {
-    font-size: 1em;
-    background: none;
-    border: none;
-    color: #007BFF;
-    text-decoration: underline;
-    cursor: pointer;
-    transition: color 0.3s;
-}
-
-#journey-preferences-button:hover {
-    color: #0056b3;
-}
-
-#journey-preferences {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
     gap: 10px;
 }
 
-#journey-preferences.hidden {
-    display: none;
+/* Input wrapper to contain the search box and clear button */
+.input-wrapper {
+    position: relative;
+    width: 100%;
 }
 
-.preferences-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-}
-
-.input-group {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.input-group label {
-    margin-bottom: 5px;
-}
-
-#station-search-via,
-#date-picker,
-#time-picker,
-#time-is,
-#journey-preference {
+/* Search box styles */
+.search-box {
     width: 100%;
     padding: 10px;
-    font-size: 1em;
+    padding-right: 30px; /* Add padding to the right to make space for the clear button */
+    font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 5px;
+    box-sizing: border-box; /* Ensures padding and border are included in width calculation */
 }
 
+/* Clear button styles */
+.clear-button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    color: #666;
+    cursor: pointer;
+    display: none; /* Hidden by default */
+}
+
+.clear-button:hover {
+    color: #000;
+}
+
+/* Show the clear button only when there is text in the search box */
+.search-box:not(:placeholder-shown) + .clear-button {
+    display: block;
+}
+
+
+/* Button styles */
+.switch-button, .search-button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.switch-button {
+    background-color: #007BFF;
+    color: white;
+    width: 95px;
+}
+
+.switch-button:hover {
+    background-color: #036ad8;
+}
+
+.search-button {
+    background-color: #28a745;
+    color: white;
+    width: 80px;
+}
+
+.search-button:hover {
+    background-color: #218c3a;
+}
+
+/* Responsive styles */
+@media (min-width: 600px) {
+    .search-buttons-section {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .input-button-group {
+        flex: 1;
+        max-width: 400px;
+    }
+
+    .search-box {
+        max-width: none;
+    }
+}
+
+/* Journey Preferences Section styles */
+.journey-preferences-section {
+    padding: 20px;
+    text-align: center;
+}
+
+.journey-preferences-button {
+    padding: 8px 8px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    background-color: #ffc107; 
+    color: #333;
+    margin-bottom: 10px;
+    margin-top: -10px;
+}
+
+.journey-preferences-button:hover {
+    background-color: #e4ac07;
+}
+
+.journey-preferences {
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.journey-preferences-section.visible .journey-preferences {
+    display: flex; /* Display flex when visible */
+}
+
+.date-input, .time-input, .time-is-dropdown, .preferences-dropdown {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.clear-preferences-button {
+    padding: 8px 8px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    background: none;
+    color: #001aff;
+    text-decoration: underline;
+    margin-bottom: 10px;
+    margin-top: -10px;
+}
+
+.clear-preferences-button {
+    color: #0015d4;
+}
+
+@media (min-width: 600px) {
+    .journey-preferences {
+        flex-direction: row; /* Arrange in a row on larger screens */
+        flex-wrap: wrap; /* Allow wrapping */
+        justify-content: center;
+    }
+    
+    .date-input, .time-input, .time-is-dropdown, .preferences-dropdown {
+        flex: 1; /* Allow inputs to grow */
+        max-width: 200px; /* Restrict max width */
+    }
+
+    #station-search-via {
+        width: 300px;
+    }
+}
+
+/* General Styles */
 .search-results {
     margin-top: 20px;
     text-align: left;
-    border-top: 1px solid #ccc;
     padding-top: 10px;
+    padding: 0 10px; /* Add some horizontal padding for mobile view */
 }
 
+/* Station Result Styles */
 .station-result {
     margin-bottom: 10px;
     padding: 10px;
@@ -105,6 +194,9 @@
     border-radius: 5px;
     background-color: #f9f9f9;
     transition: background-color 0.3s, transform 0.3s;
+    /* Ensure full width on mobile */
+    width: 100%;
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
 }
 
 .station-result:hover {
@@ -112,16 +204,90 @@
     transform: scale(1.02);
 }
 
+/* Line Colors Styles */
 .line-colors {
     margin-top: 5px;
+    padding: 0 10px; /* Add horizontal padding */
+    /* Ensure full width on mobile */
+    width: 100%;
+    box-sizing: border-box; /* Include padding in element's total width and height */
 }
 
 .line-color {
     display: inline-block;
-    width: 40px;
-    height: 10px;
+    width: 30px;
+    height: 8px;
     border-radius: 4px;
     margin-right: 5px;
+}
+
+/* Selected Station Styles */
+#selectedStation {
+    margin-top: 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+    /* Add some padding for mobile view */
+    padding: 0 10px;
+}
+
+/* Responsive Styles */
+@media (min-width: 600px) {
+    .station-result {
+        max-width: 500px; /* Limit width on larger screens */
+        margin-left: auto;
+        margin-right: auto; /* Center results on larger screens */
+    }
+
+    .line-colors {
+        padding: 0; /* Remove horizontal padding on larger screens */
+    }
+
+    #selectedStation {
+        font-size: 1.5em; /* Increase font size on larger screens */
+    }
+}
+
+@media (min-width: 900px) {
+    .station-result {
+        max-width: 600px; /* Adjust width for even larger screens */
+    }
+}
+
+/* Container for journey results */
+.journey-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    padding: 10px; /* Padding around the container */
+}
+
+/* Individual journey item */
+.journey-item {
+    margin: 10px 0;
+    margin-top: -20px;
+    margin-bottom: 40px;
+    padding: 15px;
+    background-color: white;
+    border: 4px solid #000000;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 100%; /* Full width on mobile */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box; /* Include padding and border in element's total width */
+}
+
+/* Journey leg styling */
+.journey-leg {
+    margin-bottom: 20px; /* Margin for vertical spacing */
+    padding: 15px 20px; /* Padding to accommodate the vertical line */
+    border: 2px solid #745f5f;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    position: relative;
+    border-color: #000;
+    box-sizing: border-box;
 }
 
 .line-color-inline {
@@ -132,86 +298,42 @@
     margin-right: 5px;
 }
 
-#selectedStation {
-    margin-top: 20px;
-    font-size: 1.5em;
-    font-weight: bold;
-    text-align: center;
-}
-
-.journey-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: left;
-}
-
-button {
-    padding: 10px 20px;
-    margin: 10px;
-    border: none;
-    border-radius: 4px;
-    background-color: #007BFF;
-    color: white;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-.journey-item {
-    margin: 20px 0;
-    padding: 20px;
-    background-color: white;
-    border: 3px solid #000000;
-    border-radius: 4px;
-    width: 100%;
-    max-width: 800px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.journey-leg {
-    margin-bottom: 10px;
-    padding: 10px 10px 10px 40px;
-    border: 3px solid #745f5f;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-    position: relative;
-    border-color: #000;
-}
-
+/* Vertical line indicator in journey leg */
 .journey-leg::before {
     content: '';
     position: absolute;
-    left: 20px;
-    top: 22px;
-    bottom: 22px;
+    left: 30px; /* Position the line slightly to the left */
+    top: 45px; /* Start from the top */
+    bottom: 45px; /* Extend to the bottom */
     width: 2px;
     background-color: #000;
 }
 
+/* Content inside journey leg */
 .journey-leg-content {
-    position: relative;
+    padding-left: 30px; /* Space for the vertical line */
 }
 
+/* Station details in journey leg */
 .journey-leg-station {
     position: relative;
-    margin: 15px 0;
+    margin: 10px 0;
 }
 
+/* Bullet point indicator in journey leg */
 .journey-leg-station::before {
     content: '';
     position: absolute;
-    left: -24px;
+    left: -23px; /* Adjust to align with the vertical line */
     top: 50%;
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     background-color: #000;
     border-radius: 50%;
     transform: translateY(-50%);
 }
 
+/* Button for viewing stops */
 .view-stops-button {
     margin-top: 5px;
     padding: 0;
@@ -221,6 +343,7 @@ button:hover {
     cursor: pointer;
     font: inherit;
     display: inline;
+    font-size: 0.9rem; /* Slightly smaller font size on mobile */
 }
 
 .view-stops-button:hover {
@@ -229,6 +352,7 @@ button:hover {
     text-decoration: underline;
 }
 
+/* List of stop points */
 .stop-points {
     margin-top: 10px;
     padding: 0;
@@ -236,3 +360,47 @@ button:hover {
     list-style-position: inside;
     margin-left: 20px;
 }
+
+/* Responsive Styles */
+@media (min-width: 600px) {
+    .journey-item {
+        padding: 20px;
+        margin: 15px 0;
+        border-width: 3px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .journey-leg {
+        padding: 20px 30px;
+        border-width: 3px;
+    }
+
+    .journey-leg::before {
+        left: 41px; /* Adjust for larger screens */
+    }
+
+    .journey-leg-station::before {
+        width: 10px; /* Larger marker on larger screens */
+        height: 10px;
+    }
+}
+
+@media (min-width: 900px) {
+    .journey-item {
+        max-width: 800px;
+    }
+
+    .journey-leg {
+        padding: 20px 40px;
+    }
+
+    .journey-leg::before {
+        left: 51px; /* Further adjustment for larger screens */
+    }
+
+    .journey-leg-station::before {
+        width: 10px; /* Larger marker on larger screens */
+        height: 10px;
+    }
+}
+
