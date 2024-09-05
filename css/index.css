@@ -110,11 +110,11 @@
     flex-direction: column;
     align-items: center; /* Center content horizontally */
     text-align: center; /* Center text */
-    padding: 20px; /* Padding inside the box */
+    padding: 3px; /* Padding inside the box */
 }
 
 .feature-item h2 {
-    font-size: 1.3rem; /* Title size */
+    font-size: 1.2rem; /* Title size */
     margin-bottom: 10px; /* Space below title */
 }
 
