@@ -1,3 +1,11 @@
+/* Remove default browser styles for input, select, and button elements */
+input,
+select,
+button {
+    -webkit-appearance: none; /* Removes default styles for WebKit browsers */
+    appearance: none; /* Removes default styles for all browsers */
+}
+
 /* Search and Buttons Section styles */
 .search-buttons-section {
     display: flex;
