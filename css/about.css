@@ -1,40 +1,40 @@
+/* About Section styles */
 .about-section {
-    background: #f9f9f9;
-    padding: 30px;
-    border: 4px solid black;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin: 20px auto;
-    max-width: 80%; 
-    width: 80%;
-    margin-top: 20px; 
-    font-family: Arial, sans-serif;
-    line-height: 2.0;
+    padding: 20px; /* Padding around the section */
+    background-color: #f9f9f9; /* Light background for contrast */
 }
 
 .about-section h2 {
+    font-size: 1.5rem; /* Larger font size for the heading */
+    margin-bottom: 20px; /* Space below the heading */
     text-align: center;
-    font-size: 25px;
-    margin-bottom: 20px;
 }
 
 .about-section p {
-    margin: 10px 0;
-    font-size: 18px;
-    color: #333;
+    font-size: 1rem; /* Standard font size for paragraphs */
+    color: #333; /* Darker text for contrast */
+    line-height: 1.6; /* Increased line-height for better readability */
+    margin: 0 auto; /* Center paragraphs */
+    max-width: 800px; /* Limit paragraph width for readability */
+    margin-bottom: 20px; /* Space between paragraphs */
     text-align: left;
 }
 
 .social-icons {
-    display: flex; 
-    gap: 20px; 
-    justify-content: center; 
+    display: flex; /* Use flexbox for alignment */
+    justify-content: center; /* Horizontally centers the items */
+    align-items: center; /* Vertically centers the items (if needed) */
+    gap: 10px; /* Space between the icons */
+    margin-top: 20px; /* Add space above if needed */
 }
 
-.social-icon {
-    display: block; 
-    width: 50px; 
-    height: auto;
+/* Responsive styles */
+@media (max-width: 600px) {
+    .about-section h2 {
+        font-size: 1.5rem; /* Smaller heading size on small screens */
+    }
+
+    .about-section p {
+        font-size: 0.9rem; /* Smaller paragraph text on small screens */
+    }
 }
-
-

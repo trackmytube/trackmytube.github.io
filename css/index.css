@@ -1,42 +1,3 @@
-.feature-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    max-width: 95%; 
-    margin: 0 auto; 
-    padding: 0 10px; 
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-
-.feature-item {
-    background: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    flex: 1 1 calc(33% - 20px); 
-    text-align: center;
-    box-sizing: border-box; 
-}
-
-.feature-item h3 a {
-    color: #0073e6;
-    text-decoration: none;
-    font-size: 1.2em;
-}
-
-.feature-item h3 a:hover {
-    text-decoration: underline;
-}
-
-.fetching-message {
-    flex: 1; 
-    text-align: left;
-    font-size: 1.2em; 
-    color: #333; 
-    padding-left: 20px; 
-}
-
 .ticker {
     background: #f4f4f4;
     padding: 10px 0;
@@ -44,37 +5,17 @@
     position: relative;
     border: 1px solid #ccc; 
     border-radius: 5px; 
+    width: 100%; /* Full width */
 }
 
 .ticker-wrapper {
     display: flex;
-    align-items: center;
-    width: 100%; 
-    position: relative; 
-}
-
-.ticker-text {
-    flex-shrink: 0; 
-    font-size: 1.2em; 
-    color: #333; 
-    position: absolute; 
-    left: 10px; 
-    padding: 0 10px; 
-    background: #f4f4f4; 
-    border-radius: 5px 0 0 5px; 
-}
-
-.ticker-text a {
-    text-decoration: none; 
-}
-
-.ticker-text a:hover {
-    text-decoration: underline; 
+    width: 100%;
+    overflow: hidden; /* Hide overflow for smoother scrolling */
 }
 
 .ticker-container {
-    margin-left: 150px; 
-    flex: 1; 
+    flex: 1;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -89,8 +30,7 @@
     white-space: nowrap;
 }
 
-#ticker-content1,
-#ticker-content2 {
+.ticker-content {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -100,32 +40,32 @@
 
 .status-item {
     display: inline-block;
-    margin-right: 50px; 
-    padding: 10px; 
+    margin-right: 20px; /* Adjusted margin for smaller screens */
+    padding: 5px 10px; /* Adjusted padding */
     border-radius: 5px; 
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+    font-size: 0.9em; /* Adjusted font size */
 }
 
 .status-text {
-    font-size: 1em;
     color: #333;
 }
 
-.bakerloo { border: 5px solid #B36305; }
-.central { border: 5px solid #E32017; }
-.circle { border: 5px solid #FFD300; }
-.district { border: 5px solid #00782A; }
-.dlr { border: 5px solid #00A4A7; }
-.elizabeth-line { border: 5px solid #9364CC; }
-.hammersmith-city { border: 5px solid #F3A9BB; }
-.jubilee { border: 5px solid #A0A5A9; }
-.overground { border: 5px solid #EE7C0E; }
-.metropolitan { border: 5px solid #9B0056; }
-.northern { border: 5px solid #000000; }
-.piccadilly { border: 5px solid #003688; }
-.tram { border: 5px solid #84B817; }
-.victoria { border: 5px solid #0098D4; }
-.waterloo-city { border: 5px solid #95CDBA; }
+.bakerloo { border: 3px solid #B36305; }
+.central { border: 3px solid #E32017; }
+.circle { border: 3px solid #FFD300; }
+.district { border: 3px solid #00782A; }
+.dlr { border: 3px solid #00A4A7; }
+.elizabeth-line { border: 3px solid #9364CC; }
+.hammersmith-city { border: 3px solid #F3A9BB; }
+.jubilee { border: 3px solid #A0A5A9; }
+.overground { border: 3px solid #EE7C0E; }
+.metropolitan { border: 3px solid #9B0056; }
+.northern { border: 3px solid #000000; }
+.piccadilly { border: 3px solid #003688; }
+.tram { border: 3px solid #84B817; }
+.victoria { border: 3px solid #0098D4; }
+.waterloo-city { border: 3px solid #95CDBA; }
 
 @keyframes ticker {
     0% {
@@ -136,76 +76,119 @@
     }
 }
 
-.news-section {
-    background: #f9f9f9;
+@media (max-width: 600px) {
+    .ticker-container {
+        margin-left: 0; /* No margin needed */
+    }
+
+    .ticker-content {
+        font-size: 0.8em; /* Smaller font size for smaller screens */
+    }
+
+    .status-item {
+        margin-right: 10px; /* Reduced margin for smaller screens */
+        padding: 5px; /* Reduced padding for smaller screens */
+    }
+}
+
+
+/* Fixed Grid Section styles */
+.features-grid {
+    display: grid; /* Using CSS Grid for layout */
+    grid-template-columns: repeat(3, 1fr); /* Fixed three-column layout */
+    gap: 20px; /* Space between items */
     padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin: 20px auto;
-    font-family: Arial, sans-serif;
-    max-width: 95%;
 }
 
-.news-section h2 {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 20px;
+/* Grid item styles */
+.feature-item {
+    background-color: #f0f0f0; /* Light background for grid items */
+    border-radius: 8px; /* Rounded corners */
+    overflow: hidden; /* Ensure content doesn't overflow */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    text-align: center; /* Center text */
+    padding: 20px; /* Padding inside the box */
 }
 
-#news-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+.feature-item h2 {
+    font-size: 1.3rem; /* Title size */
+    margin-bottom: 10px; /* Space below title */
+}
+
+.feature-item p {
+    font-size: 1rem; /* Description size */
+    color: #333; /* Darker text for contrast */
+    line-height: 1.6; /* Increased line-height for better readability */
+    margin: 0; /* Remove default margin */
+}
+
+/* Responsive styles */
+@media (max-width: 900px) {
+    .features-grid {
+        grid-template-columns: 1fr; /* Two-column layout for medium screens */
+    }
+}
+
+@media (max-width: 600px) {
+    .features-grid {
+        grid-template-columns: 1fr; /* Single-column layout for small screens */
+    }
+}
+
+
+
+/* News section styles */
+.news-section {
+    display: grid; /* Using CSS Grid for layout */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Flexible columns with more room */
+    gap: 20px; /* Space between items */
+    padding: 20px;
 }
 
 .news-item {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 16px;
-    background: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #f0f0f0; /* Light background for news items */
+    border-radius: 8px; /* Rounded corners */
+    overflow: hidden; /* Ensure content doesn't overflow */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    align-items: left; /* Align items to the left */
+    text-align: left;
+    padding: 15px; /* Padding inside the box */
 }
 
-.news-item img.news-image {
-    display: block;
-    width: 100%;
-    height: auto;
-    max-height: 200px;
-    object-fit: cover;
-    margin-bottom: 10px;
-    border-radius: 4px;
+.news-item img {
+    width: 100%; /* Full width of the item */
+    height: auto; /* Maintain aspect ratio */
+    aspect-ratio: 16 / 9; /* Maintain 16:9 aspect ratio */
+    object-fit: cover; /* Cover the area, maintaining aspect ratio */
+    border-bottom: 2px solid #ddd; /* Subtle separation between image and text */
 }
 
-.news-item-content {
-    padding: 10px 0;
-}
-
-.news-item h3 {
-    margin: 0;
-    font-size: 18px;
+.news-item h2 {
+    font-size: 1.2rem; /* Larger title size for more emphasis */
+    margin: 10px 0; /* Space around title */
 }
 
 .news-item p {
-    margin: 8px 0;
-    font-size: 14px;
-    line-height: 1.6;
+    font-size: 1rem; /* Larger description size for readability */
+    color: #333; /* Darker text for contrast */
+    line-height: 1.6; /* Increased line-height for better readability */
+    margin: 0; /* Remove default margin */
 }
 
-.news-item a {
-    text-decoration: none;
-    color: #0073e6;
-    font-weight: bold;
+/* Responsive styles for larger screens */
+@media (min-width: 600px) {
+    .news-section {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* More room for items on medium screens */
+    }
 }
 
-.news-item a:hover {
-    text-decoration: underline;
-}
-
-#news-container p {
-    font-size: 1em;
-    color: #888;
-    font-style: italic;
+@media (min-width: 900px) {
+    .news-section {
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Even more room for items on larger screens */
+    }
 }

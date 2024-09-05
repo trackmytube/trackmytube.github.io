@@ -1,116 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrackMyTube - TfL Train Times, Live Status, and Travel News</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>TrackMyTube - Live Line Status Page</title>
     <link rel="stylesheet" href="css/status.css">
-    <script src="js/script.js" defer></script>
-    <script src="js/status.js" defer></script>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-   <header>
-        <nav>
-            <div class="logo">
-                <img src="img/logo.png" alt="TrackMyTube Logo">
-            </div>
-            <div class="menu-toggle" id="menuToggle">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="status.html">Line Status</a></li>
-                <li><a href="station.html">Station Finder</a></li>
-                <li><a href="planner.html">Journey Planner</a></li>
-                <li><a href="about.html">About TrackMyTube</a></li>
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <img src="img/logo.png" alt="TrackMyTube Logo" />
+            </a>
+            <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+            <ul class="nav-menu">
+                <li><a href="index.html"><strong>Home</strong></a></li>
+                <li><a href="status.html"><strong>Line Status</strong></a></li>
+                <li><a href="station.html"><strong>Station Finder</strong></a></li>
+                <li><a href="planner.html"><strong>Journey Planner</strong></a></li>
+                <li><a href="about.html"><strong>About</strong></a></li>
             </ul>
         </nav>
     </header>
-
+    
+    <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-content">
-            <h1>TfL Status Updates</h1>
-        </div>
+        <h1>TfL Live Line Status</h1>
     </section>
 
-    <main>
-        <div class="tfl-status-board">
-            <div id="update-time" style="margin-top: 10px; font-weight: bold;">Last updated: </div>
-            <div class="status-board">
-                <div id="bakerloo" class="status-item bakerloo" onclick="showPopup('Bakerloo Line')">
-                    <h3>Bakerloo Line</h3>
-                    <p class="status">Status: <span class="status-text">/</span></p>
-                </div>
-                <div id="central" class="status-item central" onclick="showPopup('Central Line')">
-                    <h3>Central Line</h3>
-                    <p class="status">Status: <span class="status-text">/</span></p>
-                </div>
-                <div id="circle" class="status-item circle" onclick="showPopup('Circle Line')">
-                    <h3>Circle Line</h3>
-                    <p class="status">Status: <span class="status-text">/</span></p>
-                </div>
-                <div id="district" class="status-item district" onclick="showPopup('District Line')">
-                    <h3>District Line</h3>
-                    <p class="status">Status: <span class="status-text">/</span></p>
-                </div>
-                <div id="dlr" class="status-item dlr" onclick="showPopup('DLR')">
-                    <h3>DLR</h3>
-                    <p class="status">Status: <span class="status-text">/</span></p>
-                </div>
-                <div id="elizabeth-line" class="status-item elizabeth-line" onclick="showPopup('Elizabeth Line')">
-                    <h3>Elizabeth Line</h3>
-                    <p class="status">Status: <span class="status-text">/</span></p>
-                </div>
-                <div id="hammersmith-city" class="status-item hammersmith-city" onclick="showPopup('Hammersmith & City Line')">
-                    <h3>Hammersmith & City Line</h3>
-                    <p class="status">Status: <span class="status-text">/</span></p>
-                </div>
-                <div id="jubilee" class="status-item jubilee" onclick="showPopup('Jubilee Line')">
-                    <h3>Jubilee Line</h3>
-                    <p class="status">Status: <span class="status-text">/</span></p>
-                </div>
-                <div id="overground" class="status-item overground" onclick="showPopup('London Overground')">
-                    <h3>London Overground</h3>
-                    <p class="status">Status: <span class="status-text">/</span></p>
-                </div>
-                <div id="metropolitan" class="status-item metropolitan" onclick="showPopup('Metropolitan Line')">
-                    <h3>Metropolitan Line</h3>
-                    <p class="status">Status: <span class="status-text">/</span></p>
-                </div>
-                <div id="northern" class="status-item northern" onclick="showPopup('Northern Line')">
-                    <h3>Northern Line</h3>
-                    <p class="status">Status: <span class="status-text">/</span></p>
-                </div>
-                <div id="piccadilly" class="status-item piccadilly" onclick="showPopup('Piccadilly Line')">
-                    <h3>Piccadilly Line</h3>
-                    <p class="status">Status: <span class="status-text">/</span></p>
-                </div>
-                <div id="tram" class="status-item tram" onclick="showPopup('Tram')">
-                    <h3>Tram</h3>
-                    <p class="status">Status: <span class="status-text">/</span></p>
-                </div>
-                <div id="victoria" class="status-item victoria" onclick="showPopup('Victoria Line')">
-                    <h3>Victoria Line</h3>
-                    <p class="status">Status: <span class="status-text">/</span></p>
-                </div>
-                <div id="waterloo-city" class="status-item waterloo-city" onclick="showPopup('Waterloo & City Line')">
-                    <h3>Waterloo & City Line</h3>
-                    <p class="status">Status: <span class="status-text">/</span></p>
-                </div>
-            </div>
-            <div id="update-countdown" style="margin-top: 5px; font-weight: bold;">Update in: 60s</div>    
+    <!-- New Grid Section -->
+    <div id="update-time" class="update-info">Last updated: </div>
+    <section class="status-board">
+        <div id="bakerloo" class="status-item bakerloo">
+            <h2>Bakerloo Line</h2>
+            <p class="status"><strong>Status: <span class="status-text">/</strong></span></p>
         </div>
-    </main>
-
+        <div id="central" class="status-item central">
+            <h2>Central Line</h2>
+            <p class="status"><strong>Status: <span class="status-text">/</strong></span></p>
+        </div>
+        <div id="circle" class="status-item circle">
+            <h2>Circle Line</h2>
+            <p class="status"><strong>Status: <span class="status-text">/</strong></span></p>
+        </div>
+        <div id="district" class="status-item district">
+            <h2>District Line</h2>
+            <p class="status"><strong>Status: <span class="status-text">/</strong></span></p>
+        </div>
+        <div id="dlr" class="status-item dlr">
+            <h2>DLR</h2>
+            <p class="status"><strong>Status: <span class="status-text">/</strong></span></p>
+        </div>
+        <div id="elizabeth-line" class="status-item elizabeth-line">
+            <h2>Elizabeth Line</h2>
+            <p class="status"><strong>Status: <span class="status-text">/</strong></span></p>
+        </div>
+        <div id="hammersmith-city" class="status-item hammersmith-city">
+            <h2>Hammersmith & City Line</h2>
+            <p class="status"><strong>Status: <span class="status-text">/</strong></span></p>
+        </div>
+        <div id="jubilee" class="status-item jubilee">
+            <h2>Jubilee Line</h2>
+            <p class="status"><strong>Status: <span class="status-text">/</strong></span></p>
+        </div>
+        <div id="overground" class="status-item overground">
+            <h2>London Overground</h2>
+            <p class="status"><strong>Status: <span class="status-text">/</strong></span></p>
+        </div>
+        <div id="metropolitan" class="status-item metropolitan">
+            <h2>Metropolitan Line</h2>
+            <p class="status"><strong>Status: <span class="status-text">/</strong></span></p>
+        </div>
+        <div id="northern" class="status-item northern">
+            <h2>Northern Line</h2>
+            <p class="status"><strong>Status: <span class="status-text">/</strong></span></p>
+        </div>
+        <div id="piccadilly" class="status-item piccadilly">
+            <h2>Piccadilly Line</h2>
+            <p class="status"><strong>Status: <span class="status-text">/</strong></span></p>
+        </div>
+        <div id="tram" class="status-item tram">
+            <h2>Tram</h2>
+            <p class="status"><strong>Status: <span class="status-text">/</strong></span></p>
+        </div>
+        <div id="victoria" class="status-item victoria">
+            <h2>Victoria Line</h2>
+            <p class="status"><strong>Status: <span class="status-text">/</strong></span></p>
+        </div>
+        <div id="waterloo-city" class="status-item waterloo-city">
+            <h2>Waterloo & City Line</h2>
+            <p class="status"><strong>Status: <span class="status-text">/</strong></span></p>
+        </div>
+    </section>
+    <div id="update-countdown" class="update-info">Update in: 60s</div> 
+    
+    <!-- Popup Overlay -->
     <div id="popup-overlay" class="overlay"></div>
+
+    <!-- Popup Content -->
     <div id="popup-content" class="popup">
-        <span class="close-btn" onclick="closePopup()">&times;</span>
+        <span class="close-btn" aria-label="Close popup">&times;</span>
         <h2 id="popup-title">Service Name</h2>
         <p id="popup-details">Details will be displayed here...</p>
     </div>
+
+
+
+    <script src="js/script.js"></script>
+    <script src="js/status.js"></script>
 </body>
 </html>

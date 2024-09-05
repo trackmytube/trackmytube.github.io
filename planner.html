@@ -1,93 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrackMyTube - TfL Train Times, Live Status, and Travel News</title>
+    <title>TrackMyTube - Home Page</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/planner.css">
-    <script src="js/script.js" defer></script>
-    <script src="js/planner.js" defer></script>
 </head>
 <body>
-   <header>
-        <nav>
-            <div class="logo">
-                <img src="img/logo.png" alt="TrackMyTube Logo">
-            </div>
-            <div class="menu-toggle" id="menuToggle">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="status.html">Line Status</a></li>
-                <li><a href="station.html">Station Finder</a></li>
-                <li><a href="planner.html">Journey Planner</a></li>
-                <li><a href="about.html">About TrackMyTube</a></li>
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <img src="img/logo.png" alt="TrackMyTube Logo" />
+            </a>
+            <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+            <ul class="nav-menu">
+                <li><a href="index.html"><strong>Home</strong></a></li>
+                <li><a href="status.html"><strong>Line Status</strong></a></li>
+                <li><a href="station.html"><strong>Station Finder</strong></a></li>
+                <li><a href="planner.html"><strong>Journey Planner</strong></a></li>
+                <li><a href="about.html"><strong>About</strong></a></li>
             </ul>
         </nav>
     </header>
-
+    
+    <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-content">
-            <h1>TfL Journey Planner</h1>
+        <h1>TfL Journey Planner</h1>
+    </section>
+
+    <!-- Search and Buttons Section -->
+    <section class="search-buttons-section">
+        <div class="input-button-group">
+            <div class="input-wrapper">
+                <input type="text" class="search-box" id="station-search-1" placeholder="ORIGIN">
+                <button class="clear-button" type="button">&times;</button>
+            </div>
+            <button id="switch-stations" class="switch-button">&uarr;&darr;</button>
+        </div>
+        <div class="input-button-group">
+            <div class="input-wrapper">
+                <input type="text" class="search-box" id="station-search-2" placeholder="DESTINATION">
+                <button class="clear-button" type="button">&times;</button>
+            </div>
+            <button id="search-button" class="search-button">Search</button>
         </div>
     </section>
 
-    <main>
-        <div class="station-finder">
-            <div class="search-container">
-                <input type="text" id="station-search-1" placeholder="FROM station...">
-                <input type="text" id="station-search-2" placeholder="TO station...">
-                <button id="switch-stations" aria-label="Switch FROM and TO stations">&uarr;&darr;</button>
-                <button id="search-button">Search</button>
+    <!-- Journey Preferences Section -->
+    <section class="journey-preferences-section hidden">
+        <button id="journey-preferences-button" class="journey-preferences-button">Journey Preferences</button>
+        <div id="journey-preferences" class="journey-preferences">
+            <div class="input-wrapper">
+                <input type="text" id="station-search-via" class="search-box" placeholder="VIA (optional)">
+                <button class="clear-button" type="button">&times;</button>
             </div>
-            
-            <button id="journey-preferences-button">Journey Preferences</button>
-            <div id="journey-preferences" class="hidden">
-                <input type="text" id="station-search-via" placeholder="VIA station...">
-                <div class="preferences-row">
-                    <div class="input-group">
-                        <label for="date-picker">Date:</label>
-                        <input type="date" id="date-picker">
-                    </div>
-                    <div class="input-group">
-                        <label for="time-picker">Time:</label>
-                        <input type="time" id="time-picker">
-                    </div>
-                </div>
-                <div class="preferences-row">
-                    <div class="input-group">
-                        <label for="time-is">Departing or Arriving?</label>
-                        <select id="time-is">
-                            <option value="departing">Departing</option>
-                            <option value="arriving">Arriving</option>
-                        </select>
-                    </div>
-                    <div class="input-group">
-                        <label for="journey-preference">Least Interchange/Time/Walking?</label>
-                        <select id="journey-preference">
-                            <option value="leastinterchange">Least Interchange</option>
-                            <option value="leasttime">Least Time</option>
-                            <option value="leastwalking">Least Walking</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div id="selectedStation"></div>
-            <div id="selectedLines" class="line-colors"></div>
-
-            <div class="journey-container">
-                <div id="journey-results"></div>
-            </div>
-
-            <div id="search-results" class="search-results">
-            </div>
+            <input type="date" class="date-input" id="date-picker">
+            <input type="time" class="time-input" id="time-picker">
+            <select class="time-is-dropdown" id="time-is">
+                <option value="departing">Departing</option>
+                <option value="arriving">Arriving</option>
+            </select>
+            <select class="preferences-dropdown" id="journey-preference">
+                <option value="leasttime">Least Time</option>
+                <option value="leastinterchange">Least Interchange</option>
+                <option value="leastwalking">Least Walking</option>
+            </select>
+            <button id="clear-journey-preferences" class="clear-preferences-button" type="button">Clear Journey Preferences</button>
         </div>
-    </main>
+    </section>
+    
+
+    <div id="selectedStation"></div>
+    <div id="selectedLines" class="line-colors"></div>
+
+    <div class="journey-container">
+        <div id="journey-results"></div>
+    </div>
+
+    <div id="search-results" class="search-results">
+    </div>
+
+
+    <script src="js/script.js"></script>
+    <script src="js/planner.js"></script>
 </body>
 </html>

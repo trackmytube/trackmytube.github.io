@@ -81,6 +81,8 @@ document.addEventListener('DOMContentLoaded', function () {
     setInterval(updateStatusTicker, updateInterval);
 });
 
+
+// Function to fetch and display TfL news
 async function fetchTflNews() {
     const apiUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Ffeeds.bbci.co.uk%2Fnews%2Ftopics%2Fc26xnwx3m34t%2Frss.xml&api_key=k1ofkweiudezz4nnm4wcbgjyv0xktqjs9inbzpk6&order_by=pubDate&order_dir=desc&count=100';
 
@@ -118,25 +120,24 @@ async function fetchTflNews() {
             const logoUrl = item.imageUrl;
 
             newsHtml += `
-            <div class="news-item">
-            <div class="news-item-header">
-            ${logoUrl ? `<img src="${logoUrl}" alt="News image" class="news-image"/>` : ''}
-            <h3><a href="${item.link}" target="_blank">${item.title}</a></h3>
-            </div>
-            <p><strong>${formattedDate} - ${item.source}</strong></p>
-            <p>${item.description}</p>
-            </div>
+                <div class="news-item">
+                    <img src="${logoUrl}" alt="News image">
+                    <h2><a href="${item.link}" target="_blank">${item.title}</a></h2>
+                    <p><strong>${formattedDate} - ${item.source}</strong></p>
+                    <p>${item.description}</p>
+                </div>
             `;
         }
 
-        document.getElementById('news-container').innerHTML = newsHtml;
+        document.querySelector('.news-section').innerHTML = newsHtml;
 
     } catch (error) {
         console.error('Error fetching news:', error);
-        document.getElementById('news-container').innerHTML = '<p>Unable to fetch news at this time. Please try again later.</p>';
+        document.querySelector('.news-section').innerHTML = '<p>Unable to fetch news at this time. Please try again later.</p>';
     }
 }
 
+// Function to format dates
 function formatDate(date) {
     const now = new Date();
     const diff = now - date;
@@ -153,4 +154,5 @@ function formatDate(date) {
     return date.toLocaleDateString('en-GB', options);
 }
 
+// Initialize the script
 document.addEventListener('DOMContentLoaded', fetchTflNews);

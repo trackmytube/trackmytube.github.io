@@ -1,9 +1,9 @@
+/* Base styles */
 .station-finder {
-    max-width: 800px;
-    margin: 0 auto;
+    max-width: 800px; /* Centered layout with a max width */
+    margin: 0 auto;  /* Center horizontally */
     padding: 20px;
     text-align: center;
-    margin-top: -70px;
 }
 
 .search-container {
@@ -12,17 +12,17 @@
 
 #station-search {
     width: 100%;
-    max-width: 600px;
+    max-width: 600px; /* Limit the width on larger screens */
     padding: 10px;
     font-size: 1em;
     border: 1px solid #ccc;
     border-radius: 5px;
+    box-sizing: border-box; /* Ensures padding is included in the width */
 }
 
 .search-results {
     margin-top: 20px;
     text-align: left;
-    border-top: 1px solid #ccc;
     padding-top: 10px;
 }
 
@@ -46,15 +46,15 @@
 
 .line-color {
     display: inline-block;
-    width: 40px;
-    height: 10px;
+    width: 30px;
+    height: 8px;
     border-radius: 4px;
     margin-right: 5px;
 }
 
 #selectedStation {
     margin-top: 20px;
-    font-size: 1.5em;
+    font-size: 1.2em;
     font-weight: bold;
     text-align: center;
 }
@@ -81,24 +81,25 @@
     font-weight: bold;
     text-align: center;
     width: 100%;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .arrival {
-    flex: 1 1 200px;
+    flex: 1 1 100%; /* Full width by default for mobile-first */
     box-sizing: border-box;
     padding: 10px;
     text-align: center;
     border: 2px solid #454545;
     border-radius: 5px;
     background-color: #f9f9f9;
+    margin-bottom: 10px; /* Space between stacked arrivals */
 }
 
 .arrival strong {
     display: block;
     font-weight: bold;
     margin-bottom: 5px;
-    font-size: 17px;
+    font-size: 14px;
 }
 
 .arrival:hover {
@@ -113,7 +114,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 90%;
-    max-width: 600px;
+    max-width: 500px;
     background-color: #f5f5f5;
     border: 5px solid transparent;
     border-radius: 8px;
@@ -128,7 +129,7 @@
 .popup-close {
     position: absolute;
     top: 10px;
-    right: 20px;
+    right: 10px;
     font-size: 24px;
     cursor: pointer;
 }
@@ -157,12 +158,12 @@
 
 .popup-arrivals .arrival-item .destination {
     font-weight: bold;
-    font-size: 1.1em;
+    font-size: 1em;
 }
 
 .popup-arrivals .arrival-item .time-to-arrival {
     font-weight: bold;
-    font-size: 1.1em;
+    font-size: 1em;
 }
 
 .popup-arrivals .arrival-item .details-line {
@@ -170,7 +171,7 @@
     justify-content: space-between;
     align-items: center;
     color: #666;
-    font-size: 0.9em;
+    font-size: 0.8em;
 }
 
 .popup-arrivals .arrival-item .location {
@@ -190,4 +191,59 @@
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
     z-index: 999;
+}
+
+/* Responsive styles */
+@media (min-width: 600px) {
+    .station-result {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .line-color {
+        width: 40px;
+        height: 10px;
+    }
+
+    .search-results, .popup-arrivals .arrival-item {
+        font-size: 1em;
+    }
+
+    .line-arrivals {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        overflow-x: auto;
+    }
+    
+    .arrival {
+        flex: 1 1 100px; /* Set flexible width for larger screens */
+        margin-bottom: 0; /* Remove extra space between items for side-by-side layout */
+    }
+}
+
+@media (min-width: 800px) {
+    .station-finder {
+        padding: 40px;
+        max-width: 900px; /* Increase width on larger screens */
+    }
+
+    .popup {
+        max-width: 600px;
+    }
+}
+
+/* Adjustments for very small screens */
+@media (max-width: 400px) {
+    #station-search {
+        font-size: 0.9em; /* Slightly smaller font size on very small screens */
+        padding: 8px; /* Slightly reduced padding */
+    }
+
+    .popup {
+        width: 95%;
+        max-width: 95%;
+        padding: 8px; /* Reduce padding further for very small screens */
+    }
 }
