@@ -78,7 +78,7 @@ async function updateStatusGrid() {
                         let alertIcon = statusItem.querySelector('.alert-icon');
                         if (!alertIcon) {
                             alertIcon = document.createElement('img');
-                            alertIcon.src = '../img/tfl_alert_icon.png'; // Ensure this path is correct and image supports mobile-first design
+                            alertIcon.src = 'img/tfl_alert_icon.png'; // Ensure this path is correct and image supports mobile-first design
                             alertIcon.classList.add('alert-icon');
                             statusItem.appendChild(alertIcon);
                         }
