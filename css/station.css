@@ -10,10 +10,36 @@
     margin-bottom: 20px;
 }
 
-#station-search {
+.input-wrapper {
+    position: relative;
     width: 100%;
     max-width: 600px; /* Limit the width on larger screens */
-    padding: 10px;
+    margin: 0 auto; /* Center horizontally */
+}
+
+/* Style the clear button */
+.clear-button {
+    position: absolute;
+    right: 10px; /* Position inside the input field */
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 1.2em;
+    color: #ccc;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    display: none;
+}
+
+.clear-button:hover {
+    color: #999;
+}
+
+#station-search {
+    width: 100%;
+    padding: 10px 40px 10px 10px; /* Add padding to the right to make room for the clear button */
     font-size: 1em;
     border: 1px solid #ccc;
     border-radius: 5px;
