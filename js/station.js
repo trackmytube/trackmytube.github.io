@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const selectedStation = document.getElementById('selectedStation');
     const selectedLines = document.getElementById('selectedLines');
     const arrivalsContainer = document.getElementById('arrivalsContainer');
+    const clearButton = document.querySelector('.clear-button');
     const popup = document.getElementById('popup');
     const popupTitle = document.getElementById('popupTitle');
     const popupClose = document.getElementById('popupClose');
@@ -235,7 +236,28 @@ document.addEventListener('DOMContentLoaded', function () {
     popupClose.addEventListener('click', closePopup);
     overlay.addEventListener('click', closePopup);
 
+    function toggleClearButton() {
+        if (searchInput.value.trim()) {
+            clearButton.style.display = 'block'; 
+        } else {
+            clearButton.style.display = 'none';
+        }
+    }
+
+    clearButton.addEventListener('click', function () {
+        searchInput.value = ''; 
+        searchResults.innerHTML = ''; 
+        searchResults.style.display = 'none';
+        selectedStation.style.display = 'none';
+        selectedLines.style.display = 'none';
+        arrivalsContainer.innerHTML = '';
+        
+        if (refreshInterval) clearInterval(refreshInterval);
+    });
+
     searchInput.addEventListener('input', function () {
+        toggleClearButton();
+
         const query = searchInput.value.trim();
         if (query) {
             filterStations(query);
