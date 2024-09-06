@@ -3,18 +3,18 @@
 const CACHE_NAME = 'trackmytube-cache-v1';
 const ASSETS = [
   '/',
-  '/index.html',
-  '/about.html',
-  '/planner.html',
-  '/station.html',
-  '/status.html',
-  '/css/styles.css',
-  '/css/about.css',
-  '/css/index.css',
-  '/css/planner.css',
-  '/css/station.css',
-  '/css/status.css',
-  '/js/script.js',
+  'index.html',
+  'about.html',
+  'planner.html',
+  'station.html',
+  'status.html',
+  'css/styles.css',
+  'css/about.css',
+  'css/index.css',
+  'css/planner.css',
+  'css/station.css',
+  'css/status.css',
+  'js/script.js',
 ];
 
 self.addEventListener('install', (event) => {
