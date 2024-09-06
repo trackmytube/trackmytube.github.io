@@ -9,7 +9,7 @@
     "start_url": "./index.html",
     "icons": [
 		{
-        "src": "/img/icons/icon-36x36.png",
+        "src": "trackmytube/img/icons/icon-36x36.png",
         "sizes": "36x36",
         "type": "image/png",
         "purpose": "maskable any"
