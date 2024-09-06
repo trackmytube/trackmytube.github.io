@@ -34,7 +34,7 @@
          "src": "img/screenshots/index_portrait.png",
           "sizes": "640x320",
           "type": "image/png",
-          "form_factor": "wide",
+          "form_factor": "narrow",
           "label": "Index Portrait"
         }, {
           "src": "img/screenshots/planner_landscape.png",
