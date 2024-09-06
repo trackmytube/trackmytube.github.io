@@ -1,0 +1,9 @@
+{
+    "name": "TrackMyTube",
+    "short_name": "TrackMyTube",
+    "lang": "en-GB",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#3663e4",
+    "theme_color": "#3663e4"
+  }
