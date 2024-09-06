@@ -1,6 +1,8 @@
 {
     "name": "TrackMyTube",
     "short_name": "TrackMyTube",
+    "description": "TrackMyTube - TfL Train Times, Live Status, and Travel News Platform. The go-to platform for real-time train updates, live status reports, and travel news across the Transport for London (TfL) network.",
+    "orientation": "portrait-primary",
     "icons": [{
     "src": "img/icons/icon-128x128.png",
       "sizes": "128x128",
