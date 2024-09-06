@@ -6,6 +6,7 @@
     <title>TrackMyTube - Home Page</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="canonical" href="https://jahir10ali.github.io/trackmytube/" />
 </head>
 <body>
     <header>
@@ -67,13 +68,15 @@
     <script src="js/index.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('service-worker.js').then((registration) => {
-            console.log('Service Worker registered with scope:', registration.scope);
-            }).catch((error) => {
-            console.log('Service Worker registration failed:', error);
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/trackmytube/service-worker.js', { scope: '/trackmytube/' })
+                .then((registration) => {
+                    console.log('Service Worker registered with scope:', registration.scope);
+                })
+                .catch((error) => {
+                    console.log('Service Worker registration failed:', error);
+                });
             });
-        });
         }
     </script>
 </body>

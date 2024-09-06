@@ -2,28 +2,25 @@
 
 const CACHE_NAME = 'trackmytube-cache-v1';
 const ASSETS = [
-  '/',
-  'index.html',
-  'about.html',
-  'planner.html',
-  'station.html',
-  'status.html',
-  'css/styles.css',
-  'css/about.css',
-  'css/index.css',
-  'css/planner.css',
-  'css/station.css',
-  'css/status.css',
-  'js/script.js',
+  '/trackmytube/',
+  '/trackmytube/index.html',
+  '/trackmytube/about.html',
+  '/trackmytube/planner.html',
+  '/trackmytube/station.html',
+  '/trackmytube/status.html',
+  '/trackmytube/css/styles.css',
+  '/trackmytube/css/about.css',
+  '/trackmytube/css/index.css',
+  '/trackmytube/css/planner.css',
+  '/trackmytube/css/station.css',
+  '/trackmytube/css/status.css',
+  '/trackmytube/js/script.js',
 ];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('Caching assets...');
-      return cache.addAll(ASSETS).catch((error) => {
-        console.error('Failed to cache assets:', error);
-      });
+      return cache.addAll(ASSETS);
     })
   );
 });
@@ -31,9 +28,7 @@ self.addEventListener('install', (event) => {
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
-      return response || fetch(event.request).catch((error) => {
-        console.error('Fetch failed:', error);
-      });
+      return response || fetch(event.request);
     })
   );
 });
