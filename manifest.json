@@ -31,29 +31,41 @@
     "theme_color": "#3663e4",
     "screenshots": [
         {
-         "src": "img/screenshots/index_portrait.png",
-          "sizes": "640x320",
-          "type": "image/png",
-          "form_factor": "narrow",
-          "label": "Index Portrait"
-        }, {
-          "src": "img/screenshots/planner_landscape.png",
-          "sizes": "640x320",
-          "type": "image/png",
-          "form_factor": "wide",
-          "label": "Planner Landscape"
-        }, {
           "src": "img/screenshots/news_ss.png",
           "sizes": "1284x2778",
           "type": "image/png",
           "form_factor": "narrow",
-          "label": "News Screenshot"
+          "label": "TfL News Screenshot"
+        }, {
+          "src": "img/screenshots/status1_ss.png",
+          "sizes": "1284x2778",
+          "type": "image/png",
+          "form_factor": "narrow",
+          "label": "Line Status Screenshot 1"
+        }, {
+          "src": "img/screenshots/status2_ss.png",
+          "sizes": "1284x2778",
+          "type": "image/png",
+          "form_factor": "narrow",
+          "label": "Line Status Screenshot 2"
         }, {
           "src": "img/screenshots/station_ss.png",
           "sizes": "1284x2778",
           "type": "image/png",
           "form_factor": "narrow",
-          "label": "Station Screenshot"
+          "label": "Station Finder Screenshot"
+        }, {
+          "src": "img/screenshots/planner1_ss.png",
+          "sizes": "1284x2778",
+          "type": "image/png",
+          "form_factor": "narrow",
+          "label": "Journey Planner Screenshot 1"
+        }, {
+          "src": "img/screenshots/planner2_ss.png",
+          "sizes": "1284x2778",
+          "type": "image/png",
+          "form_factor": "narrow",
+          "label": "Journey Planner Screenshot 2"
         }
     ]
   }
