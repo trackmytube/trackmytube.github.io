@@ -42,6 +42,18 @@
           "type": "image/png",
           "form_factor": "wide",
           "label": "Planner Landscape"
+        }, {
+          "src": "img/screenshots/news_ss.png",
+          "sizes": "1284x2778",
+          "type": "image/png",
+          "form_factor": "narrow",
+          "label": "News Screenshot"
+        }, {
+          "src": "img/screenshots/station_ss.png",
+          "sizes": "1284x2778",
+          "type": "image/png",
+          "form_factor": "narrow",
+          "label": "Station Screenshot"
         }
     ]
   }
