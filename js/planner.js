@@ -224,14 +224,14 @@ document.addEventListener('DOMContentLoaded', function () {
             const results = await Promise.all(fetchPromises);
             let journeys = results.flatMap(result => result.journeys || []);
     
-            // Filter out journeys where the first leg has an empty name in routeOptions
+            // Filtering out journeys where the first leg has an empty name in routeOptions
             journeys = journeys.filter(journey => {
-                const firstLeg = journey.legs[0]; // Get the first leg of the journey
-                const routeOptions = firstLeg.routeOptions || []; // Get routeOptions of the first leg
-                return routeOptions.length > 0 && routeOptions[0].name.trim() !== ""; // Check if name is not empty
+                const firstLeg = journey.legs[0];
+                const routeOptions = firstLeg.routeOptions || []; 
+                return routeOptions.length > 0 && routeOptions[0].name.trim() !== "";
             });
     
-            // Remove duplicate journeys based on startDateTime and arrivalDateTime
+            // Removing duplicate journeys based on startDateTime and arrivalDateTime
             const uniqueJourneys = [];
             const seenJourneys = new Set();
     
@@ -243,7 +243,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
     
-            console.log(uniqueJourneys); // Log the filtered and deduplicated journeys
+            console.log(uniqueJourneys);
     
             if (uniqueJourneys.length === 0) {
                 journeyResults.innerHTML = 'We are experiencing issues with the journey data. Please try again later.';
@@ -323,7 +323,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 `;
             }).join('');
     
-            // Add click event listeners to view stops buttons
             document.querySelectorAll('.view-stops-button').forEach(button => {
                 button.addEventListener('click', () => {
                     const stopPointsList = button.closest('.journey-leg-content').querySelector('.stop-points');
@@ -355,11 +354,11 @@ document.addEventListener('DOMContentLoaded', function () {
             clearJourneyResults();
         });
 
-        // Add clear button functionality
-        const clearButton = input.nextElementSibling; // Assuming the clear button is immediately after the input in HTML structure
+        // Adding the clear button functionality
+        const clearButton = input.nextElementSibling;
         clearButton.addEventListener('click', function () {
-            input.value = ''; // Clear the input
-            input.dispatchEvent(new Event('input')); // Trigger the input event to clear results
+            input.value = ''; 
+            input.dispatchEvent(new Event('input'));
 
             if (input === searchInputOne) {
                 stationFrom = "";
