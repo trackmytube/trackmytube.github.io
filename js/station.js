@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     async function fetchLiveArrivals(naptanIds, lines) {
-        // Create an array of Promises for each line and each NaPTAN ID
+        // Creating an array of Promises for each line and each NaPTAN ID
         const arrivalsPromises = naptanIds.flatMap(naptanId =>
             lines.map(line =>
                 fetch(`https://api.tfl.gov.uk/StopPoint/${naptanId}/Arrivals?api_key=${apiKey}`)
@@ -106,14 +106,13 @@ document.addEventListener('DOMContentLoaded', function () {
         try {
             const results = await Promise.all(arrivalsPromises);
     
-            // Group results by line for display
             const groupedResults = results.reduce((acc, result) => {
                 if (!acc[result.line]) acc[result.line] = [];
                 acc[result.line].push(...result.arrivals);
                 return acc;
             }, {});
     
-            // Check if all results are empty
+            // Checking if all results are empty
             if (Object.values(groupedResults).every(arrivals => arrivals.length === 0)) {
                 arrivalsContainer.innerHTML = 'We are experiencing issues with live arrivals information. Please try again later. (TfL Server Issue)';
             } else {
@@ -153,20 +152,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     async function fetchPopupArrivals(naptanIds, line, platform) {
         try {
-            // Create an array of Promises for each NaPTAN ID
             const arrivalsPromises = naptanIds.map(naptanId =>
                 fetch(`https://api.tfl.gov.uk/StopPoint/${naptanId}/Arrivals?api_key=${apiKey}`)
                     .then(response => response.json())
                     .then(data => data.filter(arrival => arrival.platformName === platform && arrival.lineName === line))
             );
     
-            // Fetch all data
             const arrivalsForPlatforms = await Promise.all(arrivalsPromises);
     
-            // Merge all results and sort
             const allArrivals = arrivalsForPlatforms.flat().sort((a, b) => new Date(a.expectedArrival) - new Date(b.expectedArrival));
     
-            // Update popup content
             popupArrivals.innerHTML = allArrivals.map(arrival => {
                 const minutesToArrival = Math.floor(arrival.timeToStation / 60);
                 const timeDisplay = minutesToArrival < 1 ? 'Due' : `${minutesToArrival} min`;
