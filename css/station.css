@@ -1,7 +1,7 @@
-/* Base styles */
+/* Search Section Styles */
 .station-finder {
-    max-width: 800px; /* Centered layout with a max width */
-    margin: 0 auto;  /* Center horizontally */
+    max-width: 800px; 
+    margin: 0 auto;  
     padding: 20px;
     text-align: center;
 }
@@ -13,14 +13,13 @@
 .input-wrapper {
     position: relative;
     width: 100%;
-    max-width: 600px; /* Limit the width on larger screens */
-    margin: 0 auto; /* Center horizontally */
+    max-width: 600px;
+    margin: 0 auto; 
 }
 
-/* Style the clear button */
 .clear-button {
     position: absolute;
-    right: 10px; /* Position inside the input field */
+    right: 10px;
     top: 50%;
     transform: translateY(-50%);
     background: none;
@@ -39,11 +38,11 @@
 
 #station-search {
     width: 100%;
-    padding: 10px 40px 10px 10px; /* Add padding to the right to make room for the clear button */
+    padding: 10px 40px 10px 10px;
     font-size: 1em;
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-sizing: border-box; /* Ensures padding is included in the width */
+    box-sizing: border-box;
 }
 
 .search-results {
@@ -111,14 +110,14 @@
 }
 
 .arrival {
-    flex: 1 1 100%; /* Full width by default for mobile-first */
+    flex: 1 1 100%; 
     box-sizing: border-box;
     padding: 10px;
     text-align: center;
     border: 2px solid #454545;
     border-radius: 5px;
     background-color: #f9f9f9;
-    margin-bottom: 10px; /* Space between stacked arrivals */
+    margin-bottom: 10px; 
 }
 
 .arrival strong {
@@ -133,6 +132,7 @@
     transform: scale(1.02);
 }
 
+/* Popup Styles */
 .popup {
     display: none;
     position: fixed;
@@ -219,11 +219,7 @@
     z-index: 999;
 }
 
-/* Responsive styles */
-@media (max-width: 400px) {
-    
-}
-
+/* Responsive Styles for Search Results and Popups */
 @media (min-width: 600px) {
     .station-result {
         display: flex;
@@ -248,15 +244,15 @@
     }
     
     .arrival {
-        flex: 1 1 100px; /* Set flexible width for larger screens */
-        margin-bottom: 0; /* Remove extra space between items for side-by-side layout */
+        flex: 1 1 100px;
+        margin-bottom: 0;
     }
 }
 
 @media (min-width: 800px) {
     .station-finder {
         padding: 40px;
-        max-width: 900px; /* Increase width on larger screens */
+        max-width: 900px;
     }
 
     .popup {
@@ -264,11 +260,10 @@
     }
 }
 
-/* Adjustments for very small screens */
 @media (max-width: 400px) {
     #station-search {
-        font-size: 0.9em; /* Slightly smaller font size on very small screens */
-        padding: 8px; /* Slightly reduced padding */
+        font-size: 0.9em;
+        padding: 8px;
     }
 
     .popup {
