@@ -1,4 +1,4 @@
-/* Basic resets */
+/* Basic resets for all pages */
 body, ul {
     margin: 0;
     padding: 0;
@@ -17,20 +17,20 @@ header {
     align-items: center;
     justify-content: space-between;
     padding: 10px 15px;
-    position: relative; /* Necessary for positioning the absolute nav menu */
+    position: relative; 
 }
 
 .logo {
     font-size: 1.2rem;
     font-weight: bold;
-    display: flex; /* Use flexbox to center the logo image */
-    align-items: center; /* Center vertically */
+    display: flex;
+    align-items: center; 
 }
 
 .logo img {
-    max-width: 100%; /* Make sure the image scales with the container */
-    height: auto; /* Maintain aspect ratio */
-    width: 150px; /* Adjust width as needed */
+    max-width: 100%; 
+    height: auto; 
+    width: 150px; 
 }
 
 .menu-toggle {
@@ -43,12 +43,12 @@ header {
 }
 
 .nav-menu {
-    display: flex; /* Default display for larger screens */
+    display: flex; 
     list-style: none;
-    transition: max-height 0.4s ease, opacity 0.4s ease; /* Smooth animation for height and opacity */
-    max-height: none; /* Full height by default */
-    opacity: 1; /* Fully visible by default */
-    flex-direction: row; /* Row direction for larger screens */
+    transition: max-height 0.4s ease, opacity 0.4s ease; 
+    max-height: none; 
+    opacity: 1; 
+    flex-direction: row;
 }
 
 .nav-menu li {
@@ -69,29 +69,29 @@ header {
 /* Mobile styles */
 @media only screen and (max-width: 800px) {
     .nav-menu {
-        display: none; /* Hidden by default on mobile */
+        display: none; 
         flex-direction: column;
         width: 100%;
         background: #333;
         position: absolute;
-        top: 60px; /* Adjust based on header height */
+        top: 60px; 
         left: 0;
         padding: 10px;
         z-index: 1;
     }
 
     .nav-menu.active {
-        display: flex; /* Display as flex when menu is active */
-        max-height: 300px; /* Adjust max-height based on content size */
+        display: flex; 
+        max-height: 300px; 
         opacity: 1;
     }
 
     .menu-toggle {
-        display: block; /* Display toggle button on mobile */
+        display: block;
     }
 
     .logo img {
-        width: 150px; /* Adjust for smaller screens */
+        width: 150px;
     }
 
     .nav-menu li {
@@ -101,43 +101,44 @@ header {
 
 /* Hero section styles */
 .hero {
-    background-color: #007BFF; /* Blue background */
-    color: white; /* White text */
-    text-align: center; /* Center text */
-    padding: 5px 15px; /* Increased padding for more space */
+    background-color: #007BFF; 
+    color: white; 
+    text-align: center;
+    padding: 5px 15px; 
 }
 
 .hero-logo {
-    max-width: 100%; /* Make sure the image scales with the container */
-    height: auto; /* Maintain aspect ratio */
-    width: 320px; /* Adjust width as needed for larger screens */
-    margin-bottom: 0px; /* Space below the logo */
+    max-width: 100%; 
+    height: auto; 
+    width: 320px; 
+    margin-bottom: 0px; 
 }
 
 .hero h1 {
-    font-size: 1.5rem; /* Larger font size for heading */
-    margin-bottom: 20px; /* Increased space below heading */
+    font-size: 1.5rem; 
+    margin-bottom: 20px; 
 }
 
 .hero p {
-    font-size: 1.1rem; /* Larger font size for paragraph */
-    max-width: 700px; /* Slightly wider paragraph for readability */
-    margin: 0 auto; /* Center the paragraph text */
-    line-height: 1.6; /* Increased line-height for better readability */
+    font-size: 1.1rem; 
+    max-width: 700px; 
+    margin: 0 auto; 
+    line-height: 1.6;
 }
 
+/* Responsive Styles for Hero Section */
 @media only screen and (max-width: 600px) {
     .hero-logo {
-        width: 250px; /* Adjust width for smaller screens */
-        margin-bottom: 0px; /* Adjust space below the logo for mobile */
+        width: 250px; 
+        margin-bottom: 0px; 
     }
 
     .hero h1 {
-        font-size: 1.5rem; /* Adjust font size for smaller screens */
+        font-size: 1.5rem; 
     }
 
     .hero p {
-        font-size: 1rem; /* Adjust font size for smaller screens */
+        font-size: 1rem; 
     }
 }
 
