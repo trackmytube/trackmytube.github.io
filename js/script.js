@@ -1,3 +1,4 @@
+// Menu toggle functionality
 document.addEventListener('DOMContentLoaded', function () {
     const menuToggle = document.querySelector('.menu-toggle');
     const navMenu = document.querySelector('.nav-menu');
@@ -7,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+// Service Worker register
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('/trackmytube/service-worker.js', { scope: '/trackmytube/' })
