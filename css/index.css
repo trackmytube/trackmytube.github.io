@@ -1,3 +1,4 @@
+/* Ticker Styles */
 .ticker {
     background: #f4f4f4;
     padding: 10px 0;
@@ -5,13 +6,13 @@
     position: relative;
     border: 1px solid #ccc; 
     border-radius: 5px; 
-    width: 100%; /* Full width */
+    width: 100%; 
 }
 
 .ticker-wrapper {
     display: flex;
     width: 100%;
-    overflow: hidden; /* Hide overflow for smoother scrolling */
+    overflow: hidden;
 }
 
 .ticker-container {
@@ -40,11 +41,11 @@
 
 .status-item {
     display: inline-block;
-    margin-right: 20px; /* Adjusted margin for smaller screens */
-    padding: 5px 10px; /* Adjusted padding */
+    margin-right: 20px; 
+    padding: 5px 10px; 
     border-radius: 5px; 
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
-    font-size: 0.9em; /* Adjusted font size */
+    font-size: 0.9em; 
 }
 
 .status-text {
@@ -76,119 +77,119 @@
     }
 }
 
+/* Responsive Styles for Ticker */
 @media (max-width: 600px) {
     .ticker-container {
-        margin-left: 0; /* No margin needed */
+        margin-left: 0; 
     }
 
     .ticker-content {
-        font-size: 0.8em; /* Smaller font size for smaller screens */
+        font-size: 0.8em; 
     }
 
     .status-item {
-        margin-right: 10px; /* Reduced margin for smaller screens */
-        padding: 5px; /* Reduced padding for smaller screens */
+        margin-right: 10px; 
+        padding: 5px; 
     }
 }
 
 
-/* Fixed Grid Section styles */
+/* Features Grid Styles */
 .features-grid {
-    display: grid; /* Using CSS Grid for layout */
-    grid-template-columns: repeat(3, 1fr); /* Fixed three-column layout */
-    gap: 20px; /* Space between items */
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px; 
     padding: 20px;
 }
 
-/* Grid item styles */
 .feature-item {
-    background-color: #f0f0f0; /* Light background for grid items */
-    border-radius: 8px; /* Rounded corners */
-    overflow: hidden; /* Ensure content doesn't overflow */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    background-color: #f0f0f0; 
+    border-radius: 8px; 
+    overflow: hidden; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center content horizontally */
-    text-align: center; /* Center text */
-    padding: 3px; /* Padding inside the box */
+    align-items: center; 
+    text-align: center; 
+    padding: 3px; 
 }
 
 .feature-item h2 {
-    font-size: 1.2rem; /* Title size */
-    margin-bottom: 10px; /* Space below title */
+    font-size: 1.2rem; 
+    margin-bottom: 10px; 
 }
 
 .feature-item p {
-    font-size: 1rem; /* Description size */
-    color: #333; /* Darker text for contrast */
-    line-height: 1.6; /* Increased line-height for better readability */
-    margin: 0; /* Remove default margin */
+    font-size: 1rem; 
+    color: #333; 
+    line-height: 1.6; 
+    margin: 0; 
 }
 
-/* Responsive styles */
+/* Responsive Styles for Features Grid */
 @media (max-width: 900px) {
     .features-grid {
-        grid-template-columns: 1fr; /* Two-column layout for medium screens */
+        grid-template-columns: 1fr; 
     }
 }
 
 @media (max-width: 600px) {
     .features-grid {
-        grid-template-columns: 1fr; /* Single-column layout for small screens */
+        grid-template-columns: 1fr;
     }
 }
 
 
 
-/* News section styles */
+/* News Section Styles */
 .news-section {
-    display: grid; /* Using CSS Grid for layout */
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Flexible columns with more room */
-    gap: 20px; /* Space between items */
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    gap: 20px; 
     padding: 20px;
 }
 
 .news-item {
-    background-color: #f0f0f0; /* Light background for news items */
-    border-radius: 8px; /* Rounded corners */
-    overflow: hidden; /* Ensure content doesn't overflow */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    background-color: #f0f0f0; 
+    border-radius: 8px; 
+    overflow: hidden; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
     display: flex;
     flex-direction: column;
-    align-items: left; /* Align items to the left */
+    align-items: left;
     text-align: left;
-    padding: 15px; /* Padding inside the box */
+    padding: 15px;
 }
 
 .news-item img {
-    width: 100%; /* Full width of the item */
-    height: auto; /* Maintain aspect ratio */
-    aspect-ratio: 16 / 9; /* Maintain 16:9 aspect ratio */
-    object-fit: cover; /* Cover the area, maintaining aspect ratio */
-    border-bottom: 2px solid #ddd; /* Subtle separation between image and text */
+    width: 100%; 
+    height: auto; 
+    aspect-ratio: 16 / 9; 
+    object-fit: cover; 
+    border-bottom: 2px solid #ddd; 
 }
 
 .news-item h2 {
-    font-size: 1.2rem; /* Larger title size for more emphasis */
-    margin: 10px 0; /* Space around title */
+    font-size: 1.2rem; 
+    margin: 10px 0; 
 }
 
 .news-item p {
-    font-size: 1rem; /* Larger description size for readability */
-    color: #333; /* Darker text for contrast */
-    line-height: 1.6; /* Increased line-height for better readability */
-    margin: 0; /* Remove default margin */
+    font-size: 1rem; 
+    color: #333;
+    line-height: 1.6; 
+    margin: 0;
 }
 
-/* Responsive styles for larger screens */
+/* Responsive Styles for New Section */
 @media (min-width: 600px) {
     .news-section {
-        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* More room for items on medium screens */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
     }
 }
 
 @media (min-width: 900px) {
     .news-section {
-        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Even more room for items on larger screens */
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     }
 }

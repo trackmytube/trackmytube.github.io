@@ -1,43 +1,42 @@
-/* New Grid Section styles */
+/* Status Board Styles */
 .status-board {
-    display: grid; /* Using CSS Grid for layout */
-    grid-template-columns: repeat(3, 1fr); /* Default to 3 boxes per row on larger screens */
-    gap: 20px; /* Space between items */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px; 
     padding: 20px;
 }
 
-/* Grid item styles */
 .status-item {
-    background-color: #ffffff; /* Light background for grid items */
-    border: 5px solid black; /* Black border for now, will be updated by JavaScript */
-    border-radius: 3px; /* Rounded corners */
-    overflow: hidden; /* Ensure content doesn't overflow */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    background-color: #ffffff; 
+    border: 5px solid black; 
+    border-radius: 3px; 
+    overflow: hidden; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center content horizontally */
-    text-align: center; /* Center text */
-    padding: 20px; /* Padding inside the box */
-    position: relative; /* Positioning context for the alert icon */
+    align-items: center; 
+    text-align: center; 
+    padding: 20px; 
+    position: relative; 
 }
 
 .status-item h2 {
-    font-size: 1.3rem; /* Title size */
-    margin-bottom: 10px; /* Space below title */
+    font-size: 1.3rem; 
+    margin-bottom: 10px;
 }
 
 .status-item p {
-    font-size: 1rem; /* Description size */
-    color: #333; /* Darker text for contrast */
-    line-height: 1.6; /* Increased line-height for better readability */
-    margin: 0; /* Remove default margin */
+    font-size: 1rem; 
+    color: #333; 
+    line-height: 1.6; 
+    margin: 0;
 }
 
 .update-info {
-    margin: 0 auto; /* Center-align the text within its container */
-    font-weight: bold; /* Make the text bold */
-    text-align: center; /* Center the text */
-    padding: 10px; /* Add some padding for spacing */
+    margin: 0 auto; 
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
 }
 
 .bakerloo { border: 5px solid #B36305; }
@@ -60,20 +59,20 @@
     background-color: #e3e3e3;
 }
 
-/* Responsive styles */
+/* Responsive Styles for Status Board */
 @media (max-width: 950px) {
     .status-board {
-        grid-template-columns: 1fr; /* Single column layout for medium screens */
+        grid-template-columns: 1fr;
     }
 }
 
 @media (max-width: 600px) {
     .status-board {
-        grid-template-columns: 1fr; /* Single column layout for small screens */
+        grid-template-columns: 1fr; 
     }
     .update-info {
-        padding: 8px; /* Adjust padding for smaller screens */
-        font-size: 0.9rem; /* Adjust font size for smaller screens */
+        padding: 8px; 
+        font-size: 0.9rem;
     }
 }
 
@@ -82,12 +81,12 @@
     position: absolute;
     right: 10px;
     top: 10px;
-    width: 40px; /* Smaller width for mobile */
+    width: 40px; 
     height: auto;
-    display: none; /* Hidden by default */
+    display: none;
 }
 
-/* Popup Overlay */
+/* Popup Styles */
 .overlay {
     display: none;
     position: fixed;
@@ -99,7 +98,6 @@
     z-index: 1000;
 }
 
-/* Popup Content */
 .popup {
     display: none;
     position: fixed;
@@ -107,43 +105,39 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #fff;
-    padding: 15px; /* Reduced padding for better fit on small screens */
+    padding: 15px; 
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     z-index: 1001;
-    width: 90%; /* Adjusted width to ensure it fits within the viewport */
-    max-width: 100%; /* Ensure it does not exceed the viewport width */
+    width: 90%; 
+    max-width: 100%; 
     border-radius: 8px;
     text-align: center;
-    border: 5px solid transparent; /* Transparent border to avoid overflow issues */
+    border: 5px solid transparent; 
     overflow-y: auto;
-    box-sizing: border-box; /* Include border and padding in element’s total width and height */
+    box-sizing: border-box; 
 }
 
-
-/* Popup Title */
 .popup h2 {
-    font-size: 1.5rem; /* Adjusted for readability */
+    font-size: 1.5rem; 
     margin-bottom: 10px;
 }
 
-/* Popup Details */
 .popup p {
     font-size: 1rem;
     line-height: 1.5;
     margin-bottom: 20px;
 }
 
-/* Close Button */
 .close-btn {
     position: absolute;
     top: 10px;
     right: 10px;
-    font-size: 1.5rem; /* Adjusted for touch targets */
+    font-size: 1.5rem;
     cursor: pointer;
     color: #333;
 }
 
-/* Responsive Styles */
+/* Responsive Styles for Popups */
 @media (max-width: 600px) {
     .popup {
         width: 95%;

@@ -154,5 +154,5 @@ function formatDate(date) {
     return date.toLocaleDateString('en-GB', options);
 }
 
-// Initialize the script
+// Initialising the script
 document.addEventListener('DOMContentLoaded', fetchTflNews);
