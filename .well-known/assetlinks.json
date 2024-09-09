@@ -1,8 +1,8 @@
 [{
-      "relation": ["delegate_permission/common.handle_all_urls"],
-      "target": {
-        "namespace": "android_app",
-        "package_name": "io.jahir10ali.trackmytube",
-        "sha256_cert_fingerprints": ["53:54:D1:BD:53:58:02:27:BF:5F:69:1D:75:67:E0:67:AC:54:22:D5:7B:17:B5:AB:09:6B:DF:33:A3:A4:B1:82"]
-      }
-    }]
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "io.jahir10ali.trackmytube",
+    "sha256_cert_fingerprints": ["82:DF:0A:8F:84:B6:49:4F:46:54:52:76:F0:D1:59:30:3D:D4:CE:1C:3D:A5:5F:42:C7:22:61:56:FE:91:CE:80"]
+  }
+}]
