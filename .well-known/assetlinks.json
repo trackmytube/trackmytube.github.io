@@ -1,8 +1,0 @@
-[{
-  "relation": ["delegate_permission/common.handle_all_urls"],
-  "target": {
-    "namespace": "android_app",
-    "package_name": "io.jahir10ali.trackmytube",
-    "sha256_cert_fingerprints": ["82:DF:0A:8F:84:B6:49:4F:46:54:52:76:F0:D1:59:30:3D:D4:CE:1C:3D:A5:5F:42:C7:22:61:56:FE:91:CE:80"]
-  }
-}]
