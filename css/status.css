@@ -16,7 +16,7 @@
     flex-direction: column;
     align-items: center; 
     text-align: center; 
-    padding: 20px; 
+    padding: 0px 10px 10px; 
     position: relative; 
 }
 
@@ -39,21 +39,21 @@
     padding: 10px;
 }
 
-.bakerloo { border: 5px solid #B36305; }
-.central { border: 5px solid #E32017; }
-.circle { border: 5px solid #FFD300; }
-.district { border: 5px solid #00782A; }
-.dlr { border: 5px solid #00A4A7; }
-.elizabeth-line { border: 5px solid #9364CC; }
-.hammersmith-city { border: 5px solid #F3A9BB; }
-.jubilee { border: 5px solid #A0A5A9; }
-.overground { border: 5px solid #EE7C0E; }
-.metropolitan { border: 5px solid #9B0056; }
-.northern { border: 5px solid #000000; }
-.piccadilly { border: 5px solid #003688; }
-.tram { border: 5px solid #84B817; }
-.victoria { border: 5px solid #0098D4; }
-.waterloo-city { border: 5px solid #95CDBA; }
+.bakerloo { border: 7px solid #B36305; }
+.central { border: 7px solid #E32017; }
+.circle { border: 7px solid #FFD300; }
+.district { border: 7px solid #00782A; }
+.dlr { border: 7px solid #00A4A7; }
+.elizabeth-line { border: 7px solid #9364CC; }
+.hammersmith-city { border: 7px solid #F3A9BB; }
+.jubilee { border:7px solid #A0A5A9; }
+.overground { border: 7px solid #EE7C0E; }
+.metropolitan { border: 7px solid #9B0056; }
+.northern { border: 7px solid #000000; }
+.piccadilly { border: 7px solid #003688; }
+.tram { border: 7px solid #84B817; }
+.victoria { border: 7px solid #0098D4; }
+.waterloo-city { border: 7px solid #95CDBA; }
 
 .status-item:hover {
     background-color: #e3e3e3;
