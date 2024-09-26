@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // Service Worker register
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/trackmytube/service-worker.js', { scope: '/trackmytube/' })
+        navigator.serviceWorker.register('/trackmytube.github.io/service-worker.js', { scope: '/trackmytube.github.io/' })
         .then((registration) => {
             console.log('Service Worker registered with scope:', registration.scope);
         })
