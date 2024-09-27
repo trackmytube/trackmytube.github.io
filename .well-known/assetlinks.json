@@ -7,7 +7,8 @@
       "namespace": "android_app",
       "package_name": "io.jahir10ali.trackmytube",
       "sha256_cert_fingerprints": [
-        "C8:F0:88:98:E5:E9:C9:86:37:72:7F:B8:D5:1A:0B:FD:A0:AC:C9:84:30:5C:38:18:07:83:39:58:18:B8:DB:99"
+        "C8:F0:88:98:E5:E9:C9:86:37:72:7F:B8:D5:1A:0B:FD:A0:AC:C9:84:30:5C:38:18:07:83:39:58:18:B8:DB:99",
+        "E3:E0:D2:36:57:4B:20:5F:16:B0:A9:BB:2F:9D:51:F9:AF:DB:9B:89:1E:EB:AF:38:F0:85:B7:CE:9F:28:93:82"
       ]
     }
   }
