@@ -14,7 +14,7 @@
     - [Journey Planner](#journey-planner)
   - [Contributing](#contributing)
   - [License](#license)
-  - [Credits/Acknowledgments](#creditsacknowledgments)
+  - [Credits/Acknowledgments](#creditsacknowledgements)
     - [A Special Thanks to](#a-special-thanks-to)
     - [With Deepest Gratitude to](#with-deepest-gratitude-to)
 
@@ -66,7 +66,7 @@ Please ensure your contributions follow the project's coding standards and guide
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Credits/Acknowledgments
+## Credits/Acknowledgements
 
 - **Developed and Designed by**: Jahir Ali (jahir10ali)
 
