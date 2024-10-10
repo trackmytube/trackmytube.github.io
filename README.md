@@ -2,7 +2,7 @@
 
 ![TrackMyTube Logo](https://github.com/jahir10ali/trackmytube/blob/main/img/logo_large.jpg?raw=True)
 
-## Table of Contentss
+## Table of Contents
 
 - [TrackMyTube - TfL Train Times, Live Status, and Travel News Platform](#trackmytube---tfl-train-times-live-status-and-travel-news-platform)
   - [Why TrackMyTube?](#why-trackmytube)
